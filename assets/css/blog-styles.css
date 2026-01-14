@@ -1,0 +1,475 @@
+/* ========================================
+   BLOG TITLE
+   ======================================== */
+.container-blog .blog-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   BLOG META
+   ======================================== */
+.container-blog .blog-meta {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.container-blog .blog-meta i {
+  color: #8a8a8a;
+}
+
+.container-blog .blog-meta a {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.container-blog .blog-meta a:hover {
+  color: #ffffff;
+}
+
+/* ========================================
+   BLOG THUMBNAIL
+   ======================================== */
+.container-blog .blog-thumbnail {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.container-blog .blog-thumbnail img {
+  transition: transform 0.3s ease;
+}
+
+.container-blog .blog-thumbnail:hover img {
+  transform: scale(1.02);
+}
+
+/* ========================================
+   BLOG CONTENT - Encabezados y Párrafos
+   ======================================== */
+.container-blog .blog-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 300;
+}
+
+/* Párrafos */
+.container-blog .blog-content p {
+  margin-bottom: 1.75rem;
+  color: rgb(220, 220, 220);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+/* H1 dentro del contenido */
+.container-blog .blog-content h1 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  letter-spacing: 0.02em;
+}
+
+/* H2 */
+.container-blog .blog-content h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.02em;
+}
+
+/* H3 */
+.container-blog .blog-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* H4 */
+.container-blog .blog-content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin-top: 2rem;
+  margin-bottom: 0.875rem;
+  letter-spacing: 0.02em;
+}
+
+/* H5 */
+.container-blog .blog-content h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* H6 */
+.container-blog .blog-content h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d0d0d0;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Imágenes dentro del contenido */
+.container-blog .blog-content img {
+  border-radius: 8px;
+  margin: 0rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+figcaption {
+  letter-spacing: 0.08em;
+  font-size: 16px;
+  color: gray;
+  text-align: center;
+}
+
+/* Blockquotes */
+.container-blog .blog-content blockquote {
+  border-left: 4px solid var(--secondary-color);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 300;
+}
+
+/* Listas */
+.container-blog .blog-content ul,
+.container-blog .blog-content ol {
+  margin-bottom: 1.75rem;
+  padding-left: 2rem;
+}
+
+.container-blog .blog-content li {
+  margin-bottom: 0.75rem;
+  color: rgba(255, 255, 255, 0.73);
+  font-weight: 300;
+  letter-spacing: 0.08rem;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Code */
+.container-blog .blog-content code {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #e8e8e8;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-family: "Courier New", monospace;
+}
+
+.container-blog .blog-content pre {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #e8e8e8;
+  padding: 1.25rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container-blog .blog-content pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Links dentro del contenido */
+.container-blog .blog-content a {
+  color: var(--secondary-color);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.container-blog .blog-content a:hover {
+  color: #ffffff;
+}
+
+/* Tablas */
+.container-blog .blog-content table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+}
+
+.container-blog .blog-content table th,
+.container-blog .blog-content table td {
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container-blog .blog-content table th {
+  background-color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.container-blog .blog-content table td {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+}
+
+/* ========================================
+   SOCIAL SHARE BAR
+   ======================================== */
+.social-share-bar {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-share-title {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.social-share-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.social-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.social-share-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.social-share-btn i {
+  font-size: 1.1rem;
+}
+
+/* Colores específicos por red social (opcional) */
+.social-share-btn.linkedin:hover {
+  border-color: #0077b5;
+  background-color: rgba(0, 119, 181, 0.1);
+}
+
+.social-share-btn.twitter:hover {
+  border-color: #1da1f2;
+  background-color: rgba(29, 161, 242, 0.1);
+}
+
+.social-share-btn.facebook:hover {
+  border-color: #1877f2;
+  background-color: rgba(24, 119, 242, 0.1);
+}
+
+.social-share-btn.whatsapp:hover {
+  border-color: #25d366;
+  background-color: rgba(37, 211, 102, 0.1);
+}
+
+.social-share-btn.email:hover {
+  border-color: var(--secondary-color);
+  background-color: rgba(0, 144, 155, 0.1);
+}
+
+.social-share-btn.copy-link:hover {
+  border-color: var(--secondary-color);
+  background-color: rgba(0, 144, 155, 0.1);
+}
+
+/* ========================================
+   COMMENTS SECTION
+   ======================================== */
+.comments-section {
+  margin-top: 4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================
+   SIDEBAR SECTIONS
+   ======================================== */
+.sidebar-section {
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+}
+
+/* Author Card */
+
+/* Badges */
+.badge-especialidad {
+  display: inline-block;
+  padding: 0.3rem 0.48rem;
+  font-size: 0.8rem;
+  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: var(--border-container);
+  border-radius: var(--border-radius);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.badge-tag {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 300;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.badge-tag:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: var(--secondary-color);
+  color: #ffffff;
+}
+
+/* Related Articles */
+.related-article {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.related-article:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+.related-article-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.related-article-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.related-article-title {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-article-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 300;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 991px) {
+  .container-blog .blog-content {
+    font-size: 1rem;
+  }
+
+  .container-blog .blog-content h1 {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .container-blog .blog-content h2 {
+    font-size: 1.75rem;
+    margin-top: 2rem;
+  }
+
+  .container-blog .blog-content h3 {
+    font-size: 1.35rem;
+  }
+
+  .author-card {
+    margin-bottom: 2rem !important;
+  }
+
+  .social-share-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .social-share-btn span {
+    display: none;
+  }
+
+  .social-share-btn {
+    padding: 0.625rem;
+    justify-content: center;
+    min-width: 44px;
+  }
+}
+
+/* Animación suave para los botones */
+.author-card .btn,
+.sidebar-section .btn,
+.social-share-btn {
+  transition: all 0.3s ease;
+}
+
+.author-card .btn:hover,
+.sidebar-section .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

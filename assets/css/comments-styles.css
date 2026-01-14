@@ -1,0 +1,486 @@
+/* ========================================
+   WORDPRESS COMMENTS SECTION STYLES
+   Estilos para la sección de comentarios del blog
+   Compatible con el diseño Maggiore
+   ======================================== */
+
+/* ========================================
+   CONTENEDOR PRINCIPAL DE COMENTARIOS
+   ======================================== */
+.comments-section {
+    margin-top: 4rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comments-area {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   TÍTULO DE LA SECCIÓN
+   ======================================== */
+.comments-title,
+.comment-reply-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 2rem;
+    letter-spacing: 0.02em;
+}
+
+/* ========================================
+   LISTA DE COMENTARIOS
+   ======================================== */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem 0;
+}
+
+.comment-list .comment {
+    margin-bottom: 2rem;
+}
+
+/* Comentarios anidados (respuestas) */
+.comment-list .children {
+    list-style: none;
+    padding-left: 2rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 767px) {
+    .comment-list .children {
+        padding-left: 1rem;
+    }
+}
+
+/* ========================================
+   ESTRUCTURA DE UN COMENTARIO
+   ======================================== */
+.comment-body {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.comment-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Avatar */
+.comment-author .avatar {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+
+/* Información del autor */
+.comment-author .fn {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #ffffff;
+    font-style: normal;
+    margin: 0;
+}
+
+.comment-author .fn a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.comment-author .fn a:hover {
+    color: var(--secondary-color);
+}
+
+.comment-author .says {
+    display: none;
+}
+
+/* ========================================
+   METADATA DEL COMENTARIO
+   ======================================== */
+.comment-metadata {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+.comment-metadata a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.comment-metadata a:hover {
+    color: #ffffff;
+}
+
+.comment-metadata .edit-link {
+    margin-left: 1rem;
+}
+
+.comment-metadata .edit-link::before {
+    content: "•";
+    margin-right: 0.5rem;
+}
+
+/* ========================================
+   CONTENIDO DEL COMENTARIO
+   ======================================== */
+.comment-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+
+.comment-content p {
+    margin-bottom: 1rem;
+}
+
+.comment-content p:last-child {
+    margin-bottom: 0;
+}
+
+.comment-content a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.comment-content a:hover {
+    color: #ffffff;
+}
+
+/* ========================================
+   COMENTARIO EN MODERACIÓN
+   ======================================== */
+.comment-awaiting-moderation {
+    display: block;
+    padding: 0.75rem 1rem;
+    background-color: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    border-radius: var(--border-radius);
+    color: #ffc107;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+/* ========================================
+   BOTÓN DE RESPONDER
+   ======================================== */
+.comment-reply-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--border-radius);
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: all 0.3s ease;
+}
+
+.comment-reply-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--secondary-color);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   FORMULARIO DE COMENTARIOS
+   ======================================== */
+.comment-respond {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+/* Cancelar respuesta */
+#cancel-comment-reply-link {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-left: 1rem;
+    font-weight: 300;
+}
+
+#cancel-comment-reply-link:hover {
+    color: #ffffff;
+}
+
+/* ========================================
+   CAMPOS DEL FORMULARIO
+   ======================================== */
+.comment-form-comment label,
+.comment-form-author label,
+.comment-form-email label,
+.comment-form-url label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.comment-form-comment textarea,
+.comment-form-author input,
+.comment-form-email input,
+.comment-form-url input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    font-weight: 300;
+    transition: all 0.3s ease;
+}
+
+.comment-form-comment textarea:focus,
+.comment-form-author input:focus,
+.comment-form-email input:focus,
+.comment-form-url input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.comment-form-comment textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Placeholders */
+.comment-form-comment textarea::placeholder,
+.comment-form-author input::placeholder,
+.comment-form-email input::placeholder,
+.comment-form-url input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ========================================
+   CAMPOS DE INFORMACIÓN PERSONAL
+   ======================================== */
+.comment-form-author,
+.comment-form-email,
+.comment-form-url {
+    margin-bottom: 1.5rem;
+}
+
+/* Layout responsivo para campos de autor/email */
+@media (min-width: 768px) {
+    .comment-form-author,
+    .comment-form-email {
+        width: calc(50% - 0.75rem);
+        display: inline-block;
+    }
+    
+    .comment-form-author {
+        margin-right: 1.5rem;
+    }
+}
+
+/* ========================================
+   COOKIES Y CONSENTIMIENTO
+   ======================================== */
+.comment-form-cookies-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.comment-form-cookies-consent input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.comment-form-cookies-consent label {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+/* ========================================
+   BOTÓN DE ENVÍO
+   ======================================== */
+.form-submit {
+    margin-bottom: 0;
+}
+
+.submit {
+    padding: 0.75rem 2rem;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit:hover {
+    background-color: transparent;
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 144, 155, 0.3);
+}
+
+/* ========================================
+   MENSAJES Y NOTAS
+   ======================================== */
+.comment-notes,
+.logged-in-as {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.comment-notes a,
+.logged-in-as a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.comment-notes a:hover,
+.logged-in-as a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.required-field-message {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* ========================================
+   NAVEGACIÓN DE COMENTARIOS
+   ======================================== */
+.comment-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment-navigation .nav-previous,
+.comment-navigation .nav-next {
+    flex: 1;
+}
+
+.comment-navigation .nav-next {
+    text-align: right;
+}
+
+.comment-navigation a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.comment-navigation a:hover {
+    color: #ffffff;
+}
+
+/* ========================================
+   ESTADO SIN COMENTARIOS
+   ======================================== */
+.no-comments {
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius);
+    text-align: center;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* ========================================
+   TRACKBACKS Y PINGBACKS
+   ======================================== */
+.comment.pingback,
+.comment.trackback {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.comment.pingback .comment-body,
+.comment.trackback .comment-body {
+    padding: 1rem;
+}
+
+/* ========================================
+   ESTILOS ADICIONALES
+   ======================================== */
+
+/* Comentario del autor del post */
+.bypostauthor > .comment-body {
+    border-left: 3px solid var(--secondary-color);
+}
+
+/* Destacar comentarios nuevos */
+.comment-body:target {
+    animation: highlight 2s ease;
+}
+
+@keyframes highlight {
+    0%, 100% {
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+    50% {
+        background-color: rgba(0, 144, 155, 0.1);
+    }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 767px) {
+    .comment-respond {
+        padding: 1.5rem;
+    }
+    
+    .comment-body {
+        padding: 1rem;
+    }
+    
+    .comment-author .avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .comment-list .children {
+        padding-left: 0.5rem;
+    }
+}
