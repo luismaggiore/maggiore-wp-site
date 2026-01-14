@@ -148,7 +148,6 @@ function maggiore_scripts() {
     'nonce' => wp_create_nonce('maggiore_nonce'),
     'homeUrl' => home_url('/'),
     'themeUrl' => get_template_directory_uri(),
-    'isDebug' => WP_DEBUG,
     'currentLang' => function_exists('pll_current_language') ? pll_current_language() : 'es',
   ]);
 }
@@ -304,6 +303,7 @@ foreach (glob(get_template_directory() . '/inc/metaboxes/*.php') as $file) {
 require_once get_template_directory() . '/inc/taxonomies/industria.php';
 require_once get_template_directory() . '/inc/taxonomies/equipos.php';
 require_once get_template_directory() . '/inc/taxonomies/categoria-servicio.php';
+require_once get_template_directory() . '/inc/taxonomies/categoria-portafolio.php';
 
 /* -------------------------------------------------------
  * Helpers & Systems
@@ -318,56 +318,10 @@ require_once get_template_directory() . '/inc/helpers/hierarchy-helpers.php';
 require_once get_template_directory() . '/inc/helpers/portafolio-video-system.php';
 require_once get_template_directory() . '/inc/helpers/taxonomy-color-fields.php';
 require_once get_template_directory() . '/inc/helpers/taxonomy-css-generator.php';
+
+
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */
 require_once get_template_directory() . '/inc/seo-enhanced.php';
 require_once get_template_directory() . '/inc/seo-metabox-enhanced.php';
-
-/* -------------------------------------------------------
- * Debug Helper (solo en WP_DEBUG)
- * Agregar ?debug_scripts a la URL para ver orden de carga
- * ----------------------------------------------------- */
-if (WP_DEBUG) {
-    function maggiore_debug_scripts() {
-        global $wp_scripts;
-        
-        if (isset($_GET['debug_scripts'])) {
-            echo '<div style="background:#000;color:#0f0;padding:20px;margin:20px;font-family:monospace;font-size:12px;overflow:auto;">';
-            echo '<h3 style="color:#0ff;">SCRIPTS ENQUEUED (in load order):</h3>';
-            echo '<pre>';
-            
-            foreach ($wp_scripts->queue as $handle) {
-                if (!isset($wp_scripts->registered[$handle])) continue;
-                
-                $script = $wp_scripts->registered[$handle];
-                echo "\n";
-                echo "Handle: {$handle}\n";
-                echo "  Deps: " . (empty($script->deps) ? 'none' : implode(', ', $script->deps)) . "\n";
-                echo "  Ver: {$script->ver}\n";
-                
-                // Mostrar si tiene atributos especiales
-                if (isset($script->extra['data'])) {
-                    echo "  Type: module\n";
-                }
-            }
-            
-            echo '</pre>';
-            echo '<p style="color:#0ff;">Sistema de Animaciones v2.0 - Orden correcto de carga ✅</p>';
-            echo '</div>';
-        }
-    }
-    add_action('wp_footer', 'maggiore_debug_scripts', 9999);
-    
-    // Mensaje en admin
-    function maggiore_admin_notice() {
-        $screen = get_current_screen();
-        if ($screen->id !== 'themes') return;
-        
-        echo '<div class="notice notice-success is-dismissible">';
-        echo '<p><strong>🎨 Maggiore Theme v2.0:</strong> Sistema de animaciones optimizado activo.</p>';
-        echo '<p>📊 Para debug: agrega <code>?debug_scripts</code> a cualquier URL del frontend.</p>';
-        echo '</div>';
-    }
-    add_action('admin_notices', 'maggiore_admin_notice');
-}

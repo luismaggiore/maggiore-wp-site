@@ -21,7 +21,7 @@ $industrias = get_terms($args_industrias);
 <main class="container py-5">
     
     <!-- Header -->
-    <header class="mb-5" style="padding-top: 10vh;">
+    <header class="mb-5" style="padding-top: 15vh;">
         <?php if ($is_taxonomy): ?>
             <h1 class="display-4 mb-3">
                 <?= esc_html(sprintf(__('Clientes en %s', 'maggiore'), $current_term->name)); ?>
@@ -41,27 +41,37 @@ $industrias = get_terms($args_industrias);
         <?php endif; ?>
     </header>
 
-    <!-- Filtros por Industria -->
-    <?php if (!empty($industrias) && !$is_taxonomy): ?>
-        <section class="mb-5">
-            <div class="d-flex flex-wrap gap-2 align-items-center">
-                <span class="text-muted me-2"><?php _e('Filtrar por industria:', 'maggiore'); ?></span>
-                
-                <a href="<?= get_post_type_archive_link('mg_cliente'); ?>" 
-                   class="btn btn-sm <?= !$is_taxonomy ? 'btn-primary' : 'btn-outline-primary'; ?>">
-                    <?php _e('Todos', 'maggiore'); ?>
-                </a>
-                
-                <?php foreach ($industrias as $industria): ?>
-                    <a href="<?= get_term_link($industria); ?>" 
-                       class="btn btn-sm <?= ($is_taxonomy && $current_term->term_id === $industria->term_id) ? 'btn-primary' : 'btn-outline-primary'; ?>">
-                        <?= esc_html($industria->name); ?>
-                        <span class="badge bg-light text-dark ms-1"><?= $industria->count; ?></span>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </section>
-    <?php endif; ?>
+<!-- Filtros por Industria -->
+<?php if (!empty($industrias)): ?>
+  <section class="mb-5">
+    <div class="d-flex flex-wrap gap-1 align-items-center">
+      <span class="text-muted me-2"><?php _e('Filtrar por industria:', 'maggiore'); ?></span>
+
+      <?php $is_all_active = !$is_taxonomy; ?>
+
+      <a href="<?= esc_url(get_post_type_archive_link('mg_cliente')); ?>"
+         class="btn-filter <?= $is_all_active ? 'active' : ''; ?>">
+        <?php _e('Todos', 'maggiore'); ?>
+      </a>
+
+      <?php foreach ($industrias as $industria): ?>
+        <?php
+          $is_term_active = $is_taxonomy
+            && isset($current_term->term_id)
+            && ((int)$current_term->term_id === (int)$industria->term_id);
+          
+          // Añadir parámetro ?tipo=clientes al link de taxonomía
+          $industria_url = add_query_arg('tipo', 'clientes', get_term_link($industria));
+        ?>
+        <a href="<?= esc_url($industria_url); ?>"
+           class="btn-filter <?= $is_term_active ? 'active' : ''; ?>">
+          <?= esc_html($industria->name); ?>
+        </a>
+      <?php endforeach; ?>
+
+    </div>
+  </section>
+<?php endif; ?>
 
     <!-- Grid de clientes -->
     <?php if (have_posts()): ?>

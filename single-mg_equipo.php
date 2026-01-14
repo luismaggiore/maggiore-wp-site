@@ -316,6 +316,8 @@ if (!empty($equipo_a_cargo)): ?>
                 if ($translated) $id = $translated;
             }
         }
+        unset($id); // Limpiar la referencia
+        $casos_ids = array_unique($casos_ids); // Eliminar duplicados
     }
     ?>
 
@@ -323,22 +325,24 @@ if (!empty($equipo_a_cargo)): ?>
         <section class="mb-5">
             <div class="feature-name-2 mb-2">
             <h2 >
-             <?php _e('Casos de Éxito', 'maggiore'); ?>            </h2>
+             <?php _e('Casos de Éxito', 'maggiore'); ?>        
+                </h2>
             </div>
         
             
-            <div class="row g-4">
-                <?php foreach ($casos_ids as $caso_id): ?>
-                    <?php
+            <div class="row g-2">
+                <?php foreach ($casos_ids as $caso_id): 
                     global $post;
                     $post = get_post($caso_id);
                     setup_postdata($post);
-                    ?>
+                ?>
                     <div class="col-12">
                         <?php get_template_part('template-parts/card', 'caso-exito'); ?>
                     </div>
-                    <?php wp_reset_postdata(); ?>
-                <?php endforeach; ?>
+                <?php 
+                endforeach; 
+                wp_reset_postdata(); 
+                ?>
             </div>
         </section>
 
@@ -366,6 +370,18 @@ if (!empty($equipo_a_cargo)): ?>
                     }
                 }
             }
+            unset($p); // Limpiar la referencia
+            
+            // Eliminar duplicados basados en ID
+            $ids_unicos = [];
+            $portafolios_unicos = [];
+            foreach ($portafolios as $portfolio) {
+                if (!in_array($portfolio->ID, $ids_unicos)) {
+                    $ids_unicos[] = $portfolio->ID;
+                    $portafolios_unicos[] = $portfolio;
+                }
+            }
+            $portafolios = $portafolios_unicos;
         }
     } else {
         $portafolios = [];
@@ -381,12 +397,18 @@ if (!empty($equipo_a_cargo)): ?>
             </div>
 
 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-2">
-                    <?php foreach ($portafolios as $post): setup_postdata($post); ?>
+                    <?php 
+                    global $post;
+                    foreach ($portafolios as $post): 
+                        setup_postdata($post); 
+                    ?>
                     <div class="col mt-0">
                         <?php get_template_part('template-parts/card', 'portafolio'); ?>
                     </div>
-                    <?php wp_reset_postdata(); ?>
-                <?php endforeach; ?>
+                    <?php 
+                    wp_reset_postdata(); 
+                endforeach; 
+                    ?>
             </div>
         </section>
 
@@ -415,6 +437,18 @@ if (!empty($equipo_a_cargo)): ?>
                 }
             }
         }
+        unset($bp); // Limpiar la referencia
+        
+        // Eliminar duplicados basados en ID
+        $ids_unicos = [];
+        $blog_posts_unicos = [];
+        foreach ($blog_posts as $blog_post) {
+            if (!in_array($blog_post->ID, $ids_unicos)) {
+                $ids_unicos[] = $blog_post->ID;
+                $blog_posts_unicos[] = $blog_post;
+            }
+        }
+        $blog_posts = $blog_posts_unicos;
     }
     ?>
 
@@ -426,12 +460,18 @@ if (!empty($equipo_a_cargo)): ?>
             </h2>
              </div>
 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 g-2">
-                    <?php foreach ($blog_posts as $post): setup_postdata($post); ?>
+                    <?php 
+                    global $post;
+                    foreach ($blog_posts as $post): 
+                        setup_postdata($post); 
+                    ?>
                     <div class="col">
                         <?php get_template_part('template-parts/card', 'articulo'); ?>
                     </div>
-                    <?php wp_reset_postdata(); ?>
-                <?php endforeach; ?>
+                    <?php 
+                    wp_reset_postdata(); 
+                endforeach; 
+                    ?>
             </div>
         </section>
     <?php endif; ?>

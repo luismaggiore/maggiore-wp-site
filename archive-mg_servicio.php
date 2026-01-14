@@ -33,7 +33,7 @@ $areas_query = new WP_Query($args_areas);
 <main class="container py-5">
     
     <!-- Header -->
-    <header class="mb-5" style="padding-top: 10vh;">
+    <header class="mb-5" style="padding-top: 15vh;">
         <?php if ($is_taxonomy): ?>
             <h1 class="display-4 mb-3">
                 <?= esc_html($current_term->name); ?>
@@ -53,46 +53,36 @@ $areas_query = new WP_Query($args_areas);
         <?php endif; ?>
     </header>
 
-    <!-- Filtros por Categoría de Servicio -->
-    <?php if (!empty($categorias) && !$is_taxonomy): ?>
-        <section class="mb-5">
-            <div class="d-flex flex-wrap gap-2 align-items-center">
-                <span class="text-muted me-2"><?php _e('Filtrar por categoría:', 'maggiore'); ?></span>
-                
-                <a href="<?= get_post_type_archive_link('mg_servicio'); ?>" 
-                   class="btn btn-sm <?= !$is_taxonomy ? 'btn-primary' : 'btn-outline-primary'; ?>">
-                    <?php _e('Todos', 'maggiore'); ?>
-                </a>
-                
-                <?php foreach ($categorias as $categoria): ?>
-                    <a href="<?= get_term_link($categoria); ?>" 
-                       class="btn btn-sm <?= ($is_taxonomy && $current_term->term_id === $categoria->term_id) ? 'btn-primary' : 'btn-outline-primary'; ?>">
-                        <?= esc_html($categoria->name); ?>
-                        <span class="badge bg-light text-dark ms-1"><?= $categoria->count; ?></span>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </section>
-    <?php endif; ?>
+          
 
-    <!-- Filtros por Área (opcional, solo en vista principal) -->
-    <?php if ($areas_query->have_posts() && !$is_taxonomy && !is_paged()): ?>
-        <section class="mb-5">
-            <details>
-                <summary class="text-muted" style="cursor: pointer;">
-                    <?php _e('Ver servicios por área', 'maggiore'); ?>
-                </summary>
-                <div class="mt-3 ps-3">
-                    <?php while ($areas_query->have_posts()): $areas_query->the_post(); ?>
-                        <a href="<?= get_permalink(); ?>" class="d-block mb-2">
-                            → <?= get_the_title(); ?>
-                        </a>
-                    <?php endwhile; ?>
-                    <?php wp_reset_postdata(); ?>
-                </div>
-            </details>
-        </section>
-    <?php endif; ?>
+ <!-- Filtros por Categoría de Servicio -->
+<?php if (!empty($categorias)): ?>
+  <section class="mb-5">
+    <div class="d-flex flex-wrap gap-1 align-items-center">
+
+      <?php
+        $is_all_active = !$is_taxonomy; // Archive (Todos)
+      ?>
+      <a href="<?= esc_url(get_post_type_archive_link('mg_servicio')); ?>"
+         class="btn-filter <?= $is_all_active ? 'active' : ''; ?>">
+        <?php _e('Todos los servicios', 'maggiore'); ?>
+      </a>
+
+      <?php foreach ($categorias as $categoria): ?>
+        <?php
+          $is_cat_active = $is_taxonomy && isset($current_term->term_id) && ((int)$current_term->term_id === (int)$categoria->term_id);
+        ?>
+        <a href="<?= esc_url(get_term_link($categoria)); ?>"
+           class="btn-filter <?= $is_cat_active ? 'active' : ''; ?>">
+          <?= esc_html($categoria->name); ?>
+          <span class="ms-1 count-filter"><?= (int)$categoria->count; ?></span>
+        </a>
+      <?php endforeach; ?>
+
+    </div>
+  </section>
+<?php endif; ?>
+
 
     <!-- Grid de servicios -->
     <?php if (have_posts()): ?>

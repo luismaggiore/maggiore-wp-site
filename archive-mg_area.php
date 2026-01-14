@@ -8,7 +8,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
 <main class="container py-5">
     
     <!-- Header -->
-    <header class="mb-5" style="padding-top: 10vh;">
+    <header class="mb-5" style="padding-top: 15vh;">
         <h1 class="display-4 mb-3">
             <?php _e('Nuestras Áreas', 'maggiore'); ?>
         </h1>

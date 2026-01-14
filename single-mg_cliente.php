@@ -331,13 +331,16 @@ $portafolios = get_posts([
                 </h2>
             </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-                <?php foreach ($servicios as $post): 
+                <?php 
+                global $post;
+                foreach ($servicios as $post): 
                     setup_postdata($post); 
                 ?>
                     <div class="col">
                         <?php get_template_part('template-parts/card', 'servicio'); ?>
                     </div>
-                <?php endforeach; 
+                <?php 
+                endforeach; 
                 wp_reset_postdata(); 
                 ?>
             </div>
@@ -355,13 +358,16 @@ $portafolios = get_posts([
                 </h2>
             </div>
             <div class="row gy-0">
-                <?php foreach ($casos_exito as $post): 
+                <?php 
+                global $post;
+                foreach ($casos_exito as $post): 
                     setup_postdata($post); 
                 ?>
-                    <div class="col-12">
+                    <div class="col-12 mb-2">
                         <?php get_template_part('template-parts/card', 'caso-exito'); ?>
                     </div>
-                <?php endforeach; 
+                <?php 
+                endforeach; 
                 wp_reset_postdata(); 
                 ?>
             </div>
@@ -379,13 +385,16 @@ $portafolios = get_posts([
                 </h2>
             </div>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-                <?php foreach ($portafolios as $post): 
+                <?php 
+                global $post;
+                foreach ($portafolios as $post): 
                     setup_postdata($post); 
                 ?>
                     <div class="col">
                         <?php get_template_part('template-parts/card', 'portafolio'); ?>
                     </div>
-                <?php endforeach; 
+                <?php 
+                endforeach; 
                 wp_reset_postdata(); 
                 ?>
             </div>

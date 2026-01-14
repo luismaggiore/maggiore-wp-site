@@ -21,7 +21,7 @@ $equipos = get_terms($args_equipos);
 <main class="container py-5">
     
     <!-- Header -->
-    <header class="mb-5" style="padding-top: 10vh;">
+    <header class="mb-5" style="padding-top: 15vh;">
         <?php if ($is_taxonomy): ?>
             <h1 class="display-4 mb-3">
                 <?= esc_html($current_term->name); ?>
@@ -40,28 +40,39 @@ $equipos = get_terms($args_equipos);
             </p>
         <?php endif; ?>
     </header>
+<!-- Filtros por Equipo -->
+<?php if (!empty($equipos) && !$is_taxonomy): ?>
+  <section class="mb-5">
+    <div class="d-flex flex-wrap gap-1 align-items-center">
 
-    <!-- Filtros por Equipo -->
-    <?php if (!empty($equipos) && !$is_taxonomy): ?>
-        <section class="mb-5">
-            <div class="d-flex flex-wrap gap-2 align-items-center">
-                <span class="text-muted me-2"><?php _e('Filtrar por equipo:', 'maggiore'); ?></span>
-                
-                <a href="<?= get_post_type_archive_link('mg_equipo'); ?>" 
-                   class="btn btn-sm <?= !$is_taxonomy ? 'btn-primary' : 'btn-outline-primary'; ?>">
-                    <?php _e('Todos', 'maggiore'); ?>
-                </a>
-                
-                <?php foreach ($equipos as $equipo): ?>
-                    <a href="<?= get_term_link($equipo); ?>" 
-                       class="btn btn-sm <?= ($is_taxonomy && $current_term->term_id === $equipo->term_id) ? 'btn-primary' : 'btn-outline-primary'; ?>">
-                        <?= esc_html($equipo->name); ?>
-                        <span class="badge bg-light text-dark ms-1"><?= $equipo->count; ?></span>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </section>
-    <?php endif; ?>
+      <?php $is_all_active = !$is_taxonomy; ?>
+
+      <a href="<?= esc_url(get_post_type_archive_link('mg_equipo')); ?>"
+         class="btn-filter <?= $is_all_active ? 'active' : ''; ?>">
+        <?php _e('Todos', 'maggiore'); ?>
+      </a>
+
+      <?php foreach ($equipos as $equipo): ?>
+        <?php
+          $is_term_active = $is_taxonomy
+            && isset($current_term->term_id)
+            && ((int)$current_term->term_id === (int)$equipo->term_id);
+
+          $count = (int)$equipo->count;
+        ?>
+        <a href="<?= esc_url(get_term_link($equipo)); ?>"
+           class="btn-filter <?= $is_term_active ? 'active' : ''; ?>">
+          <?= esc_html($equipo->name); ?>
+          <?php if ($count > 0): ?>
+            <span class="count-filter ms-1"><?= $count; ?></span>
+          <?php endif; ?>
+        </a>
+      <?php endforeach; ?>
+
+    </div>
+  </section>
+<?php endif; ?>
+
 
     <!-- Grid de miembros del equipo -->
     <?php if (have_posts()): ?>

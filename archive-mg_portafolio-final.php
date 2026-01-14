@@ -95,7 +95,7 @@ $categorias = get_terms($args_categorias);
         </div>
     <?php endif; ?>
 
-    <?php wp_reset_postdata(); ?>   
+    <?php wp_reset_postdata(); ?>
 
 </main>
 

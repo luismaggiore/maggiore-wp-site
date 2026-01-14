@@ -44,7 +44,7 @@ $tags_populares = get_terms($args_tags);
 <main class="container py-5">
     
     <!-- Header del Blog -->
-    <header class="blog-archive-header mb-5" style="padding-top: 10vh;">
+    <header class="blog-archive-header mb-5" style="padding-top: 15vh;">
         <h1 class="display-4 mb-3">
             <?php _e('Blog', 'maggiore'); ?>
         </h1>

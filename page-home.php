@@ -189,7 +189,8 @@ $casos_landing = new WP_Query($args);
 if ($casos_landing->have_posts()) : ?>
     
         <?php while ($casos_landing->have_posts()) : $casos_landing->the_post(); ?>
-            <?php get_template_part('template-parts/card', 'caso-exito'); ?>
+        <div class="mb-2">
+        <?php get_template_part('template-parts/card', 'caso-exito'); ?></div>
         <?php endwhile; wp_reset_postdata(); ?>
 <?php else : ?>
     <p><?php _e('No hay casos de éxito destacados en este momento.', 'maggiore'); ?></p>
