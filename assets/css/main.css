@@ -395,7 +395,7 @@ h1 {
   border: var(--border-container);
   padding-bottom: 10px;
 }
-.col-xl-4 .testimonial-mg {
+.archive.testimonial-mg {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -403,11 +403,11 @@ h1 {
   padding-bottom: 0px;
 }
 
-.col-xl-4 .testimonial-mg .row {
+.archive.testimonial-mg .row {
   margin-top: auto; /* esto manda ese bloque al fondo */
 }
 
-.col-xl-4 .testimonial-mg h3 {
+.archive.testimonial-mg h3 {
   display: block; /* o simplemente elimina display */
   min-height: 0; /* o elimina min-height */
   font-size: 28px;
@@ -1332,6 +1332,26 @@ button.btns-mgr:hover .btn-brillo {
 .person-card:hover .person-card__photo {
   transform: scale(1.05);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-filter {
+  padding: 2px 10px;
+  border-radius: 4px;
+  border: var(--border-container);
+  background-color: var(--background-container);
+}
+.btn-filter.active {
+  color: white;
+}
+.btn-filter:hover {
+  background-color: var(--background-hover);
+}
+.count-filter {
+  border: var(--border-container);
+  padding: 0px 4px;
+  color: rgb(196, 196, 196);
+  margin-right: -5px;
+  border-radius: 3px;
 }
 @media (max-width: 991px) {
   .col-const {

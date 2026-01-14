@@ -1,0 +1,14 @@
+.
+./{js,docs}
+./STRUCTURE.txt
+./js
+./js/main.js
+./js/animation-controller.js
+./js/visual-config.js
+./js/visual-effects.js
+./README.md
+./docs
+./docs/MIGRATION-GUIDE.md
+./docs/QUICK-REFERENCE.md
+./migration-script.sh
+./functions.php

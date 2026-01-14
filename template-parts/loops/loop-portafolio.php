@@ -42,7 +42,7 @@ if ($query->have_posts()) :
         wp_reset_postdata();
     }
 else {
-    echo '<p class="text-muted">' . __('No se encontraron proyectos en el portafolio.', 'maggiore') . '</p>'; }
+ }
 endif;
 
 set_query_var('post_ids', null);

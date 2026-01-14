@@ -16,13 +16,17 @@ add_action('init', function () {
         'menu_name'         => __('Categorías', 'maggiore'),
     ];
 
-    register_taxonomy('mg_categoria', ['mg_servicio'], [
-        'labels' => $labels,
-        'hierarchical' => true,
-        'public' => true,
-        'show_ui' => true,
-        'show_in_rest' => true,
-        'show_admin_column' => true,
-        'rewrite' => ['slug' => 'categoría'],
-    ]);
+   register_taxonomy('mg_categoria', ['mg_servicio'], [
+    'labels' => $labels,
+    'hierarchical' => true,
+    'public' => true,
+    'show_ui' => true,
+    'show_in_rest' => true,
+    'show_admin_column' => true,
+    'rewrite' => [
+        'slug' => 'servicios',
+        'with_front' => false,
+        'hierarchical' => true
+    ],
+]);
 });

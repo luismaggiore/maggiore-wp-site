@@ -23,10 +23,11 @@ $case_id_attr         = 'case-' . $post->post_name;
 $permalink            = get_permalink($post_id);
 
 $show_author          = (!is_archive() && !empty($contratador_nombre));
+$class_archive        = is_archive() ? 'archive' : '';
 ?>
 
 <article
-  class="testimonial-mg card-mg position-relative"
+  class="testimonial-mg card-mg position-relative mb-0 <?= esc_html($class_archive); ?>"
   aria-labelledby="<?= esc_attr($case_id_attr); ?>-title"
   itemscope
   itemtype="https://schema.org/Article"

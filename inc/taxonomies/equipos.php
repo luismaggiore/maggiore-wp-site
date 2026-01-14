@@ -23,6 +23,10 @@ add_action('init', function () {
         'show_ui' => true,
         'show_in_rest' => true,
         'show_admin_column' => true,
-        'rewrite' => ['slug' => 'equipo'],
+        'rewrite' => [
+    'slug' => 'equipo',
+    'with_front' => false,
+    'hierarchical' => true
+],
     ]);
 });
