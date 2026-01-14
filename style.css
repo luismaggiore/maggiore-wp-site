@@ -1,0 +1,422 @@
+/*
+Theme Name: Maggiore
+Theme URI:  https://ejemplo.com/maggiore
+Author:     Tu Agencia
+Author URI: https://ejemplo.com
+Description: Tema base para una agencia de marketing digital
+Version:    1.0
+Text Domain: maggiore
+Domain Path: /languages
+*/
+main {
+  min-height: calc(100vh - 100px);
+}
+footer {
+  min-height: 100px;
+}
+.mg-thumb-wrapper {
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 4px;
+}
+.mg-thumb-wrapper img {
+  width: 80px;
+  height: auto;
+  display: block;
+}
+/* Galería de Imágenes */
+.images-gallery.layout-grid .media-item {
+}
+
+.images-gallery.masonry-grid {
+  column-count: 3;
+  column-gap: 1rem;
+}
+.images-gallery.masonry-grid .media-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+.images-gallery.vertical-gallery {
+  max-width: 100%;
+  margin: 0 auto;
+}
+.images-gallery.vertical-gallery .media-item {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .images-gallery.masonry-grid {
+    column-count: 2;
+  }
+}
+@media (max-width: 480px) {
+  .images-gallery.masonry-grid {
+    column-count: 1;
+  }
+}
+
+/* Galería de Videos (Masonry) */
+.videos-masonry {
+  column-count: 3;
+  column-gap: 1.5rem;
+}
+
+.video-item {
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
+}
+
+/* Video Player Container */
+.custom-video-player,
+.external-video {
+  position: relative;
+  width: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Ratios */
+.ratio-16x9 .custom-video-player::before,
+.ratio-16x9 .external-video::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;
+}
+
+.ratio-9x16 .custom-video-player::before {
+  content: "";
+  display: block;
+  padding-top: 177.78%;
+}
+
+.ratio-1x1 .custom-video-player::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+/* Video Element */
+.video-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Poster/Thumbnail */
+.video-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.poster-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  background: #000; /* Fondo mientras carga */
+}
+
+.poster-image[src*="data:image/svg"] {
+  opacity: 0.3; /* Placeholder visible pero tenue */
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.video-poster:hover .poster-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-btn-center {
+  position: relative;
+  z-index: 3;
+}
+
+.custom-video-player.playing .video-poster {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Botón Play Central (ESTILO YOUTUBE) */
+.play-btn-center {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  padding: 0;
+  opacity: 0.9;
+}
+
+.play-btn-center:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.play-btn-center:active {
+  transform: scale(0.95);
+}
+
+/* Controles Custom */
+.video-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-video-player:hover .video-controls,
+.custom-video-player.playing .video-controls {
+  opacity: 1;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.progress-filled {
+  height: 100%;
+  background: #ff0000;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+.progress-bar:hover {
+  height: 6px;
+}
+
+/* Controles Inferiores */
+.controls-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.control-btn:hover {
+  opacity: 0.8;
+}
+
+.time-display {
+  color: white;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  gap: 4px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.volume-slider {
+  width: 60px;
+  cursor: pointer;
+}
+
+/* Título del Video */
+.video-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.custom-video-player:hover .video-title {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .videos-masonry {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 576px) {
+  .videos-masonry {
+    column-count: 1;
+  }
+
+  .play-btn-center svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .control-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+.videos-vertical {
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.videos-vertical .video-item {
+  width: 100%;
+  margin-bottom: 0; /* No margin bottom porque gap lo maneja */
+}
+
+.videos-vertical .custom-video-player,
+.videos-vertical .external-video {
+  max-width: 100%;
+}
+
+/* Para videos verticales en layout vertical, centrarlos */
+.videos-vertical .ratio-9x16 {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Para videos cuadrados en layout vertical */
+.videos-vertical .ratio-1x1 {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Responsive para layout vertical */
+@media (max-width: 768px) {
+  .videos-vertical {
+    gap: 1.5rem;
+  }
+
+  .videos-vertical .ratio-9x16,
+  .videos-vertical .ratio-1x1 {
+    max-width: 100%;
+  }
+}
+
+/* ==============================================
+   TEAM MEMBER CARD - Nuevas clases CSS
+   ============================================== */
+
+/* Card container */
+.team-member-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Team badge (categoría) en la esquina superior derecha */
+.member-team {
+  position: absolute;
+  top: 3px;
+  right: 2px;
+  z-index: 2;
+}
+
+/* Link dentro del team tag */
+.team-tag {
+  font-size: 0.875rem;
+  color: white;
+  text-decoration: none;
+}
+
+/* LinkedIn icon en la esquina superior izquierda */
+.member-social {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  z-index: 2;
+  margin: 0;
+}
+
+/* Foto del miembro */
+.member-photo {
+  width: 100%;
+  aspect-ratio: 9/10;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder cuando no hay foto */
+.member-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #e9ecef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Información del miembro (superpuesta en la parte inferior) */
+.member-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px;
+  padding-top: 50px;
+  background: linear-gradient(transparent, #000000);
+  width: 100%;
+}
+
+/* Nombre del miembro */
+.member-name {
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+/* Cargo del miembro */
+.member-position {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
