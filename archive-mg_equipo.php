@@ -16,6 +16,32 @@ if ($lang) {
     $args_equipos['lang'] = $lang;
 }
 $equipos = get_terms($args_equipos);
+
+// Query personalizada para mostrar todos los miembros
+$args_team = [
+    'post_type' => 'mg_equipo',
+    'posts_per_page' => -1,
+    'orderby' => 'menu_order',
+    'order' => 'ASC',
+];
+
+// Si estamos en una taxonomía, filtrar por el término actual
+if ($is_taxonomy && isset($current_term->term_id)) {
+    $args_team['tax_query'] = [
+        [
+            'taxonomy' => 'mg_equipos',
+            'field' => 'term_id',
+            'terms' => $current_term->term_id,
+        ]
+    ];
+}
+
+// Filtrar por idioma si está activo Polylang
+if ($lang) {
+    $args_team['lang'] = $lang;
+}
+
+$team_query = new WP_Query($args_team);
 ?>
 
 <main class="container py-5">
@@ -75,37 +101,16 @@ $equipos = get_terms($args_equipos);
 
 
     <!-- Grid de miembros del equipo -->
-    <?php if (have_posts()): ?>
+    <?php if ($team_query->have_posts()): ?>
         <section class="team-grid">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
-                <?php while (have_posts()): the_post(); ?>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-2">
+                <?php while ($team_query->have_posts()): $team_query->the_post(); ?>
                     <div class="col">
                         <?php get_template_part('template-parts/card', 'equipo'); ?>
                     </div>
                 <?php endwhile; ?>
             </div>
         </section>
-
-        <!-- Paginación -->
-        <?php
-        $pagination = paginate_links([
-            'prev_text' => '&laquo; ' . __('Anterior', 'maggiore'),
-            'next_text' => __('Siguiente', 'maggiore') . ' &raquo;',
-            'type' => 'array',
-        ]);
-        ?>
-        
-        <?php if ($pagination): ?>
-            <nav class="mt-5" aria-label="<?php _e('Paginación del equipo', 'maggiore'); ?>">
-                <ul class="pagination justify-content-center">
-                    <?php foreach ($pagination as $page): ?>
-                        <li class="page-item <?= strpos($page, 'current') !== false ? 'active' : ''; ?>">
-                            <?= str_replace('page-numbers', 'page-link', $page); ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </nav>
-        <?php endif; ?>
 
     <?php else: ?>
         <!-- Mensaje si no hay miembros -->

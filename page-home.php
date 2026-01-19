@@ -45,21 +45,21 @@
             <article class="separador" id="robinHood">
               <div class="feature-name"><h3><?php _e('Metodología Robin Hood', 'maggiore'); ?></h3></div>
               <h4 class="mb-4 title-feature"><?php _e('Nuestra experiencia ayudando a crecer a gigantes nos permite impulsar a quienes quieren serlo.', 'maggiore'); ?></h4>
-              <p><?php _e('En Maggiore no solo ejecutamos estrategias: las fundamentamos con datos...', 'maggiore'); ?></p>
+              <p><?php _e('Usamos experiencia real, datos y ejecución precisa para darle a tu marca el empuje que necesita y el plan que merece para llegar más alto.', 'maggiore'); ?></p>
               <hr class="hr-mg">
             </article>
 
             <article class="separador" id="inteligencia">
               <div class="feature-name"><h3><?php _e('Metodología Inteligente', 'maggiore'); ?></h3></div>
-              <h4 class="mb-4 title-feature"><?php _e('Creamos estrategias sólidas, ejecutamos con excelencia y medimos los resultados...', 'maggiore'); ?></h4>
-              <p><?php _e('Gracias a nuestro departamento propio de inteligencia de mercados...', 'maggiore'); ?></p>
+              <h4 class="mb-4 title-feature"><?php _e('Creamos estrategias sólidas, ejecutamos con excelencia y medimos los resultados para optimizar las probabilidades de éxito.', 'maggiore'); ?></h4>
+              <p><?php _e('En Maggiore no solo ejecutamos estrategias: las fundamentamos con datos. Gracias a nuestro departamento propio de inteligencia de mercados, respondemos preguntas de negocio de forma rápida, profunda y costo eficiente. Esto nos permite guiar a nuestros clientes con decisiones mejor informadas, anticipar tendencias y construir estrategias alineadas con lo que realmente ocurre en el mercado.', 'maggiore'); ?></p>
               <hr class="hr-mg">
             </article>
 
             <article class="separador" id="flexible">
               <div class="feature-name"><h3><?php _e('Metodología Flexible', 'maggiore'); ?></h3></div>
-              <h4 class="mb-4 title-feature"><?php _e('Nuestro modelo de trabajo con tokens permite a los clientes gestionar su inversión...', 'maggiore'); ?></h4>
-              <p><?php _e('Se acumulan, se intercambian entre tareas y permiten comenzar sin cotizar cada actividad.', 'maggiore'); ?></p>
+              <h4 class="mb-4 title-feature"><?php _e('Nuestro modelo de trabajo con tokens permite a los clientes gestionar su inversión con la máxima flexibilidad, sin perder control ni eficiencia.', 'maggiore'); ?></h4>
+              <p><?php _e('Al pagar anticipadamente, acceden a mejores precios y pueden asignar sus tokens según sus necesidades cambiantes: se acumulan, se intercambian entre tareas y les permiten comenzar sin cotizar cada actividad. Cada entrega tiene un valor claro en tokens, lo que vuelve el proceso ágil, transparente y auditable.', 'maggiore'); ?></p>
               <hr class="hr-mg">
             </article>
           </div>
@@ -176,6 +176,48 @@
               </div>
             </div>
             <div class="col-md-7">
+              <!-- Grid de logos de clientes -->
+              <div class="logos-grid mb-4">
+                <?php
+                $clientes_args = [
+                    'post_type'      => 'mg_cliente',
+                    'posts_per_page' => -1, // Todos los clientes
+                    'orderby'        => 'title',
+                    'order'          => 'ASC',
+                ];
+
+                // Respetar idioma si está activo Polylang
+                if (function_exists('pll_current_language')) {
+                    $clientes_args['lang'] = pll_current_language();
+                }
+
+                $clientes_query = new WP_Query($clientes_args);
+
+                if ($clientes_query->have_posts()) : 
+                    while ($clientes_query->have_posts()) : $clientes_query->the_post();
+                        $cliente_id = get_the_ID();
+                        $cliente_nombre = get_the_title();
+                        $cliente_logo = get_the_post_thumbnail_url($cliente_id, 'medium');
+                        $cliente_url = get_permalink($cliente_id);
+                        
+                        if ($cliente_logo) :
+                ?>
+                    <a href="<?php echo esc_url($cliente_url); ?>" 
+                       class="logo-item" 
+                       title="<?php echo esc_attr($cliente_nombre); ?>">
+                        <img src="<?php echo esc_url($cliente_logo); ?>" 
+                             alt="<?php echo esc_attr('Logo de ' . $cliente_nombre); ?>"
+                             loading="lazy"
+                             decoding="async">
+                    </a>
+                <?php 
+                        endif;
+                    endwhile; 
+                    wp_reset_postdata();
+                endif;
+                ?>
+              </div>
+
 <?php
 $args = [
     'post_type'      => 'mg_caso_exito',

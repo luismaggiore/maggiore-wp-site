@@ -339,30 +339,12 @@ if ($fecha) {
         </section>
     <?php endif; ?>
 
-    <nav class="mt-5 pt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <?php
-                $prev_post = get_previous_post();
-                if ($prev_post): ?>
-                    <a href="<?= get_permalink($prev_post); ?>">
-                        <small class="tag-flecha"> <i class="bi bi-chevron-left"></i><?php _e(' Caso anterior', 'maggiore'); ?></small>
-                        <p style="color: white;"><?= esc_html($prev_post->post_title); ?></p>
-                    </a>
-                <?php endif; ?>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <?php
-                $next_post = get_next_post();
-                if ($next_post): ?>
-                    <a href="<?= get_permalink($next_post); ?>">
-                        <small class="tag-flecha next-flecha"><?php _e('Siguiente caso ', 'maggiore'); ?><i class="bi bi-chevron-right"></i> </small>
-                        <p style="color: white;"><?= esc_html($next_post->post_title); ?></p>
-                    </a>
-                <?php endif; ?>
-            </div>
-        </div>
-    </nav>
+<?php
+set_query_var('prev_label', __('Caso anterior', 'maggiore'));
+set_query_var('next_label', __('Siguiente caso', 'maggiore'));
+set_query_var('show_thumbnail', false); // Si quieres mostrar logos
+get_template_part('template-parts/navigation', 'single');
+?>
 
 </main>
 

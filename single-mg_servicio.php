@@ -311,35 +311,11 @@ foreach ($todos_portafolios as $portafolio) {
 
 
     <!-- NAVEGACIÓN A OTROS SERVICIOS -->
-        <nav class="mt-5 pt-5">
-            <div class="row">
-                <div class="col-md-6">
-                    <?php
-                    $prev_post = get_previous_post();
-                    if ($prev_post): ?>
-                        <a href="<?= get_permalink($prev_post); ?>">
-                            <small class="tag-flecha"> <i class="bi bi-chevron-left"></i>                            
-                            <?php _e(' Servicio anterior', 'maggiore'); ?>
-                    </small>
-                            <p style="color: white;"><?= esc_html($prev_post->post_title); ?></p>
-                        </a>
-                    <?php endif; ?>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <?php
-                    $next_post = get_next_post();
-                    if ($next_post): ?>
-                        <a href="<?= get_permalink($next_post); ?>">
-                            <small class="tag-flecha next-flecha">
-                            <?php _e('Siguiente servicio ', 'maggiore'); ?>
-                                <i class="bi bi-chevron-right"></i> </small>
-                            <i></i>
-                            <p style="color: white;"><?= esc_html($next_post->post_title); ?></p>
-                        </a>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </nav>
+    <?php
+set_query_var('prev_label', __('Servicio anterior', 'maggiore'));
+set_query_var('next_label', __('Siguiente servicio', 'maggiore'));
+get_template_part('template-parts/navigation', 'single');
+?>
 
 </main>
 

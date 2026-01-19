@@ -404,56 +404,12 @@ $portafolios = get_posts([
     <!-- ===============================
          NAVEGACIÓN PREV/NEXT
          =============================== -->
-    <nav class="mt-5 pt-5" >
-        <div class="row">
-            <div class="col-md-6">
-                <?php
-                $prev_post = get_previous_post();
-                if ($prev_post): 
-                    $prev_logo = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail');
-                ?>
-                    <a href="<?= esc_url(get_permalink($prev_post)); ?>" 
-                       class="text-decoration-none d-block mb-3 d-flex align-items-center">
-                        <?php if ($prev_logo): ?>
-                            <img src="<?= esc_url($prev_logo); ?>" 
-                                 alt="<?= esc_attr($prev_post->post_title); ?>"
-                                 class="me-3 border-mg"
-                                 style="width: 50px; height: 50px; object-fit: contain; border-radius: 4px; padding: 5px;">
-                        <?php endif; ?>
-                        <div>
-                            <small class="text-muted d-block ">
-                             <?php _e('Cliente anterior', 'maggiore'); ?>
-                            </small>
-                                <?= esc_html($prev_post->post_title); ?>
-                        </div>
-                    </a>
-                <?php endif; ?>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <?php
-                $next_post = get_next_post();
-                if ($next_post): 
-                    $next_logo = get_the_post_thumbnail_url($next_post->ID, 'thumbnail');
-                ?>
-                    <a href="<?= esc_url(get_permalink($next_post)); ?>" 
-                       class="text-decoration-none d-block mb-3 d-flex align-items-center justify-content-md-end">
-                        <div class="text-md-end me-3">
-                            <small class="text-muted d-block ">
-                                <?php _e('Siguiente cliente', 'maggiore'); ?> 
-                            </small>
-                                <?= esc_html($next_post->post_title); ?>
-                        </div>
-                        <?php if ($next_logo): ?>
-                            <img src="<?= esc_url($next_logo); ?>" 
-                                 alt="<?= esc_attr($next_post->post_title); ?>"
-                                 class="border-mg"
-                                 style="width: 50px; height: 50px; object-fit: contain; border-radius: 4px;  padding: 5px;">
-                        <?php endif; ?>
-                    </a>
-                <?php endif; ?>
-            </div>
-        </div>
-    </nav>
+<?php
+set_query_var('prev_label', __('Cliente anterior', 'maggiore'));
+set_query_var('next_label', __('Siguiente cliente', 'maggiore'));
+set_query_var('show_thumbnail', false); // Si quieres mostrar logos
+get_template_part('template-parts/navigation', 'single');
+?>
 
 </main>
 

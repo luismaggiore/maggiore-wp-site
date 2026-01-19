@@ -69,7 +69,13 @@ function maggiore_scripts() {
   // SISTEMA DE ANIMACIONES - ORDEN CRÍTICO ⚠️
   // Cargar en este orden específico para evitar errores
   // =========================================================================
-  
+  function permitir_webp_upload($mimes) {
+  $mimes['webp'] = 'image/webp';
+  return $mimes;
+}
+add_filter('mime_types', 'permitir_webp_upload');
+
+
   // 1️⃣ CONFIGURACIÓN (primero, sin dependencias)
   wp_enqueue_script(
     'visual-config',
