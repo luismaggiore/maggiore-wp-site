@@ -4,6 +4,7 @@
   --background-color: #030303;
   --background-container: #111118c9;
   --border-container: #535353 1px solid;
+  --color-border: #535353;
   --inner-background: #000000c9;
   --primary-color: #3498db;
   --accent-color: #00d4ff;
@@ -19,6 +20,9 @@
   --text-secondary: rgb(187, 187, 187);
   --border-radius: 5px;
   --background-hover: rgba(66, 66, 66, 0.384);
+}
+.p-top {
+  padding-top: clamp(100px, 15vh, 15vh);
 }
 body {
   color: white;
@@ -110,6 +114,10 @@ body {
   border-radius: 999px;
   width: fit-content;
   opacity: 0.9;
+}
+.quienes-somos-hero {
+  min-height: 100vh;
+  align-content: center;
 }
 .maggiore-frase {
   font-size: 4vw;
@@ -298,7 +306,39 @@ h1 {
   margin-bottom: 40px;
   max-width: 600px;
 }
+/* Bootstrap pagination custom */
+.pagination .page-link {
+  border: var(--border-container);
+  background: var(--background-container);
+  color: inherit; /* opcional: mantiene el color del texto según tu tema */
+}
 
+/* Hover */
+.pagination .page-link:hover {
+  background: var(
+    --background-hover
+  ); /* OJO: asegúrate que la variable tenga 2 guiones */
+  border: var(--border-container);
+}
+
+/* Estado activo (página actual) */
+.pagination .page-item.active .page-link {
+  background: var(--background-container);
+  border: var(--border-container);
+  color: #00909b;
+}
+
+/* Estado focus (accesibilidad / click) */
+.pagination .page-link:focus {
+  box-shadow: none; /* opcional */
+}
+
+/* Disabled */
+.pagination .page-item.disabled .page-link {
+  background: var(--background-container);
+  border: var(--border-container);
+  opacity: 0.6;
+}
 @property --angle {
   syntax: "<angle>";
   inherits: false;
@@ -880,14 +920,73 @@ button.btns-mgr:hover .btn-brillo {
 
 /* Si tu card tiene bordes redondeados, recorta perfecto */
 
-.member-photo-wrap {
-  border-radius: inherit;
+.alternative-grid .member-info {
+  padding-bottom: 1rem;
 }
 
+.alternative-grid .member-name {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.alternative-grid .member-position {
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  margin-bottom: 0px;
+}
+
+.alternative-grid .team-tag {
+  font-size: 0.9rem;
+  right: 9px;
+  position: absolute;
+  padding: 2px 8px;
+  line-height: 1rem;
+  align-self: start;
+}
+.alternative-grid .member-linkedin {
+  top: -2px !important;
+  position: absolute;
+}
+.alternative-grid .member-info {
+  min-height: 55px;
+  padding: 5px 15px;
+
+  align-content: normal;
+}
+@media (min-width: 1400px) {
+  .alternative-grid {
+    max-width: 200px;
+    min-width: 200px;
+  }
+}
+.alternative-grid .member-team {
+  left: 0;
+  width: 100%;
+}
+.alternative-grid .member-position {
+  display: none;
+}
 /* Ajuste del título cuando estás dentro de mg_area (antes lo tenías inline) */
 .team-member-card.is-in-area .member-name {
   font-size: 1rem;
   margin-bottom: 0;
+}
+.mg_values_scope .mg_values_letter.is_active {
+  color: #fff !important;
+  transition: all 200ms ease;
+}
+.mg_values_scope .mg_values_letter {
+  color: var(--secondary-color);
+  transition: all 200ms ease;
+}
+.mg_values_scope .card-mg:hover {
+  background-color: var(--background-hover);
+  transition: all 200ms ease;
+  transform: scale(0.99);
+}
+.mg_values_scope .card-mg {
+  transition: all 200ms ease;
 }
 
 /* Respeta accesibilidad */
@@ -1353,6 +1452,19 @@ button.btns-mgr:hover .btn-brillo {
   margin-right: -5px;
   border-radius: 3px;
 }
+@media (max-width: 1199px) {
+  .quienes-somos-hero {
+    min-height: fit-content;
+  }
+}
+/* Hasta 380px: forzar como col-12 */
+@media (max-width: 380px) {
+  .row > .col-xxs-12 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}
+
 @media (max-width: 991px) {
   .col-const {
     position: absolute;
@@ -1426,11 +1538,20 @@ button.btns-mgr:hover .btn-brillo {
     padding-bottom: 10px;
   }
   .container-fluid .testimonial-mg {
-    margin: 5px -20px;
+    margin: 5px 0rem;
   }
   .container-fluid {
-    padding-right: 25px;
-    padding-left: 25px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  .container-fluid .row {
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
+  .container-fluid .card-mg {
+    padding: 20px;
+    margin-left: 0rem;
+    margin-right: 0rem;
   }
   .globo {
     opacity: 0.7;
@@ -1492,7 +1613,8 @@ button.btns-mgr:hover .btn-brillo {
   }
 
   .separador {
-    padding: 20px 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     min-height: fit-content;
   }
 

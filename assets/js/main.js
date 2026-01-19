@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     TextPlugin
   );
   // gsap code here!
+  const smoother = ScrollSmoother.create({
+    wrapper: "#smooth-wrapper",
+    content: "#smooth-content",
+    smooth: 1.2,
+    effects: true,
+  });
 
   if (document.querySelector(".copiar-correo")) {
     document.querySelectorAll(".copiar-correo").forEach(function (btn) {
@@ -33,12 +39,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-  const smoother = ScrollSmoother.create({
-    wrapper: "#smooth-wrapper",
-    content: "#smooth-content",
-    smooth: 1.2,
-    effects: true,
-  });
+  if (document.querySelector(".mg_values_scope")) {
+    const scope = document.querySelector(".mg_values_scope");
+    if (!scope) return;
+
+    const letters = Array.from(scope.querySelectorAll(".mg_values_letter"));
+    const cards = Array.from(scope.querySelectorAll(".mg_values_card"));
+
+    if (letters.length === 0 || cards.length === 0) return;
+
+    const clearActive = () => {
+      letters.forEach((letter) => letter.classList.remove("is_active"));
+    };
+
+    cards.forEach((card, idx) => {
+      card.addEventListener("mouseenter", () => {
+        clearActive();
+        if (letters[idx]) letters[idx].classList.add("is_active");
+      });
+
+      card.addEventListener("mouseleave", () => {
+        clearActive();
+      });
+    });
+  }
 
   if (
     document.querySelector(".blog-sidebar") &&

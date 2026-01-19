@@ -35,7 +35,7 @@ $is_area_single = is_singular('mg_area');
  
 
   <?php if (!$is_area_single && $equipo): ?>
-      <a  href="<?php echo esc_url(get_term_link($equipo)); ?>" class="team-tag service-tag mx-0 <?= $badge_class ?>">
+      <a  href="<?php echo esc_url(get_term_link($equipo)); ?>" class=" service-tag team-tag mx-0 <?= $badge_class ?>">
         <?php echo esc_html($equipo->name); ?>
       </a>
 
@@ -44,7 +44,7 @@ $is_area_single = is_singular('mg_area');
        <?php if ($linkedin): ?>
       <a
         href="<?php echo esc_url($linkedin); ?>"
-       class="service-tag mt-1 mx-0 px-1  btn-linkedin "              
+       class="service-tag mt-1 mx-0 px-1  btn-linkedin member-linkedin "              
         target="_blank"
         rel="noopener noreferrer"
         itemprop="sameAs"
@@ -95,6 +95,7 @@ $is_area_single = is_singular('mg_area');
       </h3>
 
       <?php if ($cargo): ?>
+        
         <p class="member-position" itemprop="jobTitle">
           <?php echo esc_html($cargo); ?>
         </p>
