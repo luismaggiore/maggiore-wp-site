@@ -218,14 +218,78 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   if (document.querySelectorAll(".bajada-reveal")) {
+
+    let delayValue = document.querySelector(".globo") ? 1.4 : 0.4;
+
     gsap.from(".bajada-reveal", {
       x: 20,
       autoAlpha: 0,
-      delay: 1.4,
+      delay: delayValue,
       duration: 0.6,
       ease: "power1.out",
     });
   }
+
+
+  (() => {
+    if (typeof gsap === "undefined") return;
+
+    // Respeta "reduced motion"
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const cards = gsap.utils.toArray(".card-mg");
+    if (!cards.length) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const distance = 20;
+    // 4 direcciones base (offsets)
+    const directions = [
+      { x: -distance, y: 0 },  // desde izquierda
+      { x: distance, y: 0 },  // desde derecha
+      { x: 0, y: -distance },// desde arriba
+      { x: 0, y: distance }, // desde abajo
+    ];
+
+    // Baraja direcciones para que se sienta menos "patrón"
+    const shuffled = directions
+      .map(d => ({ d, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .map(o => o.d);
+
+    cards.forEach((card, i) => {
+      const dir = shuffled[i % shuffled.length];
+
+      // Si reduced motion, que aparezca sin desplazamiento
+      const fromVars = reduceMotion
+        ? { autoAlpha: 0 }
+        : {
+          autoAlpha: 0,
+          x: dir.x,
+          y: dir.y
+        };
+
+      gsap.fromTo(
+        card,
+        fromVars,
+        {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          duration: reduceMotion ? 0.01 : 0.9,
+          ease: "expo.out",          // "cool" (puedes probar "power4.out" también)
+          clearProps: "transform,opacity",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            end: "top 60%",
+            toggleActions: "play none none reverse",
+            // markers: true, // descomenta para debug
+          }
+        }
+      );
+    });
+  })();
 
   if (document.querySelector(".text-appear")) {
     document.fonts.ready.then(() => {
@@ -267,11 +331,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
 
       let chars = mySplitText.words;
+      let delayValue = document.querySelector(".globo")?1:0;
+
+   
 
       gsap.from(chars, {
         duration: 0.6,
         autoAlpha: 0,
-        delay: 1,
+        delay: delayValue,
         x: 20,
         ease: "power1.out",
         stagger: {
@@ -369,6 +436,62 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
     });
   }
+
+  if(document.querySelector(".reveal-up")){
+
+    gsap.utils.toArray(".reveal-up").forEach((el) => {
+    
+      gsap.from(el, {
+        y: 100,
+        autoAlpha: 0,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: el,
+          toggleActions: "play none none reverse",
+        },
+      });
+      
+      })
+
+
+  }
+
+  if (document.querySelector(".mision-vision")){
+    
+    gsap.utils.toArray(".mision-vision").forEach((el) => {
+      gsap.from(el, {
+        x: 100,
+        autoAlpha: 0,
+        ease: "expo.out",
+        duration: 2,
+        scrollTrigger: {
+          trigger: el,
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      let mySplitText = SplitText.create(el, {
+        type: "words",
+      });
+      let chars = mySplitText.words; //an array of all the divs that wrap each character
+
+      gsap.from(chars, {
+        color: "#537379ff",
+        ease: "expo.out",
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: el,
+          toggleActions: "play reverse play reverse",
+        },
+        stagger: {
+          amount: 1,
+        },
+      });
+    });
+    
+    
+  }
+
 
   if (document.getElementById("features")) {
     gsap.utils.toArray(".feature-name").forEach((el) => {

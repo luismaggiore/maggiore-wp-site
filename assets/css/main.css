@@ -923,16 +923,22 @@ button.btns-mgr:hover .btn-brillo {
 .alternative-grid .member-info {
   padding-bottom: 1rem;
 }
-
+.member-name {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
 .alternative-grid .member-name {
   font-size: 1rem;
   margin-bottom: 0.2rem;
 }
-
-.alternative-grid .member-position {
+.member-position {
   padding: 0;
   font-size: 0.9rem;
   line-height: 1rem;
+  margin-bottom: 1rem;
+}
+.alternative-grid .member-position {
+
   margin-bottom: 0px;
 }
 
@@ -1097,7 +1103,84 @@ button.btns-mgr:hover .btn-brillo {
 .col-test dt {
   height: 26px;
 }
+/* ========================================
+   Estilos para Grid de Logos de Clientes
+   ======================================== */
 
+.logos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+
+}
+
+.logos-grid .logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: var(--background-container);
+  border-radius: var(--border-radius);
+  border: var(--border-container);
+  transition: all 200ms ease;
+  min-height: 100px;
+  text-decoration: none;
+}
+
+.logos-grid .logo-item:hover {
+  background-color: var(--background-hover);
+  transform: scale(1.05);
+  border-color: var(--secondary-color);
+}
+
+.logos-grid .logo-item img {
+  max-width: 100%;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0.9);
+  transition: all 200ms ease;
+}
+
+.logos-grid .logo-item:hover img {
+  filter: brightness(1.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .logos-grid .logo-item {
+    min-height: 80px;
+    padding: 10px;
+  }
+
+  .logos-grid .logo-item img {
+    max-height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .logos-grid .logo-item {
+    min-height: 60px;
+    padding: 8px;
+  }
+
+  .logos-grid .logo-item img {
+    max-height: 50px;
+  }
+}
 .portafolio-mg {
   padding: 25px;
   border-radius: var(--border-radius);
