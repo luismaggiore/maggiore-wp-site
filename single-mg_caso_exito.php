@@ -82,7 +82,7 @@ if ($fecha) {
 <main class="container py-5" itemscope itemtype="https://schema.org/Article">
 
     <!-- Header del caso de éxito -->
-    <header style="padding-top: 15vh; position: relative;">
+    <header class="p-top" style="position: relative;">
 
         <h1 class="display-4 mb-3" itemprop="headline"><?php the_title(); ?></h1>
         

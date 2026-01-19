@@ -111,7 +111,7 @@ $portafolios = get_posts([
     <!-- ===============================
          HEADER COMPACTO
          =============================== -->
-    <header class="mb-4" style="padding-top: 15vh; position: relative;">
+    <header class="mb-4 p-top"  style="position: relative;">
         
      
         <!-- Logo y Título -->

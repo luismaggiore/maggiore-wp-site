@@ -43,7 +43,7 @@ if ($lang && $es_director) {
  
     
 <!-- Header del miembro -->
-    <header class=" mb-2  " style="padding-top:15vh;position:relative">
+    <header class=" mb-2  p-top" style=";position:relative">
         <div class="row  g-2" >
         <div class=" col-lg-2 col-md-3 " >
             <div class="card-mg p-0" > 

@@ -93,7 +93,7 @@ $term_slug = $current_term->slug;
 <main class="container py-5">
     
     <!-- Header del Archive -->
-    <header class="mb-1" style="padding-top: 15vh;">
+    <header class="mb-1 p-top"  >
         <div class="d-flex align-items-center gap-3 mb-3">
             <!-- Badge con color de la industria -->
             <?php if ($term_color): ?>

@@ -90,7 +90,7 @@ if ($autor_id) {
 
 <main class="container py-5" itemscope itemtype="https://schema.org/Article">
 
-    <div style="padding-top: 15vh;">
+    <div  class="p-top">
            <header class="mb-2"> <!-- Categorías (solo si existen) -->
 
                         <?php if ($categorias && !is_wp_error($categorias) && !empty($categorias)): ?>

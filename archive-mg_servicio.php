@@ -33,7 +33,7 @@ $areas_query = new WP_Query($args_areas);
 <main class="container py-5">
     
     <!-- Header -->
-    <header class="mb-5" style="padding-top: 15vh;">
+    <header class="mb-5 p-top" >
         <?php if ($is_taxonomy): ?>
             <h1 class="display-4 mb-3">
                 <?= esc_html($current_term->name); ?>

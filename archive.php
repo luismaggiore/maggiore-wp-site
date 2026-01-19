@@ -71,7 +71,7 @@ $autores = new WP_Query($args_autores);
 <main class="container py-5">
     
     <!-- Header del Archive -->
-    <header class="blog-archive-header mb-5" style="padding-top: 15vh;">
+    <header class="blog-archive-header mb-5 p-top" >
         <?php if ($is_category): ?>
             <div class="d-flex align-items-center gap-3 mb-3">
                 <div class="category-badge">

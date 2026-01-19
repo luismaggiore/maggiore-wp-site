@@ -105,7 +105,7 @@ foreach ($todos_portafolios as $portafolio) {
 <main class="container py-5" itemscope itemtype="https://schema.org/Service">
 
     <!-- HEADER DEL SERVICIO -->
-    <header class="mb-5" style="padding-top: 15vh; position: relative;">
+    <header class="mb-5 p-top" style="position: relative;">
         
         <!-- Título principal -->
         <h1 class="display-4 mb-3" itemprop="name"><?php the_title(); ?></h1>

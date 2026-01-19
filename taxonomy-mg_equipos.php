@@ -44,7 +44,7 @@ $term_slug = $current_term->slug;
 <main class="container py-5">
     
     <!-- Header del Archive -->
-    <header class="mb-5" style="padding-top: 15vh;">
+    <header class="mb-5 p-top" >
      
         
         <h1 class="display-4 mb-3">

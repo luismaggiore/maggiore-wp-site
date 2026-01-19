@@ -26,7 +26,7 @@ if ($fecha) {
     }
 }
 ?>
-<article class="portafolio-single" style="padding-top:15vh">
+<article class="portafolio-single p-top" >
 <div class="mb-5">
     <h1 class="display-4 mb-3"><?php the_title(); ?></h1>
 

@@ -214,7 +214,7 @@ echo '</pre>';
     <!-- ===============================
          HEADER
          =============================== -->
-    <header class="mb-5" style="padding-top: 15vh; position: relative;">
+    <header class="mb-5 p-top" style=" position: relative;">
         <h1 class="display-4 mb-3" itemprop="name">
             <?php the_title(); ?>
         </h1>
