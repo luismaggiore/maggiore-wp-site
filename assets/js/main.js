@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     ScrollSmoother,
     ScrollToPlugin,
     SplitText,
-    TextPlugin
+    TextPlugin,
   );
   // gsap code here!
   const smoother = ScrollSmoother.create({
@@ -91,28 +91,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     });
   }
-  function makeHoverableCards({
+  function makeHoverableCardsGSAP({
     cardSelector,
     linkSelector,
-    hoverableClass = "hoverable",
-    hoverClass = "is-hover",
+    scale = 0.99,
+    duration = 0.18,
+    ease = "power2.out",
+    backgroundHover = "var(--background-hover)",
+    backgroundNormal = "", // "" = vuelve al estilo CSS original
   }) {
-    // Si no existe al menos una card o un link, no hacemos nada
-    if (
-      !document.querySelector(cardSelector) ||
-      !document.querySelector(linkSelector)
-    )
-      return;
+    const reduceMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const cardExists = document.querySelector(cardSelector);
+    const linkExists = document.querySelector(linkSelector);
+    if (!cardExists || !linkExists) return;
 
     const cards = Array.from(document.querySelectorAll(cardSelector)).filter(
-      (card) => card.querySelector(linkSelector)
+      (card) => card.querySelector(linkSelector),
     );
 
     cards.forEach((card) => {
-      card.classList.add(hoverableClass);
+      // Estado inicial “normal”
 
-      const on = () => card.classList.add(hoverClass);
-      const off = () => card.classList.remove(hoverClass);
+      // Creamos una animación reutilizable por card
+      const hoverTween = gsap.to(card, {
+        scale,
+        backgroundColor: backgroundHover,
+        duration: reduceMotion ? 0 : duration,
+        ease,
+        paused: true,
+        overwrite: "auto",
+      });
+
+      const on = () => hoverTween.play();
+      const off = () => hoverTween.reverse();
 
       card.addEventListener("pointerenter", on);
       card.addEventListener("pointerleave", off);
@@ -123,20 +137,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-  // Ejemplo 1: lo mismo que tenías
-  makeHoverableCards({
+  // Ejemplo 1: .card-mg
+  makeHoverableCardsGSAP({
     cardSelector: ".card-mg",
     linkSelector: ".stretched-link",
-    hoverableClass: "hoverable",
-    hoverClass: "is-hover",
   });
 
-  // Ejemplo 2: otra variante con clases distintas
-  makeHoverableCards({
+  // Ejemplo 2: .blog-article
+  makeHoverableCardsGSAP({
     cardSelector: ".blog-article",
     linkSelector: ".stretched-link",
-    hoverableClass: "hoverable",
-    hoverClass: "is-hover",
   });
 
   if (document.querySelector(".scroll-nav")) {
@@ -190,7 +200,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     prevBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const currentIndex = dotsArray.findIndex((d) =>
-        d.classList.contains("active")
+        d.classList.contains("active"),
       );
       goToIndex(Math.max(0, currentIndex - 1));
     });
@@ -198,7 +208,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     nextBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const currentIndex = dotsArray.findIndex((d) =>
-        d.classList.contains("active")
+        d.classList.contains("active"),
       );
       goToIndex(Math.min(dotsArray.length - 1, currentIndex + 1));
     });
@@ -218,7 +228,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   if (document.querySelectorAll(".bajada-reveal")) {
-
     let delayValue = document.querySelector(".globo") ? 1.4 : 0.4;
 
     gsap.from(".bajada-reveal", {
@@ -230,12 +239,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-
   (() => {
     if (typeof gsap === "undefined") return;
 
     // Respeta "reduced motion"
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
     const cards = gsap.utils.toArray(".card-mg");
     if (!cards.length) return;
@@ -245,17 +255,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const distance = 20;
     // 4 direcciones base (offsets)
     const directions = [
-      { x: -distance, y: 0 },  // desde izquierda
-      { x: distance, y: 0 },  // desde derecha
-      { x: 0, y: -distance },// desde arriba
+      { x: -distance, y: 0 }, // desde izquierda
+      { x: distance, y: 0 }, // desde derecha
+      { x: 0, y: -distance }, // desde arriba
       { x: 0, y: distance }, // desde abajo
     ];
 
     // Baraja direcciones para que se sienta menos "patrón"
     const shuffled = directions
-      .map(d => ({ d, r: Math.random() }))
+      .map((d) => ({ d, r: Math.random() }))
       .sort((a, b) => a.r - b.r)
-      .map(o => o.d);
+      .map((o) => o.d);
 
     cards.forEach((card, i) => {
       const dir = shuffled[i % shuffled.length];
@@ -264,30 +274,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const fromVars = reduceMotion
         ? { autoAlpha: 0 }
         : {
-          autoAlpha: 0,
-          x: dir.x,
-          y: dir.y
-        };
+            autoAlpha: 0,
+            x: dir.x,
+            y: dir.y,
+          };
 
-      gsap.fromTo(
-        card,
-        fromVars,
-        {
-          autoAlpha: 1,
-          x: 0,
-          y: 0,
-          duration: reduceMotion ? 0.01 : 0.9,
-          ease: "expo.out",          // "cool" (puedes probar "power4.out" también)
-          clearProps: "transform,opacity",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            end: "top 60%",
-            toggleActions: "play none none reverse",
-            // markers: true, // descomenta para debug
-          }
-        }
-      );
+      gsap.fromTo(card, fromVars, {
+        autoAlpha: 1,
+        x: 0,
+        y: 0,
+        duration: reduceMotion ? 0.01 : 2,
+        ease: "expo.out", // "cool" (puedes probar "power4.out" también)
+        clearProps: "transform,opacity",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          end: "top 60%",
+          toggleActions: "play none none reverse",
+          // markers: true, // descomenta para debug
+        },
+      });
     });
   })();
 
@@ -331,9 +337,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       });
 
       let chars = mySplitText.words;
-      let delayValue = document.querySelector(".globo")?1:0;
-
-   
+      let delayValue = document.querySelector(".globo") ? 1 : 0;
 
       gsap.from(chars, {
         duration: 0.6,
@@ -373,28 +377,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       },
       y: 150,
     });
-
-    if (document.querySelector(".testimonial-slide")) {
-      gsap.utils.toArray(".testimonial-slide").forEach((el) => {
-        gsap.fromTo(
-          el,
-          { x: 200, opacity: 0 }, // Estado inicial (fuera, derecha)
-          {
-            x: 0,
-            y: 0,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "top 80%",
-              end: "bottom 80%",
-              scrub: true,
-              toggleActions: "play reverse play reverse",
-            },
-          }
-        );
-      });
-    }
 
     // opcional: retorna cleanup si se cambia el tamaño
     return () => {
@@ -437,10 +419,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-  if(document.querySelector(".reveal-up")){
-
+  if (document.querySelector(".reveal-up")) {
     gsap.utils.toArray(".reveal-up").forEach((el) => {
-    
       gsap.from(el, {
         y: 100,
         autoAlpha: 0,
@@ -450,14 +430,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
           toggleActions: "play none none reverse",
         },
       });
-      
-      })
-
-
+    });
   }
 
-  if (document.querySelector(".mision-vision")){
-    
+  if (document.querySelector(".mision-vision")) {
     gsap.utils.toArray(".mision-vision").forEach((el) => {
       gsap.from(el, {
         x: 100,
@@ -488,10 +464,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
       });
     });
-    
-    
   }
-
 
   if (document.getElementById("features")) {
     gsap.utils.toArray(".feature-name").forEach((el) => {
@@ -592,7 +565,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             duration: 1,
             ease: "none",
           },
-          i * stagger
+          i * stagger,
         );
       });
     }
@@ -747,4 +720,96 @@ document.addEventListener("DOMContentLoaded", (event) => {
       animate();
     }
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const switcher = document.querySelector(".language-switcher");
+  if (!switcher) return;
+
+  // Evita duplicar si el script corre 2 veces
+  if (switcher.querySelector(".ls-dropdown")) return;
+
+  const items = Array.from(switcher.querySelectorAll(":scope > li.lang-item"));
+  if (!items.length) return;
+
+  const current =
+    items.find((li) => li.classList.contains("current-lang")) || items[0];
+  const currentLink = current.querySelector("a");
+  const currentImg = currentLink?.querySelector("img");
+
+  if (!currentLink || !currentImg) return;
+
+  // Crear estructura nueva
+  const dropdown = document.createElement("div");
+  dropdown.className = "ls-dropdown";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "ls-btn";
+  btn.setAttribute("aria-haspopup", "menu");
+  btn.setAttribute("aria-expanded", "false");
+
+  const btnImg = currentImg.cloneNode(true);
+  btnImg.removeAttribute("style"); // por si viene con inline style
+  btn.appendChild(btnImg);
+
+  const caret = document.createElement("span");
+  caret.className = "ls-caret";
+  caret.textContent = "▾";
+  btn.appendChild(caret);
+
+  const menu = document.createElement("div");
+  menu.className = "ls-menu";
+  menu.setAttribute("role", "menu");
+
+  // Poner en el menú SOLO los idiomas que no son current
+  items.forEach((li) => {
+    if (li === current) return;
+    const a = li.querySelector("a");
+    const img = a?.querySelector("img");
+    if (!a || !img) return;
+
+    const aClone = a.cloneNode(true);
+    const imgClone = img.cloneNode(true);
+    imgClone.removeAttribute("style");
+
+    // dejamos solo la imagen dentro del link
+    aClone.innerHTML = "";
+    aClone.appendChild(imgClone);
+
+    aClone.setAttribute("role", "menuitem");
+    menu.appendChild(aClone);
+  });
+
+  dropdown.appendChild(btn);
+  dropdown.appendChild(menu);
+  switcher.appendChild(dropdown);
+
+  // Toggle con click
+  const open = () => {
+    dropdown.classList.add("is-open");
+    btn.setAttribute("aria-expanded", "true");
+  };
+  const close = () => {
+    dropdown.classList.remove("is-open");
+    btn.setAttribute("aria-expanded", "false");
+  };
+  const toggle = () => {
+    dropdown.classList.contains("is-open") ? close() : open();
+  };
+
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggle();
+  });
+
+  // Cerrar al click afuera
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) close();
+  });
+
+  // ESC para cerrar
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
 });

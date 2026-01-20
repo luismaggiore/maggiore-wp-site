@@ -250,7 +250,7 @@ require_once get_template_directory() . '/inc/helpers/hierarchy-helpers.php';
 require_once get_template_directory() . '/inc/helpers/portafolio-video-system.php';
 require_once get_template_directory() . '/inc/helpers/taxonomy-color-fields.php';
 require_once get_template_directory() . '/inc/helpers/taxonomy-css-generator.php';
-
+require_once get_template_directory() . '/inc/helpers/footer-functions.php';
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */

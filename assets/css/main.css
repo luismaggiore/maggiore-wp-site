@@ -486,9 +486,7 @@ h1 {
   top: 20px;
   left: 0;
 }
-.navbar {
-  padding: 60px 0px;
-}
+
 .nav-item {
   position: relative;
   font-variant: all-small-caps;
@@ -662,11 +660,14 @@ h1 {
   padding-right: clamp(10px, 8vw, 160px);
   padding-left: clamp(10px, 8vw, 160px);
 }
-
-.navegador {
+.navbar {
+  padding: 0px 0px;
+  background-color: var(--background-color);
   background: rgba(0, 0, 0, 0.5);
   border-radius: 999px;
   width: fit-content;
+  justify-self: end;
+  margin: 40px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 3px 20px;
@@ -938,7 +939,6 @@ button.btns-mgr:hover .btn-brillo {
   margin-bottom: 1rem;
 }
 .alternative-grid .member-position {
-
   margin-bottom: 0px;
 }
 
@@ -1111,7 +1111,6 @@ button.btns-mgr:hover .btn-brillo {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 10px;
-
 }
 
 .logos-grid .logo-item {
@@ -1212,7 +1211,9 @@ button.btns-mgr:hover .btn-brillo {
   background-size: cover;
   background-position: center;
   transform: scale(1);
-  transition: transform 280ms ease, opacity 280ms ease;
+  transition:
+    transform 280ms ease,
+    opacity 280ms ease;
   will-change: transform;
   z-index: -1;
 }
@@ -1549,6 +1550,21 @@ button.btns-mgr:hover .btn-brillo {
 }
 
 @media (max-width: 991px) {
+  .navbar {
+    padding: 20px 20px !important;
+    background-color: var(--background-container);
+    backdrop-filter: blur(5px);
+    padding: 0px 0px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 0px;
+    width: 100%;
+    justify-self: end;
+    margin: 0px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+  }
+
   .col-const {
     position: absolute;
     max-height: 200px !important;
@@ -1580,22 +1596,6 @@ button.btns-mgr:hover .btn-brillo {
 
   .separador {
     min-height: fit-content;
-  }
-
-  .navegador {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: var(--border-radius);
-    width: fit-content;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 10px;
-    border: solid 1px rgba(255, 255, 255, 0.3);
-  }
-
-  .navegador li {
-    padding: 0;
-    line-height: 0.7em;
-    margin: 0;
   }
 }
 @media (max-width: 767px) {
