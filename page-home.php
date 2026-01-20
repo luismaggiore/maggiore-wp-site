@@ -242,69 +242,153 @@ if ($casos_landing->have_posts()) : ?>
         </div>
       </section>
 
-      <!-- FORMULARIO -->
-      <section class="separador" id="sectionFour">
-        <div class="container">
-          <h2 class="text-center mb-5"><?php _e('Hablemos de crecimiento:', 'maggiore'); ?><br><?php _e('Cuéntanos tu meta y te guiamos', 'maggiore'); ?></h2>
-          <form>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="nombre"><?php _e('Nombre', 'maggiore'); ?></label>
-                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="<?php _e('Tu nombre completo', 'maggiore'); ?>" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="cargo"><?php _e('Cargo', 'maggiore'); ?></label>
-                <input type="text" id="cargo" name="cargo" class="form-control" placeholder="<?php _e('Ej: Gerente de Marketing', 'maggiore'); ?>">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="correo"><?php _e('Correo', 'maggiore'); ?></label>
-                <input type="email" id="correo" name="correo" class="form-control" placeholder="nombre@empresa.com" required>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="empresa"><?php _e('Empresa', 'maggiore'); ?></label>
-                <input type="text" id="empresa" name="empresa" class="form-control" placeholder="<?php _e('Nombre de la empresa', 'maggiore'); ?>">
-              </div>
-              <div class="col-12 mb-4">
-                <label for="telefono"><?php _e('Teléfono Celular', 'maggiore'); ?></label>
-                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="+56 9 1234 5678">
-              </div>
-            </div>
+     
+<!-- FORMULARIO -->
 
-            <div class="accordion mb-4" id="acordeonOpcional">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOpcional">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOpcional">
-                    <?php _e('Detalles Opcionales', 'maggiore'); ?>
-                  </button>
-                </h2>
-                <div id="collapseOpcional" class="accordion-collapse collapse">
-                  <div class="accordion-body">
-                    <div class="mb-3">
-                      <label for="dolorEmpresa"><?php _e('Dolor de la empresa', 'maggiore'); ?></label>
-                      <textarea id="dolorEmpresa" name="dolorEmpresa" class="form-control" rows="3" placeholder="<?php _e('¿Cuál es el principal problema o dolor hoy?', 'maggiore'); ?>"></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label for="objetivos"><?php _e('Objetivos', 'maggiore'); ?></label>
-                      <textarea id="objetivos" name="objetivos" class="form-control" rows="3" placeholder="<?php _e('¿Qué objetivos buscan lograr?', 'maggiore'); ?>"></textarea>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="d-grid">
-              <button type="submit" class="btn btns-mgr">
-                <div class="btn-brillo"></div>
-                <div class="btn-container">
-                  <div class="btn-content">
-                    <span class="btn-text"><?php _e('Enviar', 'maggiore'); ?></span>
-                  </div>
-                </div>
-              </button>
-            </div>
-          </form>
+<!-- FORMULARIO -->
+<section class="separador" id="sectionFour">
+  <div class="container">
+    <h2 class="text-center mb-5">
+      <?php _e('Hablemos de crecimiento:', 'maggiore'); ?><br>
+      <?php _e('Cuéntanos tu meta y te guiamos', 'maggiore'); ?>
+    </h2>
+    
+    <!-- 
+      ✅ CAMBIOS PRINCIPALES:
+      1. Agregado id="contactForm" al form
+      2. Agregado data-origen="Formulario Home" para identificar el origen
+      3. Agregado campo honeypot (anti-spam) oculto
+      4. Agregado name a todos los campos que faltaban
+      5. Los campos ya tienen los name correctos que coinciden con el handler PHP
+    -->
+    
+    <form id="contactForm" data-origen="Formulario Home">
+      
+      <!-- Campo Honeypot (anti-spam) - IMPORTANTE: debe estar oculto -->
+      <div style="position: absolute; left: -5000px;" aria-hidden="true">
+        <input type="text" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="nombre"><?php _e('Nombre', 'maggiore'); ?></label>
+          <input 
+            type="text" 
+            id="nombre" 
+            name="nombre" 
+            class="form-control" 
+            placeholder="<?php _e('Tu nombre completo', 'maggiore'); ?>" 
+            required
+          >
         </div>
-      </section>
+        
+        <div class="col-md-6 mb-3">
+          <label for="cargo"><?php _e('Cargo', 'maggiore'); ?></label>
+          <input 
+            type="text" 
+            id="cargo" 
+            name="cargo" 
+            class="form-control" 
+            placeholder="<?php _e('Ej: Gerente de Marketing', 'maggiore'); ?>"
+          >
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <label for="correo"><?php _e('Correo', 'maggiore'); ?></label>
+          <input 
+            type="email" 
+            id="correo" 
+            name="correo" 
+            class="form-control" 
+            placeholder="nombre@empresa.com" 
+            required
+          >
+        </div>
+        
+        <div class="col-md-6 mb-3">
+          <label for="empresa"><?php _e('Empresa', 'maggiore'); ?></label>
+          <input 
+            type="text" 
+            id="empresa" 
+            name="empresa" 
+            class="form-control" 
+            placeholder="<?php _e('Nombre de la empresa', 'maggiore'); ?>"
+          >
+        </div>
+        
+        <div class="col-12 mb-4">
+          <label for="telefono"><?php _e('Teléfono Celular', 'maggiore'); ?></label>
+          <input 
+            type="tel" 
+            id="telefono" 
+            name="telefono" 
+            class="form-control" 
+            placeholder="+56 9 1234 5678"
+          >
+        </div>
+      </div>
+
+      <!-- Acordeón con campos opcionales -->
+      <div class="accordion mb-4" id="acordeonOpcional">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOpcional">
+            <button 
+              class="accordion-button collapsed" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#collapseOpcional"
+              aria-expanded="false"
+              aria-controls="collapseOpcional"
+            >
+              <?php _e('Detalles Opcionales', 'maggiore'); ?>
+            </button>
+          </h2>
+          <div 
+            id="collapseOpcional" 
+            class="accordion-collapse collapse"
+            aria-labelledby="headingOpcional"
+            data-bs-parent="#acordeonOpcional"
+          >
+            <div class="accordion-body">
+              <div class="mb-3">
+                <label for="dolorEmpresa"><?php _e('Dolor de la empresa', 'maggiore'); ?></label>
+                <textarea 
+                  id="dolorEmpresa" 
+                  name="dolorEmpresa" 
+                  class="form-control" 
+                  rows="3" 
+                  placeholder="<?php _e('¿Cuál es el principal problema o dolor hoy?', 'maggiore'); ?>"
+                ></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="objetivos"><?php _e('Objetivos', 'maggiore'); ?></label>
+                <textarea 
+                  id="objetivos" 
+                  name="objetivos" 
+                  class="form-control" 
+                  rows="3" 
+                  placeholder="<?php _e('¿Qué objetivos buscan lograr?', 'maggiore'); ?>"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btns-mgr">
+          <div class="btn-brillo"></div>
+          <div class="btn-container">
+            <div class="btn-content">
+              <span class="btn-text"><?php _e('Enviar', 'maggiore'); ?></span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
 
     </main>
   </div>

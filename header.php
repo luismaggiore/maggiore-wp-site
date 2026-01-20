@@ -15,7 +15,11 @@
 </head>
 
 <body <?php body_class(); ?>>
-
+<?php 
+if (function_exists('wp_body_open')) {
+    wp_body_open();
+} 
+?>
   <!-- Aurora canvas + overlays si aplica en todas las páginas -->
   <div class="aurora" style="position: fixed">
     <canvas  id="aurora"></canvas>

@@ -62,30 +62,24 @@
                 <div class="footer-contact mb-4">
                     <div class="contact-item mb-2">
                         <i class="bi bi-geo-alt"></i>
-                        <span>Alcántara 1791, Las Condes<br>Santiago de Chile</span>
+                        <span> <?php echo maggiore_get_direccion(true); ?></span>
                     </div>
                     
                     <div class="contact-item mb-2">
                         <i class="bi bi-envelope"></i>
-                        <a href="mailto:marketing@maggiore.cl">marketing@maggiore.cl</a>
+                        <a href="mailto:<?php echo maggiore_get_email(); ?>"><?php echo maggiore_get_email(); ?></a>
                     </div>
                     
                     <div class="contact-item mb-2">
                         <i class="bi bi-telephone"></i>
-                        <a href="tel:+56912345678">+56 9 1234 5678</a>
+                        <a href="tel:<?php echo maggiore_get_telefono(); ?>">                                    <?php echo maggiore_get_telefono(); ?>
+</a>
                     </div>
                 </div>
                 
                 <!-- Redes Sociales -->
                 <div class="footer-social">
-                    <a href="https://www.linkedin.com/company/maggiore" target="_blank" rel="noopener noreferrer" 
-                       class="social-link" aria-label="LinkedIn">
-                        <i class="bi bi-linkedin"></i>
-                    </a>
-                    <a href="https://www.instagram.com/maggiore" target="_blank" rel="noopener noreferrer" 
-                       class="social-link" aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
+                    <?php maggiore_social_icons(); ?>
                 </div>
             </div>
             

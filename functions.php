@@ -65,6 +65,21 @@ function maggiore_scripts() {
   wp_enqueue_script('intl-tel-input', 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/js/intlTelInput.min.js', [], null, true);
   wp_enqueue_script('intl-tel-utils', 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/js/utils.js', ['intl-tel-input'], null, true);
 
+
+   // =========================================================================
+    // CONTACT FORM SCRIPT - Solo en páginas con formulario
+    // =========================================================================
+    if (is_page_template('page-home.php') || is_front_page()) {
+        wp_enqueue_script(
+            'maggiore-contact-form',
+            get_template_directory_uri() . '/assets/js/contact-form.js',
+            ['jquery'], // Dependencias si usas jQuery, sino puede ir vacío []
+            '1.0.0',
+            true
+        );
+    }
+    
+
   // =========================================================================
   // SISTEMA DE ANIMACIONES - ORDEN CRÍTICO ⚠️
   // Cargar en este orden específico para evitar errores
@@ -295,6 +310,7 @@ require_once get_template_directory() . '/inc/post-types/cpt-caso-exito.php';
 require_once get_template_directory() . '/inc/post-types/cpt-portafolio.php';
 require_once get_template_directory() . '/inc/post-types/cpt-equipo.php';
 require_once get_template_directory() . '/inc/post-types/cpt-area.php';
+require_once get_template_directory() . '/inc/post-types/cpt-contacto.php';
 
 /* -------------------------------------------------------
  * Metaboxes
@@ -302,6 +318,8 @@ require_once get_template_directory() . '/inc/post-types/cpt-area.php';
 foreach (glob(get_template_directory() . '/inc/metaboxes/*.php') as $file) {
     require_once $file;
 }
+require_once get_template_directory() . '/inc/contact-form/handler.php';
+require_once get_template_directory() . '/inc/contact-form/email-templates.php';
 
 /* -------------------------------------------------------
  * Taxonomías
@@ -324,8 +342,11 @@ require_once get_template_directory() . '/inc/helpers/hierarchy-helpers.php';
 require_once get_template_directory() . '/inc/helpers/portafolio-video-system.php';
 require_once get_template_directory() . '/inc/helpers/taxonomy-color-fields.php';
 require_once get_template_directory() . '/inc/helpers/taxonomy-css-generator.php';
-
-
+require_once get_template_directory() . '/inc/helpers/tracking-settings.php';
+require_once get_template_directory() . '/inc/analytics/dashboard.php';
+require_once get_template_directory() . '/inc/analytics/export.php';
+require_once get_template_directory() . '/inc/helpers/helpers.php';
+require_once get_template_directory() . '/inc/helpers/settings.php';
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */

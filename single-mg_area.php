@@ -427,7 +427,7 @@ echo '</pre>';
                 <?php foreach ($casos_destacados as $post): 
                     setup_postdata($post); 
                 ?>
-                    <div class="col-12 mt-0">
+                    <div class="col-12 mt-0 mb-2">
                         <?php get_template_part('template-parts/card', 'caso-exito'); ?>
                     </div>
                 <?php endforeach; 
