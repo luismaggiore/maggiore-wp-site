@@ -168,7 +168,9 @@ footer {
   background: none;
   border: none;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
   padding: 0;
   opacity: 0.9;
 }
@@ -420,3 +422,371 @@ footer {
   margin-bottom: 0.5rem;
   color: var(--text-secondary);
 }
+/* Ocultamos el markup original (pero queda en el DOM) */
+.language-switcher > li {
+  display: none;
+}
+
+/* Nuevo wrapper que crea el JS */
+.language-switcher .ls-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Botón negro */
+.language-switcher .ls-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.language-switcher .ls-btn:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+}
+
+.language-switcher .ls-btn img {
+  width: 18px;
+  height: auto;
+  display: block;
+}
+
+.language-switcher .ls-caret {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+/* Menú */
+.language-switcher .ls-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 54px;
+  padding: 6px;
+  background: #0b0b0b;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  z-index: 9999;
+
+  display: none;
+}
+
+.language-switcher .ls-dropdown.is-open .ls-menu {
+  display: grid;
+  gap: 6px;
+}
+
+/* Items del menú */
+.language-switcher .ls-menu a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.language-switcher .ls-menu a:hover,
+.language-switcher .ls-menu a:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+.language-switcher .ls-menu img {
+  width: 18px;
+  height: auto;
+  display: block;
+}
+
+/* Por si tu tema mete estilos raros a li */
+.language-switcher li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/**
+ * Footer Styles - Maggiore Theme
+ * Adaptado al diseño dark del tema
+ */
+
+/* ========================================
+   BREADCRUMBS
+   ======================================== */
+.breadcrumb-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem 0;
+  margin-bottom: 0;
+}
+
+.breadcrumb {
+  background: transparent;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.breadcrumb-item a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+  color: #ffffff;
+}
+
+.breadcrumb-item.active {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "›";
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0 0.5rem;
+}
+
+.breadcrumb-item i {
+  font-size: 0.85rem;
+  margin-right: 0.25rem;
+}
+
+/* ========================================
+   FOOTER PRINCIPAL
+   ======================================== */
+.footer-maggiore {
+  background-color: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.footer-main {
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 2rem;
+}
+
+/* ========================================
+   COLUMNA 1: LOGO + CONTACTO + REDES
+   ======================================== */
+.footer-logo img {
+  max-width: 180px;
+  height: auto;
+  filter: brightness(0) invert(1); /* Convierte logo a blanco si es necesario */
+}
+
+.footer-contact .contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+.footer-contact .contact-item i {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 0.2rem;
+  min-width: 20px;
+}
+
+.footer-contact .contact-item a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact .contact-item a:hover {
+  color: #ffffff;
+}
+
+/* Redes Sociales */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.footer-social .social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.footer-social .social-link i {
+  font-size: 1.2rem;
+}
+
+/* ========================================
+   COLUMNA 2: MENÚ WORDPRESS
+   ======================================== */
+.footer-title {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-menu a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.footer-menu a::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.footer-menu a:hover {
+  color: #ffffff;
+  padding-left: 1.25rem;
+}
+
+.footer-menu a:hover::before {
+  color: #ffffff;
+}
+
+/* ========================================
+   COLUMNA 3: ARCHIVES CPTs
+   ======================================== */
+.footer-cpt-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-cpt-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.footer-cpt-link::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.footer-cpt-link:hover {
+  color: #ffffff;
+  padding-left: 1.25rem;
+}
+
+.footer-cpt-link:hover::before {
+  color: #ffffff;
+}
+
+/* ========================================
+   COPYRIGHT
+   ======================================== */
+.footer-bottom {
+  padding-top: 2rem;
+}
+
+.copyright-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 991px) {
+  .footer-maggiore {
+    padding-top: 3rem;
+  }
+
+  .footer-main {
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .breadcrumb-container {
+    padding: 0.75rem 0;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+  }
+
+  .footer-logo img {
+    max-width: 150px;
+  }
+
+  .footer-title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-social {
+    margin-bottom: 2rem;
+  }
+}
+
+/* ========================================
+   BOOTSTRAP ICONS INTEGRATION
+   ======================================== */
+/* Asegúrate de tener Bootstrap Icons cargado en functions.php */
+/* Si no lo tienes, agrega esto en functions.php:
+   wp_enqueue_style('bootstrap-icons', 
+   'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css');
+*/

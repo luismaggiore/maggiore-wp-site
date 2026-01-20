@@ -24,11 +24,11 @@
   <div class="overlay2" style="position: fixed"></div>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top ">
+  
       
       <!-- Logo móvil -->
-      <a class="navbar-brand d-lg-none d-block" href="<?php echo esc_url(home_url('/')); ?>">
+      <a class="navbar-brand d-lg-none d-block " href="<?php echo esc_url(home_url('/')); ?>">
         <img
           src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg"
           alt="<?php esc_attr_e('Maggiore Marketing Logo', 'maggiore'); ?>"
@@ -42,22 +42,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Menú principal -->
-      <div class="collapse navbar-collapse" id="mainNav">
-        <?php
-          wp_nav_menu([
-            'theme_location'  => 'primary',
-            'depth'           => 2,
-            'container'       => false,
-            'menu_class'      => 'navbar-nav ms-auto navegador',
-            'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-            'walker'          => new WP_Bootstrap_Navwalker(),
-          ]);
-        ?>
-        
-        <!-- Selector de idioma (opcional con Polylang) -->
-        <?php if (function_exists('pll_the_languages')): ?>
-          <div class="ms-lg-3 mt-3 mt-lg-0 language-switcher">
+   <?php if (function_exists('pll_the_languages')): ?>
+          <div class=" language-switcher  " style="margin-left:-10px;margin-right:10px">
             <?php pll_the_languages([
               'show_flags' => 1,
               'show_names' => 0,
@@ -67,8 +53,24 @@
           </div>
         <?php endif; ?>
 
+
+      <!-- Menú principal -->
+      <div class="collapse navbar-collapse" id="mainNav">
+        <?php
+          wp_nav_menu([
+            'theme_location'  => 'primary',
+            'depth'           => 2,
+            'container'       => false,
+            'menu_class'      => 'navbar-nav ms-auto ',
+            'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+            'walker'          => new WP_Bootstrap_Navwalker(),
+          ]);
+        ?>
+        
+
+
       </div>
-    </div>
+        
   </nav>
 
 

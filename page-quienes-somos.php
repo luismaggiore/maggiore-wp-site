@@ -86,10 +86,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
                         
                         <!-- Card de Equipo -->
                         <div class="col-12 col-xxl-2 col-xl-3 col-lg-3 text-center position-relative <?= $is_even ? 'order-1 order-lg-1' : 'order-1 order-lg-2'; ?>" >
-                                    <a href="<?= esc_url($director_url); ?>" 
-                   class="stretched-link" 
-                   aria-label="<?php echo esc_attr(sprintf(__('Ver perfil completo de %s', 'maggiore'), $nombre)); ?>">
-                </a>
+                   
                         
                         <img src="<?= esc_url( $director_img) ?>" class='img-fluid border-mg'
                         itemprop='image'
@@ -98,7 +95,10 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
                 
                 
                   
+                 <a href="<?= esc_url($director_url); ?>"  class="stretched-link" 
+                   aria-label="<?php echo esc_attr(sprintf(__('Ver perfil completo de %s', 'maggiore'), $nombre)); ?>">
 
+                </a>
 
                     </div>
                         
