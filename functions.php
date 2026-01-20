@@ -13,14 +13,26 @@ if (!defined('ABSPATH')) exit;
  * Theme setup
  * ----------------------------------------------------- */
 function maggiore_setup() {
-    load_theme_textdomain('maggiore', get_template_directory() . '/languages');
-
+    // ❌ REEMPLAZA ESTO:
+    // load_theme_textdomain('maggiore', get_template_directory() . '/languages');
+    
+    // ✅ POR ESTO (más robusto):
+    add_action('after_setup_theme', function() {
+        load_theme_textdomain('maggiore', get_template_directory() . '/languages');
+    });
+    
+    // O MEJOR AÚN, usa este código completo:
+    $locale = apply_filters('theme_locale', get_locale(), 'maggiore');
+    $mofile = get_template_directory() . "/languages/maggiore-{$locale}.mo";
+    
+    if (file_exists($mofile)) {
+        load_textdomain('maggiore', $mofile);
+    }
+    
+    // Resto de tu código de setup...
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
-
-    register_nav_menus([
-        'primary' => __('Menú Principal', 'maggiore')
-    ]);
+    // etc...
 }
 add_action('after_setup_theme', 'maggiore_setup');
 
@@ -352,3 +364,18 @@ require_once get_template_directory() . '/inc/helpers/settings.php';
  * ----------------------------------------------------- */
 require_once get_template_directory() . '/inc/seo-enhanced.php';
 require_once get_template_directory() . '/inc/seo-metabox-enhanced.php';
+
+add_action('wp_footer', function() {
+    if (isset($_GET['test_lang'])) {
+        echo '<!-- DEBUG TRADUCCIONES -->' . "\n";
+        echo '<!-- Idioma actual: ' . get_locale() . ' -->' . "\n";
+        echo '<!-- Ruta del tema: ' . get_template_directory() . ' -->' . "\n";
+        
+        $mo_file = get_template_directory() . '/languages/maggiore-en_US.mo';
+        echo '<!-- Archivo .mo existe: ' . (file_exists($mo_file) ? 'SÍ' : 'NO') . ' -->' . "\n";
+        
+        // Test de traducción
+        $test = __('Casos de Éxito', 'maggiore');
+        echo '<!-- Test traducción: ' . $test . ' (debería decir "Success Stories" si funciona) -->' . "\n";
+    }
+});

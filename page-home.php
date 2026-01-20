@@ -1,3 +1,20 @@
+<?php
+/**
+ * Template Name:Home 
+ * Description: Página institucional con presentación, áreas y valores
+ */
+ ?>
+<?php
+if (function_exists('pll_current_language')) {
+    $current_lang = pll_current_language();
+    if ($current_lang === 'en') {
+        switch_to_locale('en_US');
+    } elseif ($current_lang === 'pt') {
+        switch_to_locale('pt_BR');
+    }
+}
+get_header();
+?>
 <?php get_header(); ?>
 
 <div id="smooth-wrapper">
@@ -351,7 +368,7 @@ if ($casos_landing->have_posts()) : ?>
           >
             <div class="accordion-body">
               <div class="mb-3">
-                <label for="dolorEmpresa"><?php _e('Dolor de la empresa', 'maggiore'); ?></label>
+                <label  class="text-white" for="dolorEmpresa"><?php _e('Dolor de la empresa', 'maggiore'); ?></label>
                 <textarea 
                   id="dolorEmpresa" 
                   name="dolorEmpresa" 
@@ -361,7 +378,7 @@ if ($casos_landing->have_posts()) : ?>
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label for="objetivos"><?php _e('Objetivos', 'maggiore'); ?></label>
+                <label for="objetivos" class="text-white"><?php _e('Objetivos', 'maggiore'); ?></label>
                 <textarea 
                   id="objetivos" 
                   name="objetivos" 
