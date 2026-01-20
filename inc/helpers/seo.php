@@ -1,8 +1,20 @@
 <?php
+/**
+ * ACTUALIZACIÓN PARA inc/helpers/seo.php
+ * 
+ * Esta es la versión actualizada de la función mg_output_seo_meta()
+ * que soporta el nuevo sistema de keywords como array
+ * 
+ * CÓMO USAR:
+ * 1. Abre tu archivo inc/helpers/seo.php
+ * 2. Busca la función mg_output_seo_meta()
+ * 3. Reemplázala completamente con esta versión
+ */
+
 if (!defined('ABSPATH')) exit;
 
 /**
- * Output SEO, Open Graph, Twitter y Schema
+ * Output SEO, Open Graph, Twitter y Schema - VERSIÓN ACTUALIZADA
  */
 function mg_output_seo_meta() {
 
@@ -24,15 +36,37 @@ function mg_output_seo_meta() {
     }
 
     // =========================
+    // KEYWORDS (NUEVO - SOPORTE ARRAY)
+    // =========================
+    $keywords = get_post_meta($post->ID, 'mg_seo_keywords', true);
+    $keywords_string = '';
+    
+    if (!empty($keywords)) {
+        if (is_array($keywords)) {
+            // Nuevo formato: array de keywords
+            $keywords_string = implode(', ', $keywords);
+        } elseif (is_string($keywords)) {
+            // Formato antiguo: string separado por comas (compatibilidad)
+            $keywords_string = $keywords;
+        }
+    }
+
+    // =========================
     // OG IMAGE (3 niveles)
     // =========================
-
     $og_image = '';
 
-    // 1️⃣ OG Image custom (guardada como ID)
+    // 1️⃣ OG Image custom
     $custom_og = get_post_meta($post->ID, 'mg_og_image', true);
     if (is_numeric($custom_og)) {
         $og_image = wp_get_attachment_url($custom_og);
+    } elseif (filter_var($custom_og, FILTER_VALIDATE_URL)) {
+        $og_image = $custom_og;
+    }
+
+    // 2️⃣ Fallback a featured image
+    if (!$og_image && has_post_thumbnail($post->ID)) {
+        $og_image = get_the_post_thumbnail_url($post->ID, 'large');
     }
 
     // 3️⃣ Fallback global
@@ -57,6 +91,12 @@ function mg_output_seo_meta() {
     echo "<title>" . esc_html($title) . "</title>\n";
     echo "<meta name='description' content='" . esc_attr($desc) . "'>\n";
 
+    // Keywords (NUEVO)
+    if (!empty($keywords_string)) {
+        echo "<meta name='keywords' content='" . esc_attr($keywords_string) . "'>\n";
+    }
+
+    // Robots
     if ($noindex) {
         echo "<meta name='robots' content='noindex, nofollow'>\n";
     }
@@ -81,3 +121,17 @@ function mg_output_seo_meta() {
         echo "\n</script>\n";
     }
 }
+
+/**
+ * NOTAS DE IMPLEMENTACIÓN:
+ * 
+ * 1. Esta función ahora soporta keywords en formato array (nuevo sistema de tags)
+ * 2. Mantiene compatibilidad con el formato antiguo (string separado por comas)
+ * 3. El output de OG Image tiene mejor fallback
+ * 4. Mejor validación de URLs
+ * 
+ * CAMBIOS ESPECÍFICOS:
+ * - Líneas 30-42: Nueva lógica para keywords (array o string)
+ * - Línea 68: Output condicional de keywords
+ * - Líneas 50-65: Mejor lógica para OG image
+ */
