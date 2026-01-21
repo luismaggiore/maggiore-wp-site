@@ -359,6 +359,8 @@ require_once get_template_directory() . '/inc/analytics/dashboard.php';
 require_once get_template_directory() . '/inc/analytics/export.php';
 require_once get_template_directory() . '/inc/helpers/helpers.php';
 require_once get_template_directory() . '/inc/helpers/settings.php';
+require_once get_template_directory() . '/inc/helpers/translated-slugs.php';
+require_once get_template_directory() . '/inc/helpers/theme-translations.php';
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */
