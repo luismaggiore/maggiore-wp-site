@@ -1,504 +1,1461 @@
-# Translation file for Maggiore Theme - Portuguese (Brazil)
+# Translation for Maggiore Theme - Portuguese (Brazil)
 # Copyright (C) 2025 Maggiore Marketing
 # This file is distributed under the same license as the Maggiore theme.
+
 msgid ""
 msgstr ""
 "Project-Id-Version: Maggiore 2.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 00:00+0000\n"
-"PO-Revision-Date: 2025-01-20 00:00+0000\n"
-"Last-Translator: Maggiore Team\n"
-"Language-Team: Portuguese (Brazil)\n"
+"Report-Msgid-Bugs-To: https://maggiore.cl\n"
+"POT-Creation-Date: 2026-01-21 17:29-0300\n"
+"PO-Revision-Date: 2026-01-21 17:30-0300\n"
+"Last-Translator: Maggiore Team <info@maggiore.cl>\n"
+"Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Manual\n"
+"X-Generator: Poedit 3.8\n"
 "X-Domain: maggiore\n"
 
 # ============================================================================
-# TAXONOMIES - Labels del Backend
+# Page Home
 # ============================================================================
 
-# Industrias
-msgid "Industrias"
-msgstr "Indústrias"
-
-msgid "Industria"
-msgstr "Indústria"
-
-msgid "Buscar industrias"
-msgstr "Buscar indústrias"
-
-msgid "Todas las industrias"
-msgstr "Todas as indústrias"
-
-msgid "Industria superior"
-msgstr "Indústria superior"
-
-msgid "Industria superior:"
-msgstr "Indústria superior:"
-
-msgid "Editar industria"
-msgstr "Editar indústria"
-
-msgid "Actualizar industria"
-msgstr "Atualizar indústria"
-
-msgid "Añadir nueva industria"
-msgstr "Adicionar nova indústria"
-
-msgid "Nombre de nueva industria"
-msgstr "Nome da nova indústria"
-
-# Equipos
-msgid "Equipos"
-msgstr "Equipes"
-
-msgid "Equipo"
-msgstr "Equipe"
-
-msgid "Buscar Equiposs"
-msgstr "Buscar equipes"
-
-msgid "Todas los Equiposs"
-msgstr "Todas as equipes"
-
-msgid "Equipo superior"
-msgstr "Equipe superior"
-
-msgid "Equipo superior:"
-msgstr "Equipe superior:"
-
-msgid "Editar Equipo"
-msgstr "Editar equipe"
-
-msgid "Actualizar Equipo"
-msgstr "Atualizar equipe"
-
-msgid "Añadir nuevo Equipo"
-msgstr "Adicionar nova equipe"
-
-msgid "Nombre de nuevo Equipo"
-msgstr "Nome da nova equipe"
-
-# Categorías de Servicio
-msgid "Categorías"
-msgstr "Categorias"
-
-msgid "Categoría"
-msgstr "Categoria"
-
-msgid "Buscar Categorías"
-msgstr "Buscar categorias"
-
-msgid "Todas las categorías"
-msgstr "Todas as categorias"
-
-msgid "Categoría superior"
-msgstr "Categoria superior"
-
-msgid "Categoría superior:"
-msgstr "Categoria superior:"
-
-msgid "Editar categoría"
-msgstr "Editar categoria"
-
-msgid "Actualizar categoría"
-msgstr "Atualizar categoria"
-
-msgid "Añadir nueva categoría"
-msgstr "Adicionar nova categoria"
-
-msgid "Nombre de nueva categoría"
-msgstr "Nome da nova categoria"
-
-# Categorías de Portafolio
-msgid "Categorías de Portafolio"
-msgstr "Categorias de Portfólio"
-
-# CPT - Áreas
-msgid "Áreas"
-msgstr "Áreas"
-
-msgid "Área"
-msgstr "Área"
-
-msgid "Agregar nueva área"
-msgstr "Adicionar nova área"
-
-msgid "Editar área"
-msgstr "Editar área"
-
-msgid "Ver área"
-msgstr "Ver área"
-
-# ============================================================================
-# HOME PAGE
-# ============================================================================
-
+#: page-home.php:0
 msgid "Pensamos en grande para que tu marca llegue a lo más alto"
-msgstr "Pensamos grande para que sua marca alcance o topo"
+msgstr "Pensamos grande para que sua marca chegue ao topo"
 
+#: page-home.php:0
 msgid "Somos más que una agencia de Marketing Digital, Somos un aliado estratégico para tu negocio"
-msgstr "Somos mais que uma agência de Marketing Digital, somos um parceiro estratégico para o seu negócio"
+msgstr "Somos mais do que uma agência de Marketing Digital, Somos um aliado estratégico para o seu negócio"
 
+#: page-home.php:0
 msgid "Agenda una Reunión"
 msgstr "Agende uma Reunião"
 
+#: page-home.php:0
 msgid "Diferenciales y metodología de trabajo"
 msgstr "Diferenciais e metodologia de trabalho"
 
+#: page-home.php:0
 msgid "Metodología Robin Hood"
 msgstr "Metodologia Robin Hood"
 
+#: page-home.php:0
 msgid "Nuestra experiencia ayudando a crecer a gigantes nos permite impulsar a quienes quieren serlo."
 msgstr "Nossa experiência ajudando gigantes a crescer nos permite impulsionar aqueles que querem se tornar um."
 
+#: page-home.php:0
 msgid "Usamos experiencia real, datos y ejecución precisa para darle a tu marca el empuje que necesita y el plan que merece para llegar más alto."
 msgstr "Usamos experiência real, dados e execução precisa para dar à sua marca o impulso que ela precisa e o plano que merece para chegar mais alto."
 
+#: page-home.php:0
 msgid "Metodología Inteligente"
 msgstr "Metodologia Inteligente"
 
+#: page-home.php:0
 msgid "Creamos estrategias sólidas, ejecutamos con excelencia y medimos los resultados para optimizar las probabilidades de éxito."
 msgstr "Criamos estratégias sólidas, executamos com excelência e medimos os resultados para otimizar as chances de sucesso."
 
+#: page-home.php:0
 msgid "En Maggiore no solo ejecutamos estrategias: las fundamentamos con datos. Gracias a nuestro departamento propio de inteligencia de mercados, respondemos preguntas de negocio de forma rápida, profunda y costo eficiente. Esto nos permite guiar a nuestros clientes con decisiones mejor informadas, anticipar tendencias y construir estrategias alineadas con lo que realmente ocurre en el mercado."
-msgstr "Na Maggiore não apenas executamos estratégias: fundamentamos elas com dados. Graças ao nosso departamento próprio de inteligência de mercado, respondemos perguntas de negócio de forma rápida, profunda e custo-eficiente. Isso nos permite guiar nossos clientes com decisões mais bem informadas, antecipar tendências e construir estratégias alinhadas com o que realmente acontece no mercado."
+msgstr "Na Maggiore não apenas executamos estratégias: as fundamentamos com dados. Graças ao nosso próprio departamento de inteligência de mercado, respondemos perguntas de negócio de forma rápida, profunda e com custo eficiente. Isso nos permite orientar nossos clientes com decisões mais informadas, antecipar tendências e construir estratégias alinhadas com o que realmente acontece no mercado."
 
+#: page-home.php:0
 msgid "Metodología Flexible"
 msgstr "Metodologia Flexível"
 
+#: page-home.php:0
 msgid "Nuestro modelo de trabajo con tokens permite a los clientes gestionar su inversión con la máxima flexibilidad, sin perder control ni eficiencia."
-msgstr "Nosso modelo de trabalho com tokens permite aos clientes gerenciar seu investimento com máxima flexibilidade, sem perder controle ou eficiência."
+msgstr "Nosso modelo de trabalho com tokens permite que os clientes gerenciem seu investimento com máxima flexibilidade, sem perder controle ou eficiência."
 
+#: page-home.php:0
 msgid "Al pagar anticipadamente, acceden a mejores precios y pueden asignar sus tokens según sus necesidades cambiantes: se acumulan, se intercambian entre tareas y les permiten comenzar sin cotizar cada actividad. Cada entrega tiene un valor claro en tokens, lo que vuelve el proceso ágil, transparente y auditable."
-msgstr "Ao pagar antecipadamente, eles obtêm melhores preços e podem alocar seus tokens de acordo com suas necessidades em constante mudança: eles se acumulam, podem ser trocados entre tarefas e permitem começar sem cotar cada atividade. Cada entrega tem um valor claro em tokens, tornando o processo ágil, transparente e auditável."
+msgstr "Ao pagar antecipadamente, eles acessam melhores preços e podem alocar seus tokens de acordo com suas necessidades em mudança: eles se acumulam, são trocados entre tarefas e permitem começar sem cotar cada atividade. Cada entrega tem um valor claro em tokens, tornando o processo ágil, transparente e auditável."
 
+#: page-home.php:0
 msgid "Significa"
 msgstr "Significa"
 
+#: page-home.php:0
 msgid "Mayor"
 msgstr "Maior"
 
+#: page-home.php:0
 msgid "Nuestra promesa es crecimiento para tu empresa"
 msgstr "Nossa promessa é crescimento para sua empresa"
 
-msgid "Casos de Éxito"
-msgstr "Casos de Sucesso"
-
+#: page-home.php:0
 msgid "Clientes reales, estrategias medibles para un crecimiento sostenido"
 msgstr "Clientes reais, estratégias mensuráveis para um crescimento sustentado"
 
+#: page-home.php:0
+msgid "No hay casos de éxito destacados en este momento."
+msgstr "Não há casos de sucesso em destaque no momento."
+
+#: page-home.php:0
 msgid "Hablemos de crecimiento:"
-msgstr "Vamos falar sobre crescimento:"
+msgstr "Vamos falar de crescimento:"
 
+#: page-home.php:0
 msgid "Cuéntanos tu meta y te guiamos"
-msgstr "Conte-nos sua meta e nós te guiaremos"
+msgstr "Conte-nos sua meta e nós o guiaremos"
 
-# ============================================================================
-# CONTACT FORM
-# ============================================================================
-
+#: page-home.php:0
 msgid "Nombre"
 msgstr "Nome"
 
+#: page-home.php:0
 msgid "Tu nombre completo"
 msgstr "Seu nome completo"
 
+#: page-home.php:0
 msgid "Cargo"
 msgstr "Cargo"
 
+#: page-home.php:0
 msgid "Ej: Gerente de Marketing"
 msgstr "Ex: Gerente de Marketing"
 
+#: page-home.php:0
 msgid "Correo"
 msgstr "E-mail"
 
+#: page-home.php:0
 msgid "Empresa"
 msgstr "Empresa"
 
+#: page-home.php:0
 msgid "Nombre de la empresa"
 msgstr "Nome da empresa"
 
+#: page-home.php:0
 msgid "Teléfono Celular"
 msgstr "Telefone Celular"
 
+#: page-home.php:0
 msgid "Detalles Opcionales"
 msgstr "Detalhes Opcionais"
 
+#: page-home.php:0
 msgid "Dolor de la empresa"
 msgstr "Dor da empresa"
 
+#: page-home.php:0
 msgid "¿Cuál es el principal problema o dolor hoy?"
 msgstr "Qual é o principal problema ou dor hoje?"
 
+#: page-home.php:0
 msgid "Objetivos"
 msgstr "Objetivos"
 
+#: page-home.php:0
 msgid "¿Qué objetivos buscan lograr?"
-msgstr "Quais objetivos você busca alcançar?"
+msgstr "Quais objetivos vocês buscam alcançar?"
 
+#: page-home.php:0
 msgid "Enviar"
 msgstr "Enviar"
 
-msgid "Contáctanos"
-msgstr "Entre em Contato"
-
-msgid "Estamos listos para ayudarte a alcanzar tus objetivos de marketing digital"
-msgstr "Estamos prontos para ajudá-lo a alcançar seus objetivos de marketing digital"
-
-msgid "Información de Contacto"
-msgstr "Informações de Contato"
-
-msgid "Email"
-msgstr "E-mail"
-
-msgid "Teléfono"
-msgstr "Telefone"
-
-msgid "Ubicación"
-msgstr "Localização"
-
-msgid "Síguenos"
-msgstr "Siga-nos"
-
-msgid "Envíanos un mensaje"
-msgstr "Envie-nos uma mensagem"
-
 # ============================================================================
-# QUIENES SOMOS PAGE
+# Page Quienes somos
 # ============================================================================
 
+#: page-quienes-somos.php:0
 msgid "Especialistas en investigación de mercados y estrategias, diseño + ejecución de campañas de marketing digital para marcas de presencia internacional."
 msgstr "Especialistas em pesquisa de mercado e estratégias, design + execução de campanhas de marketing digital para marcas com presença internacional."
 
+#: page-quienes-somos.php:0
 msgid "Desde Chile, trabajamos en inglés, portugués y español para importantes clientes de diversas industrias en todo el continente americano"
 msgstr "Do Chile, trabalhamos em inglês, português e espanhol para importantes clientes de diversas indústrias em todo o continente americano"
 
+#: page-quienes-somos.php:0
 msgid "Fundadores"
 msgstr "Fundadores"
 
-msgid "Nuestras Áreas"
-msgstr "Nossas Áreas"
+#: page-quienes-somos.php:0
+msgid "Ver perfil completo de %s"
+msgstr "Ver perfil completo de %s"
 
-msgid "Misión y Visión"
-msgstr "Missão e Visão"
+#: page-quienes-somos.php:0 template-parts/card-equipo.php:0
+msgid "Ver perfil de %s en LinkedIn"
+msgstr "Ver perfil de %s no LinkedIn"
 
+#: page-quienes-somos.php:0
+msgid "Director de"
+msgstr "Diretor de"
+
+#: page-quienes-somos.php:0
+msgid "Nuestros Equipos"
+msgstr "Nossas Equipes"
+
+#: page-quienes-somos.php:0
 msgid "Nuestra Misión"
 msgstr "Nossa Missão"
 
+#: page-quienes-somos.php:0
 msgid "Ser un aliado estratégico en la toma de decisiones de negocio y el fortalecimiento de las marcas en el mundo digital."
-msgstr "Ser um parceiro estratégico na tomada de decisões de negócio e no fortalecimento das marcas no mundo digital."
+msgstr "Ser um aliado estratégico na tomada de decisões de negócios e no fortalecimento das marcas no mundo digital."
 
+#: page-quienes-somos.php:0
 msgid "Nuestra Visión"
 msgstr "Nossa Visão"
 
+#: page-quienes-somos.php:0
 msgid "Convertirnos en una agencia con operación global, desde las Américas para el mundo."
-msgstr "Tornar-nos uma agência com operação global, das Américas para o mundo."
+msgstr "Nos tornar uma agência com operação global, das Américas para o mundo."
 
+#: page-quienes-somos.php:0
 msgid "Valores de Marca"
 msgstr "Valores da Marca"
 
+#: page-quienes-somos.php:0
 msgid "En Maggiore  <span class=\"mg_values_letter\">C</span><span class=\"mg_values_letter\">A</span><span class=\"mg_values_letter\">D</span><span class=\"mg_values_letter\">A</span> paso importa"
-msgstr "Na Maggiore <span class=\"mg_values_letter\">C</span><span class=\"mg_values_letter\">A</span><span class=\"mg_values_letter\">D</span><span class=\"mg_values_letter\">A</span> passo importa"
+msgstr "Na Maggiore  <span class=\"mg_values_letter\">C</span><span class=\"mg_values_letter\">A</span><span class=\"mg_values_letter\">D</span><span class=\"mg_values_letter\">A</span> passo importa"
 
+#: page-quienes-somos.php:0
 msgid "Consistencia"
 msgstr "Consistência"
 
+#: page-quienes-somos.php:0
 msgid "En la calidad de nuestras entregas."
-msgstr "Na qualidade de nossas entregas."
+msgstr "Na qualidade das nossas entregas."
 
+#: page-quienes-somos.php:0
 msgid "Adaptabilidad"
 msgstr "Adaptabilidade"
 
+#: page-quienes-somos.php:0
 msgid "Para apoyar a cada cliente en su necesidad específica."
 msgstr "Para apoiar cada cliente em sua necessidade específica."
 
+#: page-quienes-somos.php:0
 msgid "Determinación"
 msgstr "Determinação"
 
+#: page-quienes-somos.php:0
 msgid "En sorprender a nuestros clientes con los mejores insights y entregables."
-msgstr "Em surpreender nossos clientes com os melhores insights e entregas."
+msgstr "Em surpreender nossos clientes com os melhores insights e entregáveis."
 
+#: page-quienes-somos.php:0
 msgid "Atención"
 msgstr "Atenção"
 
+#: page-quienes-somos.php:0
 msgid "A los detalles para evitar ineficiencias o atrasos."
 msgstr "Aos detalhes para evitar ineficiências ou atrasos."
 
 # ============================================================================
-# ARCHIVES & NAVIGATION
+# Page Contacto
 # ============================================================================
 
-msgid "Todos"
-msgstr "Todos"
+#: page-contacto.php:0
+msgid "Contáctanos"
+msgstr "Entre em Contato"
 
-msgid "Todos los servicios"
-msgstr "Todos os serviços"
+#: page-contacto.php:0
+msgid "Estamos listos para ayudarte a alcanzar tus objetivos de marketing digital"
+msgstr "Estamos prontos para ajudá-lo a alcançar seus objetivos de marketing digital"
 
-msgid "Nuestros Servicios"
-msgstr "Nossos Serviços"
+#: page-contacto.php:0
+msgid "Información de Contacto"
+msgstr "Informações de Contato"
 
-msgid "Soluciones integrales para impulsar tu negocio al siguiente nivel."
-msgstr "Soluções integrais para levar seu negócio ao próximo nível."
+#: page-contacto.php:0
+msgid "Email"
+msgstr "E-mail"
 
-msgid "Nuestros Clientes"
-msgstr "Nossos Clientes"
+#: page-contacto.php:0
+msgid "Teléfono"
+msgstr "Telefone"
 
-msgid "Empresas que confían en nosotros para impulsar su crecimiento."
-msgstr "Empresas que confiam em nós para impulsionar seu crescimento."
+#: page-contacto.php:0
+msgid "Ubicación"
+msgstr "Localização"
 
-msgid "Filtrar por industria:"
-msgstr "Filtrar por indústria:"
+#: page-contacto.php:0
+msgid "Síguenos"
+msgstr "Siga-nos"
 
-msgid "Nuestro Equipo"
-msgstr "Nossa Equipe"
+#: page-contacto.php:0
+msgid "Envíanos un mensaje"
+msgstr "Envie-nos uma mensagem"
 
-msgid "Conoce a las personas que hacen posible nuestro trabajo."
-msgstr "Conheça as pessoas que tornam nosso trabalho possível."
+#: page-contacto.php:0
+msgid "Correo Electrónico"
+msgstr "Endereço de E-mail"
 
-msgid "Blog"
-msgstr "Blog"
+#: page-contacto.php:0
+msgid "¿Cuál es tu principal desafío?"
+msgstr "Qual é o seu principal desafio?"
 
-msgid "Insights, tendencias y conocimientos del mundo del marketing digital."
-msgstr "Insights, tendências e conhecimentos do mundo do marketing digital."
+#: page-contacto.php:0
+msgid "Cuéntanos qué problema o desafío quieres resolver..."
+msgstr "Conte-nos qual problema ou desafio você quer resolver..."
 
-msgid "Artículos escritos por %s"
-msgstr "Artigos escritos por %s"
+#: page-contacto.php:0
+msgid "¿Qué objetivos buscas alcanzar?"
+msgstr "Quais objetivos você busca alcançar?"
 
-msgid "Artículos de %s"
-msgstr "Artigos de %s"
+#: page-contacto.php:0
+msgid "Describe las metas que quieres lograr..."
+msgstr "Descreva as metas que você quer alcançar..."
 
-msgid "Artículos del %s"
-msgstr "Artigos de %s"
+#: page-contacto.php:0
+msgid "Enviar Mensaje"
+msgstr "Enviar Mensagem"
 
-# Plurales
-msgid "%s artículo encontrado"
-msgid_plural "%s artículos encontrados"
-msgstr[0] "%s artigo encontrado"
-msgstr[1] "%s artigos encontrados"
-
-msgid "%s artículo"
-msgid_plural "%s artículos"
-msgstr[0] "%s artigo"
-msgstr[1] "%s artigos"
-
-msgid "servicio"
-msgid_plural "servicios"
-msgstr[0] "serviço"
-msgstr[1] "serviços"
-
-msgid "proyecto"
-msgid_plural "proyectos"
-msgstr[0] "projeto"
-msgstr[1] "projetos"
-
-msgid "Miembro"
-msgid_plural "Miembros"
-msgstr[0] "Membro"
-msgstr[1] "Membros"
-
-msgid "Servicios"
-msgstr "Serviços"
-
-msgid "%d año"
-msgid_plural "%d años"
-msgstr[0] "%d ano"
-msgstr[1] "%d anos"
-
-msgid "y %d mes"
-msgid_plural "y %d meses"
-msgstr[0] "e %d mês"
-msgstr[1] "e %d meses"
-
-msgid "%d mes"
-msgid_plural "%d meses"
-msgstr[0] "%d mês"
-msgstr[1] "%d meses"
+#: page-contacto.php:0
+msgid "Te responderemos en menos de 24 horas hábiles"
+msgstr "Responderemos em menos de 24 horas úteis"
 
 # ============================================================================
-# SINGLE TEMPLATES
+# Footer.php
 # ============================================================================
 
-msgid "Equipo de %s"
-msgstr "Equipe de %s"
+#: footer.php:0
+msgid "Inicio"
+msgstr "Início"
 
-msgid "Proyectos Registrados"
-msgstr "Projetos Registrados"
+#: footer.php:0
+msgid "Resultados de búsqueda"
+msgstr "Resultados da busca"
 
-msgid "Portafolio Destacado"
-msgstr "Portfólio Destacado"
+#: footer.php:0
+msgid "Navegación"
+msgstr "Navegação"
 
-msgid "Trabajos realizados por el equipo de %s"
-msgstr "Trabalhos realizados pela equipe de %s"
+#: footer.php:0
+msgid "Explora"
+msgstr "Explore"
 
-msgid "El área tiene %d proyectos en portafolio en total"
-msgstr "A área tem %d projetos no portfólio no total"
-
-msgid "Microempresa"
-msgstr "Microempresa"
-
-msgid "Pequeña empresa"
-msgstr "Pequena empresa"
-
-msgid "Mediana empresa"
-msgstr "Média empresa"
-
-msgid "Gran empresa"
-msgstr "Grande empresa"
-
-msgid "Portafolio de Proyectos"
-msgstr "Portfólio de Projetos"
-
-msgid "Cliente anterior"
-msgstr "Cliente anterior"
-
-msgid "Siguiente cliente"
-msgstr "Próximo cliente"
-
-msgid "Servicio anterior"
-msgstr "Serviço anterior"
-
-msgid "Siguiente servicio"
-msgstr "Próximo serviço"
-
-msgid "Área anterior"
-msgstr "Área anterior"
-
-msgid "Siguiente Área"
-msgstr "Próxima Área"
-
+#: footer.php:0
 msgid "Portafolio"
 msgstr "Portfólio"
 
+#: footer.php:0
+msgid "Servicios"
+msgstr "Serviços"
+
+#: footer.php:0
+msgid "Equipo"
+msgstr "Equipe"
+
+#: footer.php:0
+msgid "Clientes"
+msgstr "Clientes"
+
+#: footer.php:0 page-home.php:0
+msgid "Casos de Éxito"
+msgstr "Casos de Sucesso"
+
+#: footer.php:0
+msgid "Áreas"
+msgstr "Áreas"
+
+#: footer.php:0
+msgid "Todos los derechos reservados"
+msgstr "Todos os direitos reservados"
+
 # ============================================================================
-# GENERAL
+# home.php
 # ============================================================================
 
-msgid "© 2025 Maggiore Marketing"
-msgstr "© 2025 Maggiore Marketing"
+#: home.php:0
+msgid "Blog"
+msgstr "Blog"
 
-msgid "Menú Principal"
-msgstr "Menu Principal"
+#: home.php:0
+msgid "Insights, tendencias y conocimientos del mundo del marketing digital."
+msgstr "Insights, tendências e conhecimentos do mundo do marketing digital."
 
-msgid "Toggle navigation"
-msgstr "Alternar navegação"
+#: home.php:0
+msgid "%s artículo"
+msgstr "%s artigo"
 
-msgid "Ver en Google Maps"
-msgstr "Ver no Google Maps"
+#: home.php:0
+msgid "%s artículos"
+msgstr "%s artigos"
 
+#: home.php:0
+msgid "Filtrar por categoría"
+msgstr "Filtrar por categoria"
+
+#: home.php:0
+msgid "Todas"
+msgstr "Todas"
+
+#: home.php:0
+msgid "Tags populares"
+msgstr "Tags populares"
+
+#: home.php:0
+msgid "Anterior"
+msgstr "Anterior"
+
+#: home.php:0
+msgid "Siguiente"
+msgstr "Próximo"
+
+#: home.php:0
+msgid "Paginación del blog"
+msgstr "Paginação do blog"
+
+#: home.php:0
+msgid "No se encontraron artículos"
+msgstr "Nenhum artigo encontrado"
+
+#: home.php:0
+msgid "Actualmente no hay artículos publicados en el blog."
+msgstr "Atualmente não há artigos publicados no blog."
+
+#: home.php:0
+msgid "Volver al inicio"
+msgstr "Voltar ao início"
+
+#: home.php:0
+msgid "Mantente actualizado"
+msgstr "Mantenha-se atualizado"
+
+#: home.php:0
+msgid "Descubre las últimas tendencias, estrategias y casos de éxito en marketing digital."
+msgstr "Descubra as últimas tendências, estratégias e casos de sucesso em marketing digital."
+
+# ============================================================================
+# comments.php
+# ============================================================================
+
+#: comments.php:0
+msgid "Comentario"
+msgstr "Comentário"
+
+#: comments.php:0
+msgid "%1$s Comentario"
+msgstr "%1$s Comentário"
+
+#: comments.php:0
+msgid "%1$s Comentarios"
+msgstr "%1$s Comentários"
+
+#: comments.php:0
+msgid "Los comentarios están cerrados."
+msgstr "Os comentários estão fechados."
+
+#: comments.php:0
+msgid "Deja un comentario"
+msgstr "Deixe um comentário"
+
+#: comments.php:0
+msgid "Responder a %s"
+msgstr "Responder a %s"
+
+#: comments.php:0
+msgid "Cancelar respuesta"
+msgstr "Cancelar resposta"
+
+#: comments.php:0
+msgid "Publicar comentario"
+msgstr "Publicar comentário"
+
+#: comments.php:0
+msgid "Escribe tu comentario aquí..."
+msgstr "Escreva seu comentário aqui..."
+
+#: comments.php:0
+msgid "Tu nombre"
+msgstr "Seu nome"
+
+#: comments.php:0
+msgid "tu@email.com"
+msgstr "seu@email.com"
+
+#: comments.php:0
+msgid "Sitio web"
+msgstr "Site"
+
+#: comments.php:0
+msgid "https://tusitio.com (opcional)"
+msgstr "https://seusite.com (opcional)"
+
+#: comments.php:0
+msgid "Guardar mi nombre, correo electrónico y sitio web en este navegador para la próxima vez que comente."
+msgstr "Salvar meu nome, e-mail e site neste navegador para a próxima vez que eu comentar."
+
+#: comments.php:0
+msgid "Tu comentario está esperando moderación."
+msgstr "Seu comentário está aguardando moderação."
+
+#: comments.php:0
+msgid "%1$s a las %2$s"
+msgstr "%1$s às %2$s"
+
+#: comments.php:0
+msgid "Editar"
+msgstr "Editar"
+
+# ============================================================================
+# archive.php
+# ============================================================================
+
+#: archive.php:0
+msgid "Artículos escritos por %s"
+msgstr "Artigos escritos por %s"
+
+#: archive.php:0
+msgid "Artículos de %s"
+msgstr "Artigos de %s"
+
+#: archive.php:0
+msgid "Artículos del %s"
+msgstr "Artigos de %s"
+
+#: archive.php:0
+msgid "%s artículo encontrado"
+msgstr "%s artigo encontrado"
+
+#: archive.php:0
+msgid "%s artículos encontrados"
+msgstr "%s artigos encontrados"
+
+#: archive.php:0
+msgid "No hay artículos publicados que coincidan con tu búsqueda."
+msgstr "Não há artigos publicados que correspondam à sua busca."
+
+#: archive.php:0
+msgid "Ver todos los artículos"
+msgstr "Ver todos os artigos"
+
+# ============================================================================
+# archive servicios
+# ============================================================================
+
+#: archive-mg_servicio.php:0
+msgid "Nuestros Servicios"
+msgstr "Nossos Serviços"
+
+#: archive-mg_servicio.php:0
+msgid "Soluciones integrales para impulsar tu negocio al siguiente nivel."
+msgstr "Soluções integrais para impulsionar seu negócio ao próximo nível."
+
+#: archive-mg_servicio.php:0
+msgid "Todos los servicios"
+msgstr "Todos os serviços"
+
+#: archive-mg_servicio.php:0
+msgid "Paginación de servicios"
+msgstr "Paginação de serviços"
+
+#: archive-mg_servicio.php:0
+msgid "No se encontraron servicios"
+msgstr "Nenhum serviço encontrado"
+
+#: archive-mg_servicio.php:0
+msgid "Actualmente no hay servicios publicados en esta sección."
+msgstr "Atualmente não há serviços publicados nesta seção."
+
+# ============================================================================
+# archive portafolio
+# ============================================================================
+
+#: archive-mg_portafolio.php:0
+msgid "Nuestros trabajos más destacados y proyectos realizados."
+msgstr "Nossos trabalhos mais destacados e projetos realizados."
+
+#: archive-mg_portafolio.php:0
+msgid "Filtrar por categoría:"
+msgstr "Filtrar por categoria:"
+
+#: archive-mg_portafolio.php:0
+msgid "Todos"
+msgstr "Todos"
+
+#: archive-mg_portafolio.php:0
+msgid "Paginación de portafolio"
+msgstr "Paginação de portfólio"
+
+#: archive-mg_portafolio.php:0
+msgid "No se encontraron proyectos"
+msgstr "Nenhum projeto encontrado"
+
+#: archive-mg_portafolio.php:0
+msgid "Actualmente no hay proyectos publicados."
+msgstr "Atualmente não há projetos publicados."
+
+# ============================================================================
+# archive equipo
+# ============================================================================
+
+#: archive-mg_equipo.php:0
+msgid "Nuestro Equipo"
+msgstr "Nossa Equipe"
+
+#: archive-mg_equipo.php:0
+msgid "Conoce a las personas que hacen posible nuestro trabajo."
+msgstr "Conheça as pessoas que tornam nosso trabalho possível."
+
+#: archive-mg_equipo.php:0
+msgid "No se encontraron miembros"
+msgstr "Nenhum membro encontrado"
+
+#: archive-mg_equipo.php:0
+msgid "Actualmente no hay miembros del equipo publicados."
+msgstr "Atualmente não há membros da equipe publicados."
+
+# ============================================================================
+# archive clientes
+# ============================================================================
+
+#: archive-mg_cliente.php:0
+msgid "Clientes en %s"
+msgstr "Clientes em %s"
+
+#: archive-mg_cliente.php:0
+msgid "Nuestros Clientes"
+msgstr "Nossos Clientes"
+
+#: archive-mg_cliente.php:0
+msgid "Empresas que confían en nosotros para impulsar su crecimiento."
+msgstr "Empresas que confiam em nós para impulsionar seu crescimento."
+
+#: archive-mg_cliente.php:0
+msgid "Filtrar por industria:"
+msgstr "Filtrar por indústria:"
+
+#: archive-mg_cliente.php:0
+msgid "Paginación de clientes"
+msgstr "Paginação de clientes"
+
+#: archive-mg_cliente.php:0
+msgid "No se encontraron clientes"
+msgstr "Nenhum cliente encontrado"
+
+#: archive-mg_cliente.php:0
+msgid "Actualmente no hay clientes publicados en esta sección."
+msgstr "Atualmente não há clientes publicados nesta seção."
+
+# ============================================================================
+# archive caso exito
+# ============================================================================
+
+#: archive-mg_caso_exito.php:0
+msgid "Casos de Éxito en %s"
+msgstr "Casos de Sucesso em %s"
+
+#: archive-mg_caso_exito.php:0
+msgid "Historias reales de transformación y resultados excepcionales."
+msgstr "Histórias reais de transformação e resultados excepcionais."
+
+#: archive-mg_caso_exito.php:0
+msgid "Paginación de casos de éxito"
+msgstr "Paginação de casos de sucesso"
+
+#: archive-mg_caso_exito.php:0
+msgid "No se encontraron casos de éxito"
+msgstr "Nenhum caso de sucesso encontrado"
+
+#: archive-mg_caso_exito.php:0
+msgid "Actualmente no hay casos de éxito publicados en esta sección."
+msgstr "Atualmente não há casos de sucesso publicados nesta seção."
+
+# ============================================================================
+# archive area
+# ============================================================================
+
+#: archive-mg_area.php:0
+msgid "Nuestras Áreas"
+msgstr "Nossas Áreas"
+
+#: archive-mg_area.php:0
+msgid "Conoce los equipos especializados que componen nuestra estructura organizacional."
+msgstr "Conheça as equipes especializadas que compõem nossa estrutura organizacional."
+
+#: archive-mg_area.php:0
+msgid "Paginación de áreas"
+msgstr "Paginação de áreas"
+
+#: archive-mg_area.php:0
+msgid "No se encontraron áreas"
+msgstr "Nenhuma área encontrada"
+
+#: archive-mg_area.php:0
+msgid "Actualmente no hay áreas publicadas."
+msgstr "Atualmente não há áreas publicadas."
+
+#: archive-mg_area.php:0
+msgid "¿Qué son las áreas?"
+msgstr "O que são as áreas?"
+
+#: archive-mg_area.php:0
+msgid "Las áreas representan las divisiones estratégicas de nuestra agencia, cada una especializada en diferentes aspectos del marketing digital y servicios relacionados."
+msgstr "As áreas representam as divisões estratégicas da nossa agência, cada uma especializada em diferentes aspectos do marketing digital e serviços relacionados."
+
+#: archive-mg_area.php:0
+msgid "¿Cómo trabajamos?"
+msgstr "Como trabalhamos?"
+
+#: archive-mg_area.php:0
+msgid "Cada área cuenta con un equipo de especialistas que colaboran para ofrecer soluciones integrales. Nuestros servicios se organizan por área para garantizar expertise y excelencia en cada proyecto."
+msgstr "Cada área conta com uma equipe de especialistas que colaboram para oferecer soluções integrais. Nossos serviços são organizados por área para garantir expertise e excelência em cada projeto."
+
+# ============================================================================
+# Template Parts Content None
+# ============================================================================
+
+#: template-parts/content-none.php:0
 msgid "No se encontraron resultados."
 msgstr "Nenhum resultado encontrado."
 
 # ============================================================================
-# THEME INFO (metadata)
+# Template Parts Card Portafolio
 # ============================================================================
 
-msgid "Maggiore"
-msgstr "Maggiore"
+#: template-parts/card-portafolio.php:0
+msgid "Ver página de %s"
+msgstr "Ver página de %s"
 
-msgid "Tema base para una agencia de marketing digital"
-msgstr "Tema base para uma agência de marketing digital"
+# ============================================================================
+# Template Parts Card Equipo
+# ============================================================================
+
+
+
+# ============================================================================
+# Template Parts Card Caso Exito
+# ============================================================================
+
+#: template-parts/card-caso-exito.php:0
+msgid "Servicios involucrados"
+msgstr "Serviços envolvidos"
+
+#: template-parts/card-caso-exito.php:0
+msgid "Contratador"
+msgstr "Contratante"
+
+# ============================================================================
+# Template Parts Card Articulo
+# ============================================================================
+
+#: template-parts/card-articulo.php:0
+msgid "Ver perfil de %s"
+msgstr "Ver perfil de %s"
+
+# ============================================================================
+# Template Parts Card Area
+# ============================================================================
+
+#: template-parts/card-area.php:0
+msgid "servicio"
+msgstr "serviço"
+
+#: template-parts/card-area.php:0
+msgid "servicios"
+msgstr "serviços"
+
+#: template-parts/card-area.php:0
+msgid "miembro"
+msgstr "membro"
+
+#: template-parts/card-area.php:0
+msgid "miembros"
+msgstr "membros"
+
+#: template-parts/card-area.php:0
+msgid "Director"
+msgstr "Diretor"
+
+# ============================================================================
+# Single
+# ============================================================================
+
+#: single.php:0
+msgid "Por"
+msgstr "Por"
+
+#: single.php:0
+msgid "Compartir este artículo"
+msgstr "Compartilhar este artigo"
+
+#: single.php:0
+msgid "Compartir en LinkedIn"
+msgstr "Compartilhar no LinkedIn"
+
+#: single.php:0
+msgid "Compartir en Twitter"
+msgstr "Compartilhar no Twitter"
+
+#: single.php:0
+msgid "Compartir en Facebook"
+msgstr "Compartilhar no Facebook"
+
+#: single.php:0
+msgid "Compartir en WhatsApp"
+msgstr "Compartilhar no WhatsApp"
+
+#: single.php:0
+msgid "Compartir por Email"
+msgstr "Compartilhar por E-mail"
+
+#: single.php:0
+msgid "Copiar enlace"
+msgstr "Copiar link"
+
+#: single.php:0
+msgid "Copiar"
+msgstr "Copiar"
+
+#: single.php:0
+msgid "¡Copiado!"
+msgstr "Copiado!"
+
+#: single.php:0
+msgid "Sobre el autor"
+msgstr "Sobre o autor"
+
+#: single.php:0
+msgid "Especialidades"
+msgstr "Especialidades"
+
+#: single.php:0
+msgid "Etiquetas"
+msgstr "Tags"
+
+#: single.php:0
+msgid "Más artículos de este autor"
+msgstr "Mais artigos deste autor"
+
+# ============================================================================
+# Single Servicio
+# ============================================================================
+
+#: single-mg_servicio.php:0
+msgid "¿En qué consiste el servicio?"
+msgstr "Em que consiste o serviço?"
+
+#: single-mg_servicio.php:0
+msgid "Proceso"
+msgstr "Processo"
+
+#: single-mg_servicio.php:0
+msgid "Entregables"
+msgstr "Entregáveis"
+
+#: single-mg_servicio.php:0
+msgid "¿Para quién es el servicio?"
+msgstr "Para quem é o serviço?"
+
+#: single-mg_servicio.php:0
+msgid "Beneficios al obtenerlo"
+msgstr "Benefícios ao obtê-lo"
+
+#: single-mg_servicio.php:0
+msgid "Ventajas frente a la competencia"
+msgstr "Vantagens frente à concorrência"
+
+#: single-mg_servicio.php:0
+msgid "Director a Cargo"
+msgstr "Diretor Responsável"
+
+#: single-mg_servicio.php:0
+msgid "Área Responsable"
+msgstr "Área Responsável"
+
+#: single-mg_servicio.php:0
+msgid "Precio"
+msgstr "Preço"
+
+#: single-mg_servicio.php:0
+msgid "Servicio anterior"
+msgstr "Serviço anterior"
+
+#: single-mg_servicio.php:0
+msgid "Siguiente servicio"
+msgstr "Próximo serviço"
+
+# ============================================================================
+# Single Portafolio
+# ============================================================================
+
+#: single-mg_portafolio.php:0
+msgid "Equipo que participó"
+msgstr "Equipe que participou"
+
+#: single-mg_portafolio.php:0
+msgid "Foto de %s"
+msgstr "Foto de %s"
+
+#: single-mg_portafolio.php:0
+msgid "Cliente"
+msgstr "Cliente"
+
+#: single-mg_portafolio.php:0
+msgid "Logo de %s"
+msgstr "Logo de %s"
+
+#: single-mg_portafolio.php:0
+msgid "Caso de éxito"
+msgstr "Caso de sucesso"
+
+#: single-mg_portafolio.php:0
+msgid "Servicios aplicados"
+msgstr "Serviços aplicados"
+
+#: single-mg_portafolio.php:0
+msgid "Galería de Imágenes"
+msgstr "Galeria de Imagens"
+
+#: single-mg_portafolio.php:0
+msgid "Galería de Videos"
+msgstr "Galeria de Vídeos"
+
+#: single-mg_portafolio.php:0
+msgid "Reproducir video"
+msgstr "Reproduzir vídeo"
+
+#: single-mg_portafolio.php:0
+msgid "Pantalla completa"
+msgstr "Tela cheia"
+
+#: single-mg_portafolio.php:0
+msgid "Vea este proyecto en acción"
+msgstr "Veja este projeto em ação"
+
+#: single-mg_portafolio.php:0
+msgid "aquí"
+msgstr "aqui"
+
+#: single-mg_portafolio.php:0
+msgid "Proyecto anterior"
+msgstr "Projeto anterior"
+
+#: single-mg_portafolio.php:0
+msgid "Siguiente proyecto"
+msgstr "Próximo projeto"
+
+# ============================================================================
+# Single Equipo
+# ============================================================================
+
+#: single-mg_equipo.php:0
+msgid " de"
+msgstr " de"
+
+#: single-mg_equipo.php:0
+msgid "Área:"
+msgstr "Área:"
+
+#: single-mg_equipo.php:0
+msgid "Copiar correo de %s"
+msgstr "Copiar e-mail de %s"
+
+#: single-mg_equipo.php:0
+msgid "Sobre mí"
+msgstr "Sobre mim"
+
+#: single-mg_equipo.php:0
+msgid "Áreas de Especialización"
+msgstr "Áreas de Especialização"
+
+#: single-mg_equipo.php:0
+msgid "Equipo completo de las áreas que supervisa"
+msgstr "Equipe completa das áreas que supervisiona"
+
+#: single-mg_equipo.php:0
+msgid "Equipo a cargo"
+msgstr "Equipe sob responsabilidade"
+
+#: single-mg_equipo.php:0
+msgid "Artículos escritos"
+msgstr "Artigos escritos"
+
+#: single-mg_equipo.php:0
+msgid "Miembro anterior"
+msgstr "Membro anterior"
+
+#: single-mg_equipo.php:0
+msgid "Siguiente miembro"
+msgstr "Próximo membro"
+
+# ============================================================================
+# Single Cliente
+# ============================================================================
+
+#: single-mg_cliente.php:0
+msgid "Actualidad"
+msgstr "Atualidade"
+
+#: single-mg_cliente.php:0
+msgid "%d año"
+msgstr "%d ano"
+
+#: single-mg_cliente.php:0
+msgid "%d años"
+msgstr "%d anos"
+
+#: single-mg_cliente.php:0
+msgid "y %d mes"
+msgstr "e %d mês"
+
+#: single-mg_cliente.php:0
+msgid "y %d meses"
+msgstr "e %d meses"
+
+#: single-mg_cliente.php:0
+msgid "%d mes"
+msgstr "%d mês"
+
+#: single-mg_cliente.php:0
+msgid "%d meses"
+msgstr "%d meses"
+
+#: single-mg_cliente.php:0
+msgid "Microempresa"
+msgstr "Microempresa"
+
+#: single-mg_cliente.php:0
+msgid "Pequeña empresa"
+msgstr "Pequena empresa"
+
+#: single-mg_cliente.php:0
+msgid "Mediana empresa"
+msgstr "Média empresa"
+
+#: single-mg_cliente.php:0
+msgid "Gran empresa"
+msgstr "Grande empresa"
+
+#: single-mg_cliente.php:0
+msgid "Relación Comercial"
+msgstr "Relação Comercial"
+
+#: single-mg_cliente.php:0
+msgid "Estado Actual"
+msgstr "Status Atual"
+
+#: single-mg_cliente.php:0
+msgid "Cliente Activo"
+msgstr "Cliente Ativo"
+
+#: single-mg_cliente.php:0
+msgid "Finalizado en %s"
+msgstr "Finalizado em %s"
+
+#: single-mg_cliente.php:0
+msgid "Tiempo de relación"
+msgstr "Tempo de relacionamento"
+
+#: single-mg_cliente.php:0
+msgid "Duración total"
+msgstr "Duração total"
+
+#: single-mg_cliente.php:0
+msgid "empleados"
+msgstr "funcionários"
+
+#: single-mg_cliente.php:0
+msgid "Industria"
+msgstr "Indústria"
+
+#: single-mg_cliente.php:0
+msgid "Redes"
+msgstr "Redes"
+
+#: single-mg_cliente.php:0
+msgid "Resumen de Colaboración"
+msgstr "Resumo da Colaboração"
+
+#: single-mg_cliente.php:0
+msgid "Servicios Contratados"
+msgstr "Serviços Contratados"
+
+#: single-mg_cliente.php:0
+msgid "Proyectos en Portafolio"
+msgstr "Projetos no Portfólio"
+
+#: single-mg_cliente.php:0
+msgid "Portafolio de Proyectos"
+msgstr "Portfólio de Projetos"
+
+#: single-mg_cliente.php:0
+msgid "Cliente anterior"
+msgstr "Cliente anterior"
+
+#: single-mg_cliente.php:0
+msgid "Siguiente cliente"
+msgstr "Próximo cliente"
+
+# ============================================================================
+# Single Caso Exito
+# ============================================================================
+
+#: single-mg_caso_exito.php:0
+msgid "Contexto"
+msgstr "Contexto"
+
+#: single-mg_caso_exito.php:0
+msgid "Acciones Implementadas"
+msgstr "Ações Implementadas"
+
+#: single-mg_caso_exito.php:0
+msgid "Resultados Obtenidos"
+msgstr "Resultados Obtidos"
+
+#: single-mg_caso_exito.php:0
+msgid "Contratador del servicio"
+msgstr "Contratante do serviço"
+
+#: single-mg_caso_exito.php:0
+msgid "Fecha del Proyecto"
+msgstr "Data do Projeto"
+
+#: single-mg_caso_exito.php:0
+msgid "Servicios Involucrados"
+msgstr "Serviços Envolvidos"
+
+#: single-mg_caso_exito.php:0
+msgid "Equipo Participante"
+msgstr "Equipe Participante"
+
+#: single-mg_caso_exito.php:0
+msgid "Portafolio Relacionado"
+msgstr "Portfólio Relacionado"
+
+#: single-mg_caso_exito.php:0
+msgid "Caso anterior"
+msgstr "Caso anterior"
+
+#: single-mg_caso_exito.php:0
+msgid "Siguiente caso"
+msgstr "Próximo caso"
+
+# ============================================================================
+# Single Area
+# ============================================================================
+
+#: single-mg_area.php:0
+msgid "Equipo General"
+msgstr "Equipe Geral"
+
+#: single-mg_area.php:0
+msgid "Director del Área"
+msgstr "Diretor da Área"
+
+#: single-mg_area.php:0
+msgid "Ver perfil completo"
+msgstr "Ver perfil completo"
+
+#: single-mg_area.php:0
+msgid "En Números"
+msgstr "Em Números"
+
+#: single-mg_area.php:0
+msgid "Miembros"
+msgstr "Membros"
+
+#: single-mg_area.php:0
+msgid "Proyectos Registrados"
+msgstr "Projetos Registrados"
+
+#: single-mg_area.php:0
+msgid "Equipo de %s"
+msgstr "Equipe de %s"
+
+#: single-mg_area.php:0
+msgid "Servicios que Ofrece esta Área"
+msgstr "Serviços Oferecidos por esta Área"
+
+#: single-mg_area.php:0
+msgid "Casos de Éxito Destacados"
+msgstr "Casos de Sucesso em Destaque"
+
+#: single-mg_area.php:0
+msgid "Proyectos exitosos realizados por el equipo de %s"
+msgstr "Projetos bem-sucedidos realizados pela equipe de %s"
+
+#: single-mg_area.php:0
+msgid "El área tiene %d casos de éxito en total"
+msgstr "A área tem %d casos de sucesso no total"
+
+#: single-mg_area.php:0
+msgid "Portafolio Destacado"
+msgstr "Portfólio em Destaque"
+
+#: single-mg_area.php:0
+msgid "Trabajos realizados por el equipo de %s"
+msgstr "Trabalhos realizados pela equipe de %s"
+
+#: single-mg_area.php:0
+msgid "El área tiene %d proyectos en portafolio en total"
+msgstr "A área tem %d projetos no portfólio no total"
+
+#: single-mg_area.php:0
+msgid "Área anterior"
+msgstr "Área anterior"
+
+#: single-mg_area.php:0
+msgid "Siguiente Área"
+msgstr "Próxima Área"
+
+# ============================================================================
+# Archive de Taxonomía: Categorías de Portafolio
+# ============================================================================
+
+#: taxonomy-mg_categoria_portafolio.php:0
+msgid "proyecto"
+msgstr "projeto"
+
+#: taxonomy-mg_categoria_portafolio.php:0
+msgid "proyectos"
+msgstr "projetos"
+
+#: taxonomy-mg_categoria_portafolio.php:0
+msgid "Paginación"
+msgstr "Paginação"
+
+#: taxonomy-mg_categoria_portafolio.php:0
+msgid "Actualmente no hay proyectos en la categoría %s."
+msgstr "Atualmente não há projetos na categoria %s."
+
+# ============================================================================
+#  Archive de Taxonomía: Categoría de Servicio
+# ============================================================================
+
+# ============================================================================
+#  Archive de Taxonomía: Equipos
+# ============================================================================
+
+#: taxonomy-mg_equipos.php:0
+msgid "Actualmente no hay miembros asignados a este equipo."
+msgstr "Atualmente não há membros atribuídos a esta equipe."
+
+# ============================================================================
+#  Archive de Taxonomía: Industrias
+# ============================================================================
+
+#: taxonomy-mg_industria.php:0
+msgid "Industria: %s"
+msgstr "Indústria: %s"
+
+#: taxonomy-mg_industria.php:0
+msgid "elementos en total"
+msgstr "elementos no total"
+
+#: taxonomy-mg_industria.php:0
+msgid "clientes"
+msgstr "clientes"
+
+#: taxonomy-mg_industria.php:0
+msgid "casos de éxito"
+msgstr "casos de sucesso"
+
+#: taxonomy-mg_industria.php:0
+msgid "Otras industrias:"
+msgstr "Outras indústrias:"
+
+#: taxonomy-mg_industria.php:0
+msgid "Todo"
+msgstr "Tudo"
+
+#: taxonomy-mg_industria.php:0
+msgid "Todos los clientes"
+msgstr "Todos os clientes"
+
+#: taxonomy-mg_industria.php:0
+msgid "Todos los casos de éxito"
+msgstr "Todos os casos de sucesso"
+
+#: taxonomy-mg_industria.php:0
+msgid "No se encontró contenido"
+msgstr "Nenhum conteúdo encontrado"
+
+#: taxonomy-mg_industria.php:0
+msgid "Actualmente no hay clientes en esta industria."
+msgstr "Atualmente não há clientes nesta indústria."
+
+#: taxonomy-mg_industria.php:0
+msgid "Actualmente no hay casos de éxito en esta industria."
+msgstr "Atualmente não há casos de sucesso nesta indústria."
+
+#: taxonomy-mg_industria.php:0
+msgid "Actualmente no hay contenido disponible para esta industria."
+msgstr "Atualmente não há conteúdo disponível para esta indústria."
+
+# ============================================================================
+# CPTS
+# ============================================================================
+
+#: inc/post-types/cpt-area.php:0
+msgid "Área"
+msgstr "Área"
+
+#: inc/post-types/cpt-area.php:0
+msgid "Agregar nueva área"
+msgstr "Adicionar nova área"
+
+#: inc/post-types/cpt-area.php:0
+msgid "Editar área"
+msgstr "Editar área"
+
+#: inc/post-types/cpt-area.php:0
+msgid "Ver área"
+msgstr "Ver área"
+
+#: inc/post-types/cpt-caso-exito.php:0
+msgid "Caso de Éxito"
+msgstr "Caso de Sucesso"
+
+#: inc/post-types/cpt-caso-exito.php:0
+msgid "Agregar caso de éxito"
+msgstr "Adicionar caso de sucesso"
+
+#: inc/post-types/cpt-caso-exito.php:0
+msgid "Editar caso de éxito"
+msgstr "Editar caso de sucesso"
+
+#: inc/post-types/cpt-caso-exito.php:0
+msgid "Ver caso de éxito"
+msgstr "Ver caso de sucesso"
+
+#: inc/post-types/cpt-cliente.php:0
+msgid "Agregar nuevo"
+msgstr "Adicionar novo"
+
+#: inc/post-types/cpt-cliente.php:0
+msgid "Agregar nuevo cliente"
+msgstr "Adicionar novo cliente"
+
+#: inc/post-types/cpt-cliente.php:0
+msgid "Editar cliente"
+msgstr "Editar cliente"
+
+#: inc/post-types/cpt-cliente.php:0
+msgid "Nuevo cliente"
+msgstr "Novo cliente"
+
+#: inc/post-types/cpt-cliente.php:0
+msgid "Ver cliente"
+msgstr "Ver cliente"
+
+#: inc/post-types/cpt-cliente.php:0
+msgid "Buscar clientes"
+msgstr "Buscar clientes"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Contactos"
+msgstr "Contatos"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Contacto"
+msgstr "Contato"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Todos los contactos"
+msgstr "Todos os contatos"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Ver contacto"
+msgstr "Ver contato"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Buscar contacto"
+msgstr "Buscar contato"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "No se encontraron contactos"
+msgstr "Nenhum contato encontrado"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Gestión de contactos recibidos desde formularios"
+msgstr "Gestão de contatos recebidos de formulários"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Origen"
+msgstr "Origem"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Fecha"
+msgstr "Data"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Nota:"
+msgstr "Nota:"
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Los contactos se crean automáticamente desde los formularios del sitio. No se pueden crear manualmente."
+msgstr "Os contatos são criados automaticamente a partir dos formulários do site. Não podem ser criados manualmente."
+
+#: inc/post-types/cpt-contacto.php:0
+msgid "Todos los orígenes"
+msgstr "Todas as origens"
+
+#: inc/post-types/cpt-equipo.php:0 single-mg_area.php:0
+msgid "Miembro"
+msgstr "Membro"
+
+#: inc/post-types/cpt-equipo.php:0
+msgid "Agregar miembro"
+msgstr "Adicionar membro"
+
+#: inc/post-types/cpt-equipo.php:0
+msgid "Editar miembro"
+msgstr "Editar membro"
+
+#: inc/post-types/cpt-equipo.php:0
+msgid "Ver miembro"
+msgstr "Ver membro"
+
+#: inc/post-types/cpt-portafolio.php:0
+msgid "Proyecto"
+msgstr "Projeto"
+
+#: inc/post-types/cpt-portafolio.php:0
+msgid "Agregar proyecto"
+msgstr "Adicionar projeto"
+
+#: inc/post-types/cpt-portafolio.php:0
+msgid "Editar proyecto"
+msgstr "Editar projeto"
+
+#: inc/post-types/cpt-portafolio.php:0
+msgid "Ver proyecto"
+msgstr "Ver projeto"
+
+#: inc/post-types/cpt-servicio.php:0
+msgid "Servicio"
+msgstr "Serviço"
+
+#: inc/post-types/cpt-servicio.php:0
+msgid "Agregar nuevo servicio"
+msgstr "Adicionar novo serviço"
+
+#: inc/post-types/cpt-servicio.php:0
+msgid "Editar servicio"
+msgstr "Editar serviço"
+
+#: inc/post-types/cpt-servicio.php:0
+msgid "Nuevo servicio"
+msgstr "Novo serviço"
+
+#: inc/post-types/cpt-servicio.php:0
+msgid "Ver servicio"
+msgstr "Ver serviço"
+
+#: inc/post-types/cpt-servicio.php:0
+msgid "Buscar servicios"
+msgstr "Buscar serviços"
+
+# ============================================================================
+# GENERAL / GLOBAL
+# ============================================================================
+
+#: functions.php
+msgid "Menú Principal"
+msgstr "Menu Principal"
+
+#: inc/helpers/helpers.php
+msgid "Ver en Google Maps"
+msgstr "Ver no Google Maps"
+
+#: 404.php inc/helpers/footer-functions.php
+msgid "Página no encontrada"
+msgstr "Página não encontrada"

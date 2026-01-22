@@ -92,7 +92,7 @@ $portafolios_count = $portafolios->found_posts;
         target="_blank"
         rel="noopener noreferrer"
         itemprop="sameAs"
-        aria-label="<?php echo esc_attr(sprintf(__('Ver perfil de %s en LinkedIn', 'maggiore'), $nombre)); ?>"
+        aria-label="<?php echo esc_attr(sprintf(__('Ver perfil de %s en LinkedIn', 'maggiore'), $titulo)); ?>"
       >
    
                            <i>
