@@ -263,7 +263,7 @@ echo '</pre>';
                                 <a href="<?= esc_url(get_permalink($director_id)); ?>" 
                                    style="color: white; text-decoration: none;">
                                 <img src="<?= esc_url($director_foto); ?>" 
-                                     alt="<?= esc_attr($director_nombre); ?>"
+                                     alt="<?= esc_attr( sprintf( __('Foto de %s', 'maggiore'), $director_nombre ) ); ?>"
                                      class="img-fluid border-mg"
                                      style="width: 100%;height:300px; object-fit: cover; object-position: 50% 30%;"></a>
                             </div>

@@ -119,7 +119,7 @@ $portafolios = get_posts([
             <?php if ($logo): ?>
                 <div class="col-auto">
                     <img src="<?= esc_url($logo); ?>" 
-                         alt="<?= esc_attr('Logo de ' . get_the_title()); ?>" 
+                         alt="<?= esc_attr( sprintf( __('Logo de %s', 'maggiore'), get_the_title() ) ); ?>" 
                          class="img-fluid" 
                          style="max-height: 100px; max-width: 200px;"
                          itemprop="logo">
@@ -184,8 +184,8 @@ $portafolios = get_posts([
                                     </span>
                                 <?php else: ?>
                                     <p class="mb-0" style="font-weight: 400; color: white; font-size: 1.1rem;line-height:1.73rem">
-                                        <?php _e('Finalizado en', 'maggiore'); ?>
-                                        <?= esc_html($termino_formateado); ?>
+                                        <?php printf( esc_html__('Finalizado en %s', 'maggiore'), $termino_formateado ); ?>
+                                       
                                 <?php endif; ?>
                             </div>
                         </div>

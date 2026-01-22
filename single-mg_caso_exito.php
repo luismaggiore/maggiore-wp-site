@@ -176,7 +176,7 @@ if ($fecha) {
                         <div class="d-flex align-items-center">
                             <?php if ($contratador_img): ?>
                                 <img src="<?= esc_url($contratador_img); ?>" 
-                                     alt="<?= esc_attr("Foto de $contratador_nombre"); ?>"
+                                     alt="<?= esc_attr( sprintf( __('Foto de %s', 'maggiore'), $contratador_nombre ) ); ?>"
                                      class="rounded-circle me-3"
                                      style="width: 60px; height: 60px; object-fit: cover;">
                             <?php endif; ?>
@@ -224,7 +224,7 @@ if ($fecha) {
                             <a href="<?= get_permalink($cliente_id); ?>">
                                 <?php if ($cliente_logo): ?>
                                     <img src="<?= esc_url($cliente_logo); ?>"
-                                         alt="<?= esc_attr("Logo de $cliente_nombre"); ?>"
+                                         alt="<?= esc_attr( sprintf( __('Logo de %s', 'maggiore'), $cliente_nombre ) ); ?>"
                                          width="20" height="20"
                                          loading="lazy">
                                 <?php endif; ?>
@@ -301,7 +301,7 @@ if ($fecha) {
                                 <a href="<?= get_permalink($eid); ?>" class="person-card">
                                     <?php if ($miembro_foto): ?>
                                         <img src="<?= esc_url($miembro_foto); ?>"
-                                             alt="<?= esc_attr("Foto de $miembro_nombre"); ?>"
+                                             alt="<?= esc_attr( sprintf( __('Foto de %s', 'maggiore'), $miembro_nombre ) ); ?>"
                                              class="person-card__photo">
                                     <?php endif; ?>
                                     <div class="person-card__info">

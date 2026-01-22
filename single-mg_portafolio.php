@@ -58,10 +58,10 @@ if ($fecha) {
               $link = get_permalink($equipo_id);
           ?>
             <li class="person-tag" itemscope itemtype="https://schema.org/Person">
-              <a href="<?= esc_url($link); ?>" itemprop="url" aria-label="<?= esc_attr("Ver perfil de $nombre"); ?>">
+              <a href="<?= esc_url($link); ?>" itemprop="url" aria-label="<?= esc_attr( sprintf( __('Ver perfil de %s', 'maggiore'), $nombre ) ); ?>">
                 <?php if ($foto): ?>
                   <img src="<?= esc_url($foto); ?>"
-                       alt="<?= esc_attr("Foto de $nombre"); ?>"
+                       alt="<?= esc_attr( sprintf( __('Foto de %s', 'maggiore'), $nombre ) ); ?>"
                        width="20"
                        height="20"
                        loading="lazy"
@@ -85,7 +85,7 @@ if ($fecha) {
            aria-label="<?= esc_attr(sprintf(__('Ver página de %s', 'maggiore'), $cliente_nombre)) ?>">
           <?php if ($cliente_logo): ?>
             <img src="<?= esc_url($cliente_logo) ?>"
-                 alt="<?= esc_attr("Logo de $cliente_nombre") ?>"
+                 alt="<?= esc_attr( sprintf( __('Logo de %s', 'maggiore'), $cliente_nombre ) ); ?>"
                  width="20"
                  height="20"
                  loading="lazy"
@@ -301,7 +301,7 @@ if ($fecha) {
                 <div class="video-poster">
                   <img src="<?= esc_url($poster); ?>" alt="<?= esc_attr($video_title); ?>" class="poster-image">
                   <div class="poster-overlay"></div>
-                  <button class="play-btn-center" aria-label="Reproducir video">
+                  <button class="play-btn-center" aria-label="<?php echo esc_attr__('Reproducir video', 'maggiore'); ?>">
                     <svg width="80" height="80" viewBox="0 0 80 80">
                       <circle cx="40" cy="40" r="38" fill="rgba(0,0,0,0.7)" stroke="white" stroke-width="2"/>
                       <path d="M 30 20 L 30 60 L 60 40 Z" fill="white"/>
@@ -335,7 +335,7 @@ if ($fecha) {
                       </svg>
                     </button>
                     <input type="range" class="volume-slider" min="0" max="100" value="100">
-                    <button class="control-btn fullscreen-btn" aria-label="Pantalla completa">
+                    <button class="control-btn fullscreen-btn" aria-label="<?php echo esc_attr__('Pantalla completa', 'maggiore'); ?>">
                       <svg width="24" height="24" viewBox="0 0 24 24">
                         <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" fill="white"/>
                       </svg>
@@ -378,7 +378,7 @@ if ($fecha) {
                     <img src="<?= esc_url($thumbnail); ?>" alt="Video thumbnail" class="poster-image">
                   <?php endif; ?>
                   <div class="poster-overlay"></div>
-                  <button class="play-btn-center" aria-label="Reproducir video">
+                  <button class="play-btn-center" aria-label="<?php echo esc_attr__('Reproducir video', 'maggiore'); ?>">
                     <svg width="80" height="80" viewBox="0 0 80 80">
                       <circle cx="40" cy="40" r="38" fill="rgba(255,0,0,0.9)" stroke="white" stroke-width="2"/>
                       <path d="M 30 20 L 30 60 L 60 40 Z" fill="white"/>
@@ -396,9 +396,9 @@ if ($fecha) {
                 <?php if ($enlace): ?>
                     <section>
                       <h2 class="p-source display-6">
-                      <?php _e('  Vea este proyecto en acción ', 'maggiore'); ?>  
+                      <?php _e('Vea este proyecto en acción', 'maggiore'); ?>  
                       <a href="<?= esc_html($enlace); ?>" target="_blank">
-                      <?php _e('  aquí ', 'maggiore'); ?>  
+                      <?php _e('aquí', 'maggiore'); ?>  
                       </a></section> </h2>
       
       <?php endif; ?>

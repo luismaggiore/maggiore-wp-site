@@ -79,7 +79,7 @@ if ($lang && $es_director) {
             ?>
                 <p class="mb-2 mt-2">
                     <span style="color: var(--text-secondary);">     <a href="<?= esc_url(get_term_link($equipos)); ?>"> 
-                            <?= esc_html($equipos->name); ?><?php _e(' de', 'maggiore'); ?>
+                            <?= esc_html($equipos->name); ?><?php _e('de', 'maggiore'); ?>
                         </a> </span><br>
                     <?php foreach ($areas_director as $area_dir): ?>
                         <a href="<?= get_permalink($area_dir->ID); ?>" 
