@@ -210,15 +210,15 @@ msgstr "Brand Values"
 
 #: page-quienes-somos.php:0
 msgid "En Maggiore  <span class=\"mg_values_letter\">C</span><span class=\"mg_values_letter\">A</span><span class=\"mg_values_letter\">D</span><span class=\"mg_values_letter\">A</span> paso importa"
-msgstr "At Maggiore  <span class=\"mg_values_letter\">E</span><span class=\"mg_values_letter\">V</span><span class=\"mg_values_letter\">E</span><span class=\"mg_values_letter\">R</span><span class=\"mg_values_letter\">Y</span> step matters"
+msgstr "At Maggiore  <span class=\"mg_values_letter\">E</span><span class=\"mg_values_letter\">A</span><span class=\"mg_values_letter\">C</span><span class=\"mg_values_letter\">H</span> step matters"
 
 #: page-quienes-somos.php:0
 msgid "Consistencia"
-msgstr "Consistency"
+msgstr "Energy"
 
 #: page-quienes-somos.php:0
 msgid "En la calidad de nuestras entregas."
-msgstr "In the quality of our deliveries."
+msgstr "To surprise with the best deliverables."
 
 #: page-quienes-somos.php:0
 msgid "Adaptabilidad"
@@ -230,15 +230,15 @@ msgstr "To support each client in their specific need."
 
 #: page-quienes-somos.php:0
 msgid "Determinación"
-msgstr "Determination"
+msgstr "Consistency"
 
 #: page-quienes-somos.php:0
 msgid "En sorprender a nuestros clientes con los mejores insights y entregables."
-msgstr "In surprising our clients with the best insights and deliverables."
+msgstr "In the quality of our deliveries."
 
 #: page-quienes-somos.php:0
 msgid "Atención"
-msgstr "Attention"
+msgstr "Heed"
 
 #: page-quienes-somos.php:0
 msgid "A los detalles para evitar ineficiencias o atrasos."

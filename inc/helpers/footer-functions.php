@@ -1,9 +1,12 @@
 <?php
 /**
  * Funciones adicionales para el Footer
- * Agregar estas funciones a functions.php
  * 
  * @package Maggiore
+ * @version 2.0
+ * 
+ * NOTA: El registro del menú footer se movió a functions.php
+ * para centralizar todos los menús y asegurar compatibilidad con Polylang
  */
 
 if (!defined('ABSPATH')) exit;
@@ -11,16 +14,14 @@ if (!defined('ABSPATH')) exit;
 /* ========================================
  * REGISTRAR MENÚ DEL FOOTER
  * ======================================== */
-function maggiore_register_footer_menu() {
-    register_nav_menus([
-        'footer-menu' => __('Menú Footer', 'maggiore')
-    ]);
-}
-add_action('init', 'maggiore_register_footer_menu');
+/**
+ * ❌ ESTA FUNCIÓN SE ELIMINÓ
+ * El menú footer ahora se registra en functions.php junto con el menú principal
+ * Ver: maggiore_setup() en functions.php
+ */
 
 /* ========================================
  * ENQUEUE FOOTER CSS
- * Agregar esto a la función maggiore_scripts() existente
  * ======================================== */
 function maggiore_footer_styles() {
     wp_enqueue_style(
@@ -87,46 +88,38 @@ function maggiore_breadcrumbs() {
                 echo '<a href="' . esc_url(get_category_link($category->term_id)) . '">' . esc_html($category->name) . '</a>';
                 echo '</li>';
             }
-        } else {
-            // Para CPTs, obtener la primera taxonomía asociada
-            $taxonomies = get_object_taxonomies($post_type);
-            if (!empty($taxonomies)) {
-                $terms = get_the_terms(get_the_ID(), $taxonomies[0]);
-                if (!empty($terms) && !is_wp_error($terms)) {
-                    $term = $terms[0];
-                    echo '<li class="breadcrumb-item">';
-                    echo '<a href="' . esc_url(get_term_link($term)) . '">' . esc_html($term->name) . '</a>';
-                    echo '</li>';
-                }
-            }
         }
         
         // Título actual
-        echo '<li class="breadcrumb-item active" aria-current="page">' . get_the_title() . '</li>';
-        
+        echo '<li class="breadcrumb-item active" aria-current="page">';
+        echo esc_html(get_the_title());
+        echo '</li>';
     } elseif (is_archive()) {
+        echo '<li class="breadcrumb-item active" aria-current="page">';
+        
         if (is_category()) {
-            $category = get_queried_object();
-            if ($category->parent) {
-                $parent = get_category($category->parent);
-                echo '<li class="breadcrumb-item">';
-                echo '<a href="' . esc_url(get_category_link($parent->term_id)) . '">' . esc_html($parent->name) . '</a>';
-                echo '</li>';
-            }
-            echo '<li class="breadcrumb-item active" aria-current="page">' . single_cat_title('', false) . '</li>';
-        } elseif (is_tax()) {
-            $term = get_queried_object();
-            $taxonomy = get_taxonomy($term->taxonomy);
-            echo '<li class="breadcrumb-item active" aria-current="page">' . esc_html($term->name) . '</li>';
+            echo esc_html(single_cat_title('', false));
+        } elseif (is_tag()) {
+            echo esc_html(single_tag_title('', false));
+        } elseif (is_author()) {
+            echo esc_html(get_the_author());
         } elseif (is_post_type_archive()) {
-            echo '<li class="breadcrumb-item active" aria-current="page">' . post_type_archive_title('', false) . '</li>';
+            echo esc_html(post_type_archive_title('', false));
+        } elseif (is_tax()) {
+            echo esc_html(single_term_title('', false));
         } else {
-            echo '<li class="breadcrumb-item active" aria-current="page">' . get_the_archive_title() . '</li>';
+            echo __('Archivo', 'maggiore');
         }
+        
+        echo '</li>';
     } elseif (is_search()) {
-        echo '<li class="breadcrumb-item active" aria-current="page">' . __('Resultados de búsqueda', 'maggiore') . '</li>';
+        echo '<li class="breadcrumb-item active" aria-current="page">';
+        echo __('Resultados de búsqueda', 'maggiore');
+        echo '</li>';
     } elseif (is_404()) {
-        echo '<li class="breadcrumb-item active" aria-current="page">' . __('Página no encontrada', 'maggiore') . '</li>';
+        echo '<li class="breadcrumb-item active" aria-current="page">';
+        echo __('Página no encontrada', 'maggiore');
+        echo '</li>';
     }
     
     echo '</ol>';
@@ -135,15 +128,63 @@ function maggiore_breadcrumbs() {
 }
 
 /* ========================================
- * ACTUALIZAR REWRITE RULES
- * Ejecutar una sola vez después de instalar
+ * WIDGET AREAS FOOTER (OPCIONAL)
+ * Si deseas usar widgets en el footer
  * ======================================== */
-function maggiore_flush_rewrite_rules_on_activation() {
-    // Registrar los CPTs
-    maggiore_register_footer_menu();
+function maggiore_footer_widgets() {
+    register_sidebar([
+        'name'          => __('Footer Widget Area 1', 'maggiore'),
+        'id'            => 'footer-1',
+        'description'   => __('Primera columna del footer', 'maggiore'),
+        'before_widget' => '<div class="footer-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="footer-widget-title">',
+        'after_title'   => '</h5>',
+    ]);
     
-    // Flush rewrite rules
-    flush_rewrite_rules();
+    register_sidebar([
+        'name'          => __('Footer Widget Area 2', 'maggiore'),
+        'id'            => 'footer-2',
+        'description'   => __('Segunda columna del footer', 'maggiore'),
+        'before_widget' => '<div class="footer-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="footer-widget-title">',
+        'after_title'   => '</h5>',
+    ]);
+    
+    register_sidebar([
+        'name'          => __('Footer Widget Area 3', 'maggiore'),
+        'id'            => 'footer-3',
+        'description'   => __('Tercera columna del footer', 'maggiore'),
+        'before_widget' => '<div class="footer-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h5 class="footer-widget-title">',
+        'after_title'   => '</h5>',
+    ]);
 }
-// Descomentar esta línea UNA VEZ después de agregar el código, luego comentarla de nuevo
-// register_activation_hook(__FILE__, 'maggiore_flush_rewrite_rules_on_activation');
+// Descomentar si quieres usar widgets en el footer
+// add_action('widgets_init', 'maggiore_footer_widgets');
+
+/* ========================================
+ * HELPER: Obtener enlaces de redes sociales
+ * ======================================== */
+function maggiore_get_social_links() {
+    return [
+        'facebook'  => get_option('mg_facebook_url', ''),
+        'instagram' => get_option('mg_instagram_url', ''),
+        'linkedin'  => get_option('mg_linkedin_url', ''),
+        'twitter'   => get_option('mg_twitter_url', ''),
+        'youtube'   => get_option('mg_youtube_url', ''),
+    ];
+}
+
+/* ========================================
+ * HELPER: Obtener información de contacto
+ * ======================================== */
+function maggiore_get_contact_info() {
+    return [
+        'phone'   => get_option('mg_phone', ''),
+        'email'   => get_option('mg_email', ''),
+        'address' => get_option('mg_address', ''),
+    ];
+}
