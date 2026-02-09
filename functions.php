@@ -13,26 +13,52 @@ if (!defined('ABSPATH')) exit;
  * Theme setup
  * ----------------------------------------------------- */
 function maggiore_setup() {
-    // ❌ REEMPLAZA ESTO:
-    // load_theme_textdomain('maggiore', get_template_directory() . '/languages');
-    
-    // ✅ POR ESTO (más robusto):
-    add_action('after_setup_theme', function() {
-        load_theme_textdomain('maggiore', get_template_directory() . '/languages');
-    });
-    
-    // O MEJOR AÚN, usa este código completo:
+    // ========================================
+    // CARGA DE IDIOMAS (Método robusto)
+    // ========================================
     $locale = apply_filters('theme_locale', get_locale(), 'maggiore');
     $mofile = get_template_directory() . "/languages/maggiore-{$locale}.mo";
     
     if (file_exists($mofile)) {
         load_textdomain('maggiore', $mofile);
+    } else {
+        // Fallback al método estándar
+        load_theme_textdomain('maggiore', get_template_directory() . '/languages');
     }
     
-    // Resto de tu código de setup...
+    // ========================================
+    // SOPORTE DEL TEMA
+    // ========================================
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
-    // etc...
+    add_theme_support('html5', [
+        'search-form',
+        'comment-form',
+        'comment-list',
+        'gallery',
+        'caption',
+        'style',
+        'script'
+    ]);
+    add_theme_support('automatic-feed-links');
+    add_theme_support('customize-selective-refresh-widgets');
+    
+    // ========================================
+    // REGISTRO DE MENÚS
+    // Centralizado aquí para compatibilidad con Polylang
+    // ========================================
+    register_nav_menus([
+        'primary'     => __('Menú Principal', 'maggiore'),
+        'footer-menu' => __('Menú Footer', 'maggiore')
+    ]);
+    
+    // ========================================
+    // TAMAÑOS DE IMAGEN PERSONALIZADOS
+    // ========================================
+    add_image_size('maggiore-featured', 1200, 675, true);  // 16:9 para destacadas
+    add_image_size('maggiore-thumbnail', 400, 300, true);  // Thumbnails
+    add_image_size('maggiore-team', 500, 500, true);       // Fotos del equipo (cuadradas)
+    add_image_size('maggiore-portrait', 600, 800, true);   // Retratos 3:4
 }
 add_action('after_setup_theme', 'maggiore_setup');
 
@@ -361,6 +387,7 @@ require_once get_template_directory() . '/inc/helpers/helpers.php';
 require_once get_template_directory() . '/inc/helpers/settings.php';
 require_once get_template_directory() . '/inc/helpers/translated-slugs.php';
 require_once get_template_directory() . '/inc/helpers/theme-translations.php';
+require_once get_template_directory() . '/inc/helpers/footer-functions.php';
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */
@@ -381,3 +408,29 @@ add_action('wp_footer', function() {
         echo '<!-- Test traducción: ' . $test . ' (debería decir "Success Stories" si funciona) -->' . "\n";
     }
 });
+
+function maggiore_get_lang() {
+    // Polylang
+    if (function_exists('pll_current_language')) {
+        return pll_current_language();
+    }
+    
+    // WPML
+    if (defined('ICL_LANGUAGE_CODE')) {
+        return ICL_LANGUAGE_CODE;
+    }
+    
+    // WordPress nativo
+    $locale = get_locale();
+    return substr($locale, 0, 2);
+}
+
+// ============================================================
+// BODY CLASS CON IDIOMA
+// ============================================================
+
+function maggiore_language_body_class($classes) {
+    $classes[] = 'lang-' . maggiore_get_lang();
+    return $classes;
+}
+add_filter('body_class', 'maggiore_language_body_class');

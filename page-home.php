@@ -26,7 +26,7 @@ get_header();
         <div class="container-fluid">
           <div class="row justify-content-between align-items-center">
             <div class="col-xl-4 col-lg-6 order-1 order-lg-2">
-              <img src="<?php echo get_template_directory_uri(); ?>/assets/img/globo.png" class="globo" alt="globo">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/img/globo.webp" class="globo" alt="Maggiore's Hot Air Balloon">
             </div>
             <div class="col-xl-6 col-lg-6 move mb-4 order-2 order-lg-1">
               <div class="hero-content">
@@ -38,7 +38,7 @@ get_header();
               <div class="bajada-reveal">
                 <p class="bajada"><?php _e('Somos más que una agencia de Marketing Digital, Somos un aliado estratégico para tu negocio', 'maggiore'); ?></p>
                 <div class="mg-link">
-                  <a class="btns-mgr" href="#">
+                  <a class="btns-mgr" href="#sectionFour">
                     <div class="btn-brillo"></div>
                     <div class="btn-container">
                       <div class="btn-content">
@@ -81,11 +81,11 @@ get_header();
             </article>
           </div>
 
-          <div class="col-lg-5 order-1 order-lg-2 d-none d-md-block position-relative">
+          <div class="col-lg-5 order-1 order-lg-2 d-none d-lg-block position-relative">
             <div class="constelacion" aria-hidden="true">
-              <img class="img-constelacion arco" src="<?php echo get_template_directory_uri(); ?>/assets/img/arco.png" alt="">
-              <img class="img-constelacion ajedrez" src="<?php echo get_template_directory_uri(); ?>/assets/img/ajedrez.png" alt="">
-              <img class="img-constelacion infinito" src="<?php echo get_template_directory_uri(); ?>/assets/img/infinito.png" alt="">
+              <img class="img-constelacion arco" src="<?php echo get_template_directory_uri(); ?>/assets/img/bow.webp" alt="Bow and arrow">
+              <img class="img-constelacion ajedrez" src="<?php echo get_template_directory_uri(); ?>/assets/img/pawn.webp" alt="A chess pawn">
+              <img class="img-constelacion infinito" src="<?php echo get_template_directory_uri(); ?>/assets/img/infinity.webp" alt="Infinity symbol">
                    <svg
                     id="Layer_1"
                     data-name="Layer 1"
@@ -179,7 +179,7 @@ get_header();
           <h2 class="maggiore-frase text-appear mb-4"><b>Maggiore</b><br><?php _e('Significa', 'maggiore'); ?> <b><?php _e('Mayor', 'maggiore'); ?></b></h2>
           <h2 class="mid-title"><?php _e('Nuestra promesa es crecimiento para tu empresa', 'maggiore'); ?></h2>
         </div>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/globo.png" class="globo-2" alt="globo">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/globo.webp" class="globo-2" alt="Maggiore's hot air balloon">
       </section>
 
       <!-- CASOS DE ÉXITO (Estático por ahora) -->
@@ -410,4 +410,69 @@ if ($casos_landing->have_posts()) : ?>
     </main>
   </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Esperar a que GSAP y ScrollSmoother estén listos
+    gsap.registerPlugin(ScrollToPlugin);
+    
+    const ctaButton = document.querySelector('.btns-mgr[href="#sectionFour"]');
+    
+    if (ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Obtener la instancia de ScrollSmoother
+            const smoother = ScrollSmoother.get();
+            
+            if (smoother) {
+                // Usar ScrollSmoother para hacer scroll suave
+                smoother.scrollTo("#sectionFour", true, "top 100px");
+            } else {
+                // Fallback si ScrollSmoother no está disponible
+                gsap.to(window, {
+                    duration: 1.5,
+                    scrollTo: {
+                        y: "#sectionFour",
+                        offsetY: 100
+                    },
+                    ease: "power2.inOut"
+                });
+            }
+        });
+    }
+});
+</script>
+<?php
+/**
+ * SNIPPET PARA HOME/FRONT-PAGE
+ * Carga el archivo de desgloces correcto según idioma
+ * 
+ * Añade este código en tu template home (ej: front-page.php, page-home.php)
+ * antes del cierre de </body> o después de wp_footer()
+ */
+
+// Detectar idioma actual
+$current_lang = 'es'; // Default español
+
+// Polylang
+if (function_exists('pll_current_language')) {
+    $current_lang = pll_current_language();
+}
+// WPML
+elseif (defined('ICL_LANGUAGE_CODE')) {
+    $current_lang = ICL_LANGUAGE_CODE;
+}
+// WordPress nativo
+else {
+    $locale = get_locale();
+    $current_lang = substr($locale, 0, 2);
+}
+
+// Construir URL del archivo correcto
+$desgloces_file = 'desgloces-' . $current_lang . '.js';
+$desgloces_url = get_template_directory_uri() . '/assets/js/' . $desgloces_file;
+?>
+
+<!-- Desgloces idioma: <?php echo strtoupper($current_lang); ?> -->
+<script src="<?php echo esc_url($desgloces_url); ?>"></script> 
 <?php get_footer(); ?>

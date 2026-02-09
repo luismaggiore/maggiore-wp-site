@@ -17,7 +17,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
         <div class="container-fluid">
             <div class="row justify-content-center ">
                 <div class="col-lg-10 col-xl-10 mt-5">
-                    <h1 class="title-reveal">
+                    <h1 class="title-reveal2">
                         <?php _e('Especialistas en investigación de mercados y estrategias, diseño + ejecución de campañas de marketing digital para marcas de presencia internacional.', 'maggiore'); ?>
                     </h1>
                     <div class="bajada-reveal">

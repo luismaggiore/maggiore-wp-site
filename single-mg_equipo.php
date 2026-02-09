@@ -36,9 +36,14 @@ if ($lang && $es_director) {
     }
     unset($area_dir);
 }
+
+// ===== CORRECCIÓN: Procesar equipos de forma segura =====
+$equipo_actual = null;
+if (!empty($equipos) && !is_wp_error($equipos)) {
+    $equipo_actual = $equipos[0]; // Guardar en variable separada
+}
 ?>
-<?php if (!empty($equipos) && !is_wp_error($equipos)): ?>
-        <?php $equipos = $equipos[0]; ?>      <?php endif; ?>
+
 <main class="container py-5" itemscope itemtype="https://schema.org/Person">
  
     
@@ -78,9 +83,13 @@ if ($lang && $es_director) {
                 // MOSTRAR PARA DIRECTORES
             ?>
                 <p class="mb-2 mt-2">
-                    <span style="color: var(--text-secondary);">     <a href="<?= esc_url(get_term_link($equipos)); ?>"> 
-                            <?= esc_html($equipos->name); ?><?php _e('de', 'maggiore'); ?>
-                        </a> </span><br>
+                    <?php if ($equipo_actual): // CORRECCIÓN: Verificar antes de usar ?>
+                        <span style="color: var(--text-secondary);">
+                            <a href="<?= esc_url(get_term_link($equipo_actual)); ?>"> 
+                                <?= esc_html($equipo_actual->name); ?> <?php _e('de', 'maggiore'); ?>
+                            </a> 
+                        </span><br>
+                    <?php endif; ?>
                     <?php foreach ($areas_director as $area_dir): ?>
                         <a href="<?= get_permalink($area_dir->ID); ?>" 
                            class="service-tag" 
@@ -100,10 +109,12 @@ if ($lang && $es_director) {
                     <span><?php _e('Área:', 'maggiore'); ?></span>
                     <a href="<?= get_permalink($area_id); ?>" itemprop="url">
                         <span itemprop="name"><?= get_the_title($area_id); ?></span>
-                    </a> /
-                    <a href="<?= esc_url(get_term_link($equipos)); ?>">
-                        <?= esc_html($equipos->name); ?>
-                    </a>  
+                    </a>
+                    <?php if ($equipo_actual): // CORRECCIÓN: Verificar antes de usar ?>
+                        / <a href="<?= esc_url(get_term_link($equipo_actual)); ?>">
+                            <?= esc_html($equipo_actual->name); ?>
+                        </a>
+                    <?php endif; ?>
                 </p>
             <?php 
                 endif; 
@@ -141,17 +152,15 @@ if ($lang && $es_director) {
                         
     <div class="row g-2 mb-5">
     <!-- Biografía -->
-    <?php if ($bio ): ?>
+    <?php if ($bio ): // CORRECCIÓN: Eliminada verificación duplicada ?>
         <div class="col-lg-8" style="min-height: 100%;">
                <div class="card-mg " style="height: 100%;">
 
             <h2 class="label"><?php _e('Sobre mí', 'maggiore'); ?></h2>
             
-            <?php if ($bio): ?>
-                <div class="lead mb-4" itemprop="description">
-                    <?= wpautop(esc_html($bio)); ?>
-                </div>
-            <?php endif; ?>
+            <div class="lead mb-4" itemprop="description">
+                <?= wpautop(esc_html($bio)); ?>
+            </div>
             
                 </div>
             </div>
@@ -225,24 +234,12 @@ if ($lang && !empty($equipo_a_cargo)) {
     }
     
     $equipo_a_cargo = $equipo_temp;
-} else if (!empty($equipo_a_cargo)) {
-    // Sin idiomas, también filtrar duplicados por si acaso
-    $equipo_temp = [];
-    $ids_procesados = [];
-    
-    foreach ($equipo_a_cargo as $miembro) {
-        if (!in_array($miembro->ID, $ids_procesados)) {
-            $ids_procesados[] = $miembro->ID;
-            $equipo_temp[] = $miembro;
-        }
-    }
-    
-    $equipo_a_cargo = $equipo_temp;
 }
+?>
 
-if (!empty($equipo_a_cargo)): ?>
-    <div class="col-lg-12">
-        <div class="card-mg ">
+<?php if (!empty($equipo_a_cargo)): ?>
+    <div class="col-12">
+        <div class="card-mg mb-0">
             <h2 class="label">
                 <?php 
                 if ($es_director) {
@@ -252,45 +249,38 @@ if (!empty($equipo_a_cargo)): ?>
                 }
                 ?>
             </h2>
-        
-        <div class="row g-2">
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-2">
             <?php foreach ($equipo_a_cargo as $miembro): 
                 $cargo_miembro = get_post_meta($miembro->ID, 'mg_equipo_cargo', true);
-                $area_miembro_id = get_post_meta($miembro->ID, 'mg_equipo_area', true);
-                
-                // Ajustar área según idioma
-                if ($lang && $area_miembro_id && function_exists('pll_get_post_language') && pll_get_post_language($area_miembro_id) !== $lang) {
-                    $area_miembro_id = pll_get_post($area_miembro_id, $lang);
-                }
             ?>
-                <div class="col-auto">
-                     <a href="<?= get_permalink($miembro->ID); ?>" 
-                           class="person-card"
-                         >
-                              <?php if (has_post_thumbnail($miembro->ID)): ?>
-                                   <?= get_the_post_thumbnail($miembro->ID, 'thumbnail', [
-                                                'class' => 'rounded-circle me-3',
-                                                'style' => 'width: 50px; height: 50px; object-fit: cover;'
-                                            ]); ?>    
-                            <?php endif; ?>
-                            <div style="line-height: 1.3;">
-                                <div style="color: white; font-weight: 500;margin-right:20px">
-                                   <?= esc_html($miembro->post_title); ?>
-                                </div>
-                                <?php if ($cargo_miembro): ?>
-                                    <div style="color: var(--text-secondary); font-size: 0.875rem;">
-                                        <?= esc_html($cargo_miembro); ?>
-                                    </div>
-                                <?php endif; ?>
+                <div class="col">
+                   <a href="<?= get_permalink($miembro->ID); ?>" 
+                       class="person-card"> <!-- CORRECCIÓN: Clase corregida -->
+                          <?php if (has_post_thumbnail($miembro->ID)): ?>
+                               <?= get_the_post_thumbnail($miembro->ID, 'thumbnail', [
+                                            'class' => 'rounded-circle me-3',
+                                            'style' => 'width: 50px; height: 50px; object-fit: cover;'
+                                        ]); ?>    
+                        <?php endif; ?>
+                        <div style="line-height: 1.3;">
+                            <div style="color: white; font-weight: 500;margin-right:20px">
+                               <?= esc_html($miembro->post_title); ?>
                             </div>
-                        </a>
-
-
-                  
-                </div>
-            <?php endforeach; ?>
-        </div></div>
+                            <?php if ($cargo_miembro): ?>
+                                <div style="color: var(--text-secondary); font-size: 0.875rem;">
+                                    <?= esc_html($cargo_miembro); ?>
                                 </div>
+                            <?php endif; ?>
+                        </div>
+                    </a>
+
+
+              
+            </div>
+        <?php endforeach; ?>
+    </div></div>
+                            </div>
 <?php endif; ?>
 </div>
 

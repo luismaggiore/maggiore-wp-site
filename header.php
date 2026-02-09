@@ -78,6 +78,19 @@ if (function_exists('wp_body_open')) {
   </nav>
 
 
+
+
   <!-- Wrapper para animaciones con ScrollSmoother -->
   <div id="smooth-wrapper">
     <div id="smooth-content">
+  <?php if (!is_page_template('page-home.php')): ?>
+<div class="logo-fixed d-none d-lg-block" style="position: absolute; top: 60px; left: 40px; z-index: 1000;">
+    <a href="<?php echo esc_url(home_url('/')); ?>">
+        <img
+            src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg"
+            alt="<?php esc_attr_e('Maggiore Marketing Logo', 'maggiore'); ?>"
+            style="width: 140px;"
+        />
+    </a>
+</div>
+<?php endif; ?>
