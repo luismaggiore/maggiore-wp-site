@@ -18,11 +18,11 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
             <div class="row justify-content-center ">
                 <div class="col-lg-10 col-xl-10 mt-5">
                     <h1 class="title-reveal2">
-                        <?php _e('Especialistas en investigación de mercados y estrategias, diseño + ejecución de campañas de marketing digital para marcas de presencia internacional.', 'maggiore'); ?>
+                        <?php _e('Somos una agencia que combina inteligencia, creatividad y marketing digital.', 'maggiore'); ?>
                     </h1>
                     <div class="bajada-reveal">
                         <p class="bajada">
-                            <?php _e('Desde Chile, trabajamos en inglés, portugués y español para importantes clientes de diversas industrias en todo el continente americano', 'maggiore'); ?>
+                            <?php _e('Desde Chile, trabajamos en inglés, portugués y español para importantes clientes de diversas industrias en todo el continente americano.', 'maggiore'); ?>
                         </p>
                     </div>
                 </div>
@@ -211,7 +211,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
                     'post_type'   => 'mg_equipo',
                     'post__in'    => $miembros_ids,
                     'numberposts' => -1,
-                    'orderby'     => 'title',
+                    'orderby'     => 'menu_order',
                     'order'       => 'ASC'
                 ];
                 if ($lang) $args_miembros['lang'] = $lang;
@@ -285,7 +285,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
                     <div class="feature-name">
                     <h3 class=" mb-2  "><?php _e('Nuestra Misión', 'maggiore'); ?></h3></div>
                     <p class="mision-vision h3 display-5" style="line-height: 1;">
-                        <?php _e('Ser un aliado estratégico en la toma de decisiones de negocio y el fortalecimiento de las marcas en el mundo digital.', 'maggiore'); ?>
+                        <?php _e('Ser un aliado estratégico en la toma de decisiones de negocio (a través de la inteligencia) y en el fortalecimiento de las marcas en el mundo digital (a través de la creatividad).', 'maggiore'); ?>
                     </p>
                     <hr class="hr-mg">
                 </article>
@@ -297,7 +297,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
                        <div class="feature-name">
                     <h3 class="  "><?php _e('Nuestra Visión', 'maggiore'); ?></h3></div>
                     <p class="mision-vision h3 display-5 " style="line-height: 1;">
-                        <?php _e('Convertirnos en una agencia con operación global, desde las Américas para el mundo.', 'maggiore'); ?>
+                        <?php _e('Convertirnos en una agencia con operación global, desde Chile para el mundo.', 'maggiore'); ?>
                     </p>
                         <hr class="hr-mg">
                 </article>

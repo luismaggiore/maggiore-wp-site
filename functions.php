@@ -388,6 +388,7 @@ require_once get_template_directory() . '/inc/helpers/settings.php';
 require_once get_template_directory() . '/inc/helpers/translated-slugs.php';
 require_once get_template_directory() . '/inc/helpers/theme-translations.php';
 require_once get_template_directory() . '/inc/helpers/footer-functions.php';
+require_once get_template_directory() . '/inc/helpers/allow-duplicate-slugs.php';
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */
@@ -408,6 +409,49 @@ add_action('wp_footer', function() {
         echo '<!-- Test traducción: ' . $test . ' (debería decir "Success Stories" si funciona) -->' . "\n";
     }
 });
+
+/**
+ * Excluir clientes "no indexar" del archive y taxonomías
+ */
+add_action('pre_get_posts', function($query) {
+    if (is_admin() || !$query->is_main_query()) return;
+
+    $cpts_con_orden = ['mg_cliente', 'mg_portafolio', 'mg_equipo', 'mg_servicio', 'mg_area', 'mg_caso_exito'];
+
+    $is_cpt_archive = $query->is_post_type_archive($cpts_con_orden);
+    $is_tax_archive = is_tax(['mg_industria', 'mg_categoria', 'mg_equipos']);
+
+    if (!$is_cpt_archive && !$is_tax_archive) return;
+
+    // ✅ Orden manual para todos los CPTs
+    $query->set('orderby', 'menu_order');
+    $query->set('order', 'ASC');
+
+    // ✅ Lógica específica de clientes: excluir no indexables
+    $is_client_archive = (
+        $query->is_post_type_archive('mg_cliente') ||
+        (is_tax('mg_industria') && isset($_GET['tipo']) && $_GET['tipo'] === 'clientes')
+    );
+
+    if ($is_client_archive) {
+        $meta_query = $query->get('meta_query') ?: [];
+        $meta_query[] = [
+            'relation' => 'OR',
+            [
+                'key'     => 'mg_cliente_no_indexar',
+                'compare' => 'NOT EXISTS',
+            ],
+            [
+                'key'     => 'mg_cliente_no_indexar',
+                'value'   => '1',
+                'compare' => '!=',
+            ],
+        ];
+        $query->set('meta_query', $meta_query);
+    }
+});
+
+
 
 function maggiore_get_lang() {
     // Polylang
@@ -434,3 +478,4 @@ function maggiore_language_body_class($classes) {
     return $classes;
 }
 add_filter('body_class', 'maggiore_language_body_class');
+
