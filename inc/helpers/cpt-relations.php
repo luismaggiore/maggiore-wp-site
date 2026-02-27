@@ -143,3 +143,24 @@ function mg_get_portafolios_by_miembro($miembro_id) {
 
     return $query;
 }
+
+function mg_get_indexable_clients_meta_query() {
+    return [
+        'relation' => 'OR',
+        [
+            'key'     => 'mg_cliente_no_indexar',
+            'compare' => 'NOT EXISTS',
+        ],
+        [
+            'key'     => 'mg_cliente_no_indexar',
+            'value'   => '1',
+            'compare' => '!=',
+        ],
+    ];
+}
+
+
+function mg_is_client_indexable($client_id) {
+    $no_indexar = get_post_meta($client_id, 'mg_cliente_no_indexar', true);
+    return $no_indexar !== '1';
+}

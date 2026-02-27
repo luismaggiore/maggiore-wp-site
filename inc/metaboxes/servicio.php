@@ -107,10 +107,12 @@ function mg_servicio_metabox_callback($post) {
     <p><strong><?php _e('Ventajas frente a la competencia', 'maggiore'); ?></strong></p>
         <?php wp_editor($ventajas, 'mg_servicio_ventajas', ['textarea_rows' => 4]); ?>
 
-
+   
     <p><strong><?php _e('Precio al cliente', 'maggiore'); ?></strong></p>
-    
-    <textarea name="mg_servicio_precio" class="widefat" rows="3"><?= esc_textarea($precio); ?></textarea>
+        <?php wp_editor($precio, 'mg_servicio_precio', ['textarea_rows' => 4]); ?>
+        
+        
+
 
 <?php
 }
@@ -131,7 +133,7 @@ add_action('save_post_mg_servicio', function ($post_id) {
     update_post_meta($post_id, 'mg_servicio_para_quien', wp_kses_post($_POST['mg_servicio_para_quien'] ?? ''));
     update_post_meta($post_id, 'mg_servicio_beneficios', wp_kses_post($_POST['mg_servicio_beneficios'] ?? ''));
     update_post_meta($post_id, 'mg_servicio_ventajas', wp_kses_post($_POST['mg_servicio_ventajas'] ?? ''));
-    update_post_meta($post_id, 'mg_servicio_precio', sanitize_textarea_field($_POST['mg_servicio_precio'] ?? ''));
+    update_post_meta($post_id, 'mg_servicio_precio', wp_kses_post($_POST['mg_servicio_precio'] ?? ''));
     update_post_meta($post_id, 'mg_servicio_bajada', sanitize_textarea_field($_POST['mg_servicio_bajada'] ?? ''));
 
 });

@@ -25,7 +25,7 @@ function mg_register_cpt_cliente() {
             'slug' => 'clientes/%mg_industria%',  // Singles con industria
             'with_front' => false,
         ],
-        'supports' => ['title', 'thumbnail'],
+        'supports' => ['title', 'thumbnail', 'page-attributes'],
         'show_in_rest' => true,
     ];
 

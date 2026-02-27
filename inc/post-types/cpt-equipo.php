@@ -21,7 +21,7 @@ function mg_register_cpt_equipo() {
             'slug' => 'equipo/%mg_equipos%',  // Singles con equipo
             'with_front' => false,
         ],
-        'supports' => ['title', 'thumbnail'],
+        'supports' => ['title', 'thumbnail', 'page-attributes'],
         'show_in_rest' => true,
     ];
 

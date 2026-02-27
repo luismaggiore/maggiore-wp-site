@@ -33,7 +33,7 @@ function mg_render_metabox_clientes($post) {
     $termino_contrato = get_post_meta($post->ID, 'mg_cliente_termino_contrato', true);
     $empleados        = get_post_meta($post->ID, 'mg_cliente_num_empleados', true);
     $linkedin         = get_post_meta($post->ID, 'mg_cliente_linkedin', true);
-
+    $no_indexar = get_post_meta($post->ID, 'mg_cliente_no_indexar', true);
     // Opciones
     $servicios_options = mg_get_servicios_options();
 
@@ -72,6 +72,18 @@ function mg_render_metabox_clientes($post) {
     </p>';
 
     echo '<hr style="margin: 2em 0;">';
+
+    // === CHECKBOX NO INDEXAR ===
+echo '<div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px; margin-bottom: 20px;">';
+echo '<label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">';
+echo '<input type="checkbox" name="mg_cliente_no_indexar" value="1" ' . checked($no_indexar, '1', false) . '>';
+echo '<strong>' . __('No indexar este cliente', 'maggiore') . '</strong>';
+echo '</label>';
+echo '<p style="margin: 8px 0 0 28px; color: #666; font-size: 13px;">';
+echo __('Si está marcado, este cliente NO aparecerá en listados públicos (archive, home, etc.) pero SÍ podrá ser referenciado en portafolios y casos de éxito.', 'maggiore');
+echo '</p>';
+echo '</div>';
+
 
     // === SERVICIOS MANUALES ===
     echo '<p><strong>' . __('Servicios contratados (manual)', 'maggiore') . '</strong></p>';
@@ -145,4 +157,7 @@ add_action('save_post_mg_cliente', function ($post_id) {
         'mg_cliente_linkedin',
         esc_url_raw($_POST['mg_cliente_linkedin'] ?? '')
     );
+        // Guardar checkbox no indexar
+    $no_indexar = isset($_POST['mg_cliente_no_indexar']) ? '1' : '0';
+    update_post_meta($post_id, 'mg_cliente_no_indexar', $no_indexar);
 });

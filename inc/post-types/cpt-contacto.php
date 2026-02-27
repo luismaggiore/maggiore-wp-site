@@ -26,7 +26,7 @@ add_action('init', function() {
         'show_in_menu' => true,
         'menu_position' => 26,
         'menu_icon' => 'dashicons-email-alt',
-        'supports' => ['title'],
+        'supports' => ['title', 'page-attributes'],
         'capability_type' => 'post',
         'capabilities' => [
             'create_posts' => 'do_not_allow', // Deshabilitar "Añadir nuevo"

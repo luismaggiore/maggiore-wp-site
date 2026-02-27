@@ -18,7 +18,7 @@ function mg_register_cpt_area() {
         'menu_icon' => 'dashicons-networking',
         'has_archive' => true,
         'rewrite' => ['slug' => 'area'],
-        'supports' => ['title'],
+        'supports' => ['title', 'page-attributes'],
         'show_in_rest' => true,
     ];
 

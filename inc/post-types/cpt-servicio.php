@@ -25,7 +25,7 @@ function mg_register_cpt_servicio() {
             'slug' => 'servicios/%mg_categoria%',  // Singles con categoría
             'with_front' => false,
         ],
-        'supports' => ['title'],
+        'supports' => ['title', 'page-attributes'],
         'show_in_rest' => true,
     ];
 

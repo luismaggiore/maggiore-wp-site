@@ -33,7 +33,7 @@ function mg_register_cpt_portafolio() {
         // (opcional) para que aparezca el metabox de la taxonomía
         'taxonomies'        => ['mg_categoria_portafolio'],
 
-        'supports'          => ['title', 'thumbnail'],
+        'supports'          => ['title', 'thumbnail', 'page-attributes'],
         'show_in_rest'      => true,
     ];
 
