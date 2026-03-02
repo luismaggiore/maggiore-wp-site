@@ -54,7 +54,7 @@
                 <div class="mb-4">
                     <img class="m-0 p-0 d-lg-inline-block d-none" 
                          src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg" 
-                         style="width: 180px; margin: 60px auto" 
+                         style="width: 180px; margin: 60px auto"  width="180" height="50"
                          alt="Maggiore">
                 </div>
                 
@@ -65,10 +65,11 @@
                         <span> <?php echo maggiore_get_direccion(true); ?></span>
                     </div>
                     
-                    <div class="contact-item mb-2">
-                        <i class="bi bi-envelope"></i>
-                        <a href="mailto:<?php echo maggiore_get_email(); ?>"><?php echo maggiore_get_email(); ?></a>
-                    </div>
+                 <div class="contact-item mb-2">
+    <i class="bi bi-envelope"></i>
+    <?php $email = maggiore_get_email(); ?>
+    <a href="mailto:<?php echo antispambot($email); ?>"><?php echo antispambot($email); ?></a>
+</div>
                     
                     <div class="contact-item mb-2">
                         <i class="bi bi-telephone"></i>
@@ -85,7 +86,7 @@
             
             <!-- COLUMNA 2: Menú de WordPress -->
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <h4 class="footer-title"><?php _e('Navegación', 'maggiore'); ?></h4>
+                <p class="footer-title"><?php _e('Navegación', 'maggiore'); ?></p>
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'footer-menu',
@@ -99,16 +100,13 @@
             
             <!-- COLUMNA 3: Archives de CPTs -->
             <div class="col-lg-4 col-md-12">
-                <h4 class="footer-title"><?php _e('Explora', 'maggiore'); ?></h4>
+                <p class="footer-title"><?php _e('Explora', 'maggiore'); ?></p>
                 <nav class="footer-cpt-links">
                     <?php
                     $cpts = [
-                        'mg_portafolio' => __('Portafolio', 'maggiore'),
                         'mg_servicio'   => __('Servicios', 'maggiore'),
-                        'mg_equipo'     => __('Equipo', 'maggiore'),
                         'mg_cliente'    => __('Clientes', 'maggiore'),
                         'mg_caso_exito' => __('Casos de Éxito', 'maggiore'),
-                        'mg_area'       => __('Áreas', 'maggiore')
                     ];
                     
                     foreach ($cpts as $cpt => $label) {
@@ -136,33 +134,7 @@
         </div>
     </div>
     
-    <!-- Schema Markup para SEO -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Maggiore",
-        "url": "<?php echo esc_url(home_url('/')); ?>",
-        "logo": "<?php echo esc_url(wp_get_attachment_url(get_theme_mod('custom_logo'))); ?>",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Alcántara 1791",
-            "addressLocality": "Las Condes",
-            "addressRegion": "Santiago",
-            "addressCountry": "CL"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+56-9-1234-5678",
-            "contactType": "Marketing",
-            "email": "marketing@maggiore.cl"
-        },
-        "sameAs": [
-            "https://www.linkedin.com/company/maggiore",
-            "https://www.instagram.com/maggiore"
-        ]
-    }
-    </script>
+
 </footer>
        </div> <!-- #smooth-content -->
     </div> <!-- #smooth-wrapper -->

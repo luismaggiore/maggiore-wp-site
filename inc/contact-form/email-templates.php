@@ -15,11 +15,11 @@ if (!defined('ABSPATH')) exit;
  */
 function maggiore_get_email_cliente_template($data) {
     $nombre = $data['nombre'];
-    $logo_url = get_template_directory_uri() . '/assets/img/logo-white.svg';
+    $logo_url = get_template_directory_uri() . '/assets/img/logo-mm.svg';
     $site_name = get_bloginfo('name');
-    $portafolio_url = home_url('/portafolio');
-    $instagram_url = 'https://instagram.com/maggiore'; // Configurar
-    $linkedin_url = 'https://linkedin.com/company/maggiore'; // Configurar
+    $portafolio_url = home_url('/casos-de-exito');
+    $instagram_url = 'https://www.instagram.com/maggiorelatam'; // Configurar
+    $linkedin_url = 'https://www.linkedin.com/company/maggioremarketing/'; // Configurar
     
     ob_start();
     ?>
@@ -46,7 +46,7 @@ function maggiore_get_email_cliente_template($data) {
                 box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             }
             .header { 
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: rgb(50,50,50);
                 padding: 50px 30px; 
                 text-align: center; 
             }
@@ -75,7 +75,7 @@ function maggiore_get_email_cliente_template($data) {
             }
             .cta-button {
                 display: inline-block;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: rgb(19, 110, 122);
                 color: white !important;
                 padding: 16px 40px;
                 text-decoration: none;
@@ -133,7 +133,7 @@ function maggiore_get_email_cliente_template($data) {
             
             <!-- Contenido -->
             <div class="content">
-                <h1>¡Hola <?php echo esc_html($nombre); ?>! 👋</h1>
+                <h1>Hola <?php echo esc_html($nombre); ?> </h1>
                 
                 <p>
                     Gracias por contactarnos. <strong>Hemos recibido tu mensaje correctamente</strong> 
@@ -146,19 +146,17 @@ function maggiore_get_email_cliente_template($data) {
                     más sobre nuestro trabajo.
                 </p>
                 
-                <center>
-                    <a href="<?php echo esc_url($portafolio_url); ?>" class="cta-button">
+                    <a href="<?php echo esc_url($portafolio_url); ?>" class="cta-button" target="_blank">
                         Ver nuestro portafolio
                     </a>
-                </center>
                 
                 <div class="divider"></div>
                 
                 <p style="font-size: 15px; color: #718096;">
                     <strong>¿Tienes alguna duda urgente?</strong><br>
-                    Puedes escribirnos directamente a 
-                    <a href="mailto:hola@maggiore.cl" style="color: #667eea; text-decoration: none;">
-                        hola@maggiore.cl
+                    Puedes escribirnos directamente  
+                    <a href="https://wa.me/+56952026029" style="color: #667eea; text-decoration: none;">
+                        aquí
                     </a>
                 </p>
             </div>

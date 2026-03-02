@@ -39,18 +39,23 @@ $pid = get_the_ID();
 
             <div class="col-xl-6 col-lg-6 move mb-4 order-2 order-lg-1">
               <div class="hero-content">
-                <img class="brand-name d-lg-inline-block d-none"
-                     src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg"
-                     style="width: 180px; margin: 60px auto"
-                     alt="Maggiore">
+          
+                     
+                     <img class="brand-name d-lg-inline-block d-none"
+     src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg"
+     width="180"
+     height="50"
+     style="width: 180px; margin: 60px auto"
+     alt="Maggiore">
+     
               </div>
 
               <h1 class="title-reveal">
-                <?php _e( 'Pensamos en grande para que tu marca llegue a lo más alto', 'maggiore' ); ?>
+                <?php _e( 'Pensamos en grande para que tu marca llegue a lo más alto', 'maggiore' ); ?>.
               </h1>
 
               <div class="bajada-reveal">
-                <p class="bajada"><?php echo esc_html( mg_home_get( $pid, 'mg_home_hero_bajada' ) ); ?></p>
+                <p class="bajada"><?php echo esc_html( mg_home_get( $pid, 'mg_home_hero_bajada' ) ); ?>.</p>
 
                 <div class="mg-link">
                   <?php $cta_texto = mg_home_get( $pid, 'mg_home_hero_cta_texto' ); ?>
@@ -257,14 +262,17 @@ $pid = get_the_ID();
 
                         if ( $cliente_logo ) :
                 ?>
-                    <a href="<?php echo esc_url( $cliente_url ); ?>"
-                       class="logo-item"
-                       title="<?php echo esc_attr( $cliente_nombre ); ?>">
-                        <img src="<?php echo esc_url( $cliente_logo ); ?>"
-                             alt="<?php echo esc_attr( 'Logo de ' . $cliente_nombre ); ?>"
-                             loading="lazy"
-                             decoding="async">
-                    </a>
+             <a href="<?php echo esc_url( $cliente_url ); ?>"
+   class="logo-item"
+   title="<?php echo esc_attr( $cliente_nombre ); ?>">
+    <?php
+    $thumbnail_id = get_post_thumbnail_id( $cliente_id );
+    echo wp_get_attachment_image( $thumbnail_id, 'medium', false, [
+        'alt'     => esc_attr( 'Logo de ' . $cliente_nombre ),
+        'loading' => 'lazy',
+        'style'   => 'max-width:100%; max-height:80px; width:auto; height:auto; object-fit:contain;',
+    ] );
+    ?>
                 <?php
                         endif;
                     endwhile;
@@ -353,7 +361,7 @@ $pid = get_the_ID();
               <div class="col-12 mb-4">
                 <label for="telefono"><?php _e( 'Teléfono Celular', 'maggiore' ); ?></label>
                 <input type="tel" id="telefono" name="telefono" class="form-control"
-                       placeholder="1234 5678">
+                       placeholder=" ">
               </div>
             </div>
 

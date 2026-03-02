@@ -95,7 +95,14 @@ echo '</div>';
 
     echo '<hr><h3>' . __('Fecha del proyecto', 'maggiore') . '</h3>';
     $fecha = get_post_meta($post->ID, 'mg_caso_fecha', true);
-    echo '<input type="month" name="mg_caso_fecha" class="widefat" value="' . esc_attr($fecha) . '">';
+    $fecha_termino = get_post_meta($post->ID, 'mg_caso_fecha_termino', true);
+
+    echo '<p><label><strong>' . __('Inicio', 'maggiore') . '</strong></label><br>';
+    echo '<input type="month" name="mg_caso_fecha" class="widefat" value="' . esc_attr($fecha) . '"></p>';
+
+    echo '<p><label><strong>' . __('Término', 'maggiore') . '</strong></label><br>';
+    echo '<input type="month" name="mg_caso_fecha_termino" class="widefat" value="' . esc_attr($fecha_termino) . '"></p>';
+    echo '<p style="color:#666; font-size:13px;">' . __('Si no hay fecha de término, se mostrará "Actualidad".', 'maggiore') . '</p>';
     
     // Mostrar automáticos si los hay
     $auto_serv = get_post_meta($post->ID, '_mg_servicios_auto', true) ?: [];
@@ -130,4 +137,5 @@ add_action('save_post_mg_caso_exito', function ($post_id) {
     update_post_meta($post_id, 'mg_caso_contratador_img', intval($_POST['mg_caso_contratador_img'] ?? 0));
 
     update_post_meta($post_id, 'mg_caso_fecha', sanitize_text_field($_POST['mg_caso_fecha'] ?? ''));
+    update_post_meta($post_id, 'mg_caso_fecha_termino', sanitize_text_field($_POST['mg_caso_fecha_termino'] ?? ''));
 });

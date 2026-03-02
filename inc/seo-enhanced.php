@@ -1125,40 +1125,11 @@ function mg_schema_webpage($post_id) {
     ];
 }
 
-/**
- * Inyectar Schema en el <head>
- */
-add_action('wp_head', function () {
-    if (!is_singular()) return;
-    
-    global $post;
-    
-    // Verificar si hay schema manual
-    $schema_manual = get_post_meta($post->ID, 'mg_schema_json', true);
-    
-    if ($schema_manual) {
-        // Usar schema manual si existe
-        echo "\n" . '<script type="application/ld+json">' . "\n" . $schema_manual . "\n" . '</script>' . "\n";
-    } else {
-        // Generar schema automático
-        $schema = mg_generate_auto_schema($post->ID);
-        if ($schema) {
-            // Limpiar nulls del schema
-            $schema = mg_clean_schema_nulls($schema);
-            
-            // Sanitizar UTF-8 para evitar escapes innecesarios
-            $schema = mg_sanitize_schema_utf8($schema);
-            
-            // Generar JSON con encoding UTF-8 correcto
-            $json = json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-            
-            // Verificar que el JSON se generó correctamente
-            if ($json !== false) {
-                echo "\n" . '<script type="application/ld+json">' . "\n" . $json . "\n" . '</script>' . "\n";
-            }
-        }
-    }
-}, 1);
+
+// =============================================================================
+// FUNCIONES DE UTILIDAD PARA SCHEMA
+// Usadas por mg_output_seo_meta() en seo.php
+// =============================================================================
 
 /**
  * Limpiar valores null del schema recursivamente
@@ -1179,83 +1150,29 @@ function mg_clean_schema_nulls($array) {
 
 /**
  * Sanitizar strings para asegurar UTF-8 correcto en el schema
- * Convierte strings con encoding incorrecto a UTF-8 válido
  */
 function mg_sanitize_schema_utf8($data) {
     if (is_string($data)) {
-        // Si el string ya está en UTF-8 válido, devolverlo tal cual
         if (mb_check_encoding($data, 'UTF-8')) {
             return $data;
         }
-        
-        // Si no está en UTF-8, intentar convertirlo
         $encoding = mb_detect_encoding($data, ['UTF-8', 'ISO-8859-1', 'Windows-1252'], true);
         if ($encoding && $encoding !== 'UTF-8') {
             return mb_convert_encoding($data, 'UTF-8', $encoding);
         }
-        
-        // Como último recurso, forzar UTF-8
         return mb_convert_encoding($data, 'UTF-8', 'UTF-8');
     }
-    
     if (is_array($data)) {
         foreach ($data as $key => $value) {
             $data[$key] = mg_sanitize_schema_utf8($value);
         }
     }
-    
     return $data;
 }
 
-/**
- * Meta tags personalizados
- */
-add_action('wp_head', function () {
-    if (!is_singular()) return;
-    
-    global $post;
-    
-    // Verificar noindex
-    $noindex = get_post_meta($post->ID, 'mg_seo_noindex', true);
-    if ($noindex) {
-        echo '<meta name="robots" content="noindex, nofollow">' . "\n";
-    }
-    
-    // Meta title
-    $seo_title = get_post_meta($post->ID, 'mg_seo_title', true);
-    if ($seo_title) {
-        echo '<meta property="og:title" content="' . esc_attr($seo_title) . '">' . "\n";
-        echo '<meta name="twitter:title" content="' . esc_attr($seo_title) . '">' . "\n";
-    }
-    
-    // Meta description
-    $seo_description = get_post_meta($post->ID, 'mg_seo_description', true);
-    if ($seo_description) {
-        echo '<meta name="description" content="' . esc_attr($seo_description) . '">' . "\n";
-        echo '<meta property="og:description" content="' . esc_attr($seo_description) . '">' . "\n";
-        echo '<meta name="twitter:description" content="' . esc_attr($seo_description) . '">' . "\n";
-    }
-    
-    // Meta keywords
-    $seo_keywords = get_post_meta($post->ID, 'mg_seo_keywords', true);
-    if ($seo_keywords) {
-        echo '<meta name="keywords" content="' . esc_attr($seo_keywords) . '">' . "\n";
-    }
-    
-    // OG Image
-    $og_image = get_post_meta($post->ID, 'mg_og_image', true) ?: get_the_post_thumbnail_url($post->ID, 'large');
-    if ($og_image) {
-        echo '<meta property="og:image" content="' . esc_url($og_image) . '">' . "\n";
-        echo '<meta name="twitter:image" content="' . esc_url($og_image) . '">' . "\n";
-        echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
-    }
-    
-    // OG Type
-    echo '<meta property="og:type" content="website">' . "\n";
-    echo '<meta property="og:url" content="' . get_permalink($post->ID) . '">' . "\n";
-    
-}, 5);
-
+// =============================================================================
+// FUNCIONES AUXILIARES
+// =============================================================================
 // =============================================================================
 // FUNCIONES AUXILIARES
 // =============================================================================

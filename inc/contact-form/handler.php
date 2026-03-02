@@ -167,7 +167,7 @@ function maggiore_send_contact_emails($data) {
     // EMAIL 2: NOTIFICACIÓN AL ADMIN
     // =========================================================================
     
-    $admin_email = get_option('admin_email'); // O configurar otro email
+    $admin_emails = maggiore_get_notification_emails();
     
     $admin_subject = sprintf(
         __('🔔 Nuevo contacto: %s', 'maggiore'),
@@ -182,7 +182,7 @@ function maggiore_send_contact_emails($data) {
     ];
     
     $resultado['admin'] = wp_mail(
-        $admin_email,
+        $admin_emails,
         $admin_subject,
         $admin_message,
         $admin_headers
@@ -217,6 +217,27 @@ function maggiore_get_user_ip() {
     }
     
     return 'Unknown';
+}
+
+/**
+ * Obtener emails de notificación configurados en el admin
+ * Por defecto: marketing@maggiore.cl y joao@maggiore.cl
+ *
+ * @return array
+ */
+function maggiore_get_notification_emails() {
+    $stored = get_option('maggiore_notification_emails', '');
+    
+    if (empty($stored)) {
+        return ['marketing@maggiore.cl', 'joao@maggiore.cl'];
+    }
+    
+    // Separar por comas o saltos de línea, limpiar espacios
+    $emails = preg_split('/[\s,]+/', $stored, -1, PREG_SPLIT_NO_EMPTY);
+    $emails = array_filter($emails, 'is_email');
+    
+    // Si después de filtrar no queda ninguno válido, usar los por defecto
+    return !empty($emails) ? array_values($emails) : ['marketing@maggiore.cl', 'joao@maggiore.cl'];
 }
 
 /**

@@ -120,6 +120,16 @@ add_action('admin_init', function() {
     ]);
     
     // =========================================================================
+    // NOTIFICACIONES
+    // =========================================================================
+    
+    register_setting($option_group, 'maggiore_notification_emails', [
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'default'           => 'marketing@maggiore.cl' . PHP_EOL . 'joao@maggiore.cl',
+    ]);
+    
+    // =========================================================================
     // REDES SOCIALES
     // =========================================================================
     
@@ -313,6 +323,37 @@ function maggiore_contact_data_page() {
                                     >
                                     <p class="description">
                                         <?php _e('Número de WhatsApp (solo números, sin espacios ni guiones)', 'maggiore'); ?>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- NOTIFICACIONES DEL FORMULARIO -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <h2 class="title" style="padding: 15px 20px; margin: 0; border-bottom: 1px solid #ddd;">
+                        📬 <?php _e('Notificaciones del Formulario de Contacto', 'maggiore'); ?>
+                    </h2>
+                    <div style="padding: 20px;">
+                        <table class="form-table" role="presentation">
+                            <tr>
+                                <th scope="row">
+                                    <label for="maggiore_notification_emails">
+                                        <?php _e('Correos de notificación', 'maggiore'); ?>
+                                    </label>
+                                </th>
+                                <td>
+                                    <textarea
+                                        id="maggiore_notification_emails"
+                                        name="maggiore_notification_emails"
+                                        rows="4"
+                                        class="regular-text"
+                                        placeholder="marketing@maggiore.cl&#10;joao@maggiore.cl"
+                                        style="font-family: monospace; font-size: 13px;"
+                                    ><?php echo esc_textarea(get_option('maggiore_notification_emails', 'marketing@maggiore.cl' . PHP_EOL . 'joao@maggiore.cl')); ?></textarea>
+                                    <p class="description">
+                                        <?php _e('Un correo por línea (o separados por coma). Todos recibirán la notificación cuando alguien llene el formulario.', 'maggiore'); ?>
                                     </p>
                                 </td>
                             </tr>

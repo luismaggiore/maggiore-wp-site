@@ -33,11 +33,13 @@ if (function_exists('wp_body_open')) {
       
       <!-- Logo móvil -->
       <a class="navbar-brand d-lg-none d-block " href="<?php echo esc_url(home_url('/')); ?>">
-        <img
-          src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg"
-          alt="<?php esc_attr_e('Maggiore Marketing Logo', 'maggiore'); ?>"
-          style="width: 140px"
-        />
+       <img
+        src="<?php echo get_template_directory_uri(); ?>/assets/img/logo-mm.svg"
+        alt="<?php esc_attr_e('Maggiore Marketing Logo', 'maggiore'); ?>"
+        width="140"
+        height="39"
+        style="width: 140px"
+    />
       </a>
 
       <!-- Botón hamburguesa -->
@@ -46,7 +48,7 @@ if (function_exists('wp_body_open')) {
         <span class="navbar-toggler-icon"></span>
       </button>
 
-   <?php if (function_exists('pll_the_languages')): ?>
+   <?php  /* if (function_exists('pll_the_languages')): ?>
           <div class=" language-switcher  " style="margin-left:-10px;margin-right:10px">
             <?php pll_the_languages([
               'show_flags' => 1,
@@ -55,7 +57,8 @@ if (function_exists('wp_body_open')) {
               'raw' => 0,
             ]); ?>
           </div>
-        <?php endif; ?>
+        <?php endif; */?>
+
 
 
       <!-- Menú principal -->
