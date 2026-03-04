@@ -39,45 +39,18 @@ $director_cargo = $director_id ? get_post_meta($director_id, 'mg_equipo_cargo', 
 $director_bio = $director_id ? get_post_meta($director_id, 'mg_equipo_bio', true) : '';
 
 // ===============================
-// EQUIPO AGRUPADO POR CATEGORÍA
+// EQUIPO DEL ÁREA (LISTA PLANA)
 // ===============================
-$equipo_por_categoria = [];
+$miembros_posts = [];
 
 if (!empty($miembros_ids)) {
     $miembros_posts = get_posts([
         'post_type'   => 'mg_equipo',
         'post__in'    => $miembros_ids,
         'numberposts' => -1,
-        'orderby'     => 'title',
+    'orderby' => 'menu_order',
         'order'       => 'ASC'
     ]);
-    
-    foreach ($miembros_posts as $miembro) {
-        $categorias = get_the_terms($miembro->ID, 'mg_equipos');
-        
-        if (!empty($categorias) && !is_wp_error($categorias)) {
-            foreach ($categorias as $categoria) {
-                if (!isset($equipo_por_categoria[$categoria->term_id])) {
-                    $equipo_por_categoria[$categoria->term_id] = [
-                        'term' => $categoria,
-                        'miembros' => []
-                    ];
-                }
-                $equipo_por_categoria[$categoria->term_id]['miembros'][] = $miembro;
-            }
-        } else {
-            if (!isset($equipo_por_categoria[0])) {
-                $equipo_por_categoria[0] = [
-                    'term' => (object)[
-                        'name' => __('Equipo General', 'maggiore'),
-                        'description' => ''
-                    ],
-                    'miembros' => []
-                ];
-            }
-            $equipo_por_categoria[0]['miembros'][] = $miembro;
-        }
-    }
 }
 
 // ===============================
@@ -164,8 +137,8 @@ if (!empty($casos_ids)) {
         'post_type'   => 'mg_caso_exito',
         'post__in'    => $casos_ids,
         'numberposts' => 3,
-        'orderby'     => 'date',
-        'order'       => 'DESC'
+    'orderby' => 'menu_order',
+        'order'       => 'ASC'
     ]);
 }
 
@@ -342,45 +315,27 @@ echo '</pre>';
     </div>
 
     <!-- ===============================
-         EQUIPO DEL ÁREA (POR CATEGORÍA)
+         EQUIPO DEL ÁREA
          =============================== -->
-    <?php if (!empty($equipo_por_categoria)): ?>
+    <?php if (!empty($miembros_posts)): ?>
         <section class="mb-5">
             <div class="feature-name-2 mb-2">
                 <h2>
                     <?php printf(__('Equipo de %s', 'maggiore'), get_the_title()); ?>
                 </h2>
             </div>
-            
-            <?php foreach ($equipo_por_categoria as $categoria_data): 
-                $categoria = $categoria_data['term'];
-                $miembros_categoria = $categoria_data['miembros'];
-            ?>
-                <div class="mb-2 card-mg">
-                    <div >
-                        <h3 class="label">
-                            <?= esc_html($categoria->name); ?>
-                        </h3>
-                        <?php if (!empty($categoria->description)): ?>
-                            <p class="text-muted mb-2" style="font-size: 0.95rem;">
-                                <?= esc_html($categoria->description); ?>
-                            </p>
-                        <?php endif; ?>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-2">
+                <?php foreach ($miembros_posts as $post):
+                    setup_postdata($post);
+                ?>
+                    <div class="col">
+                        <?php get_template_part('template-parts/card', 'equipo'); ?>
                     </div>
-                       
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5   g-2">
-                        <?php foreach ($miembros_categoria as $post): 
-                            setup_postdata($post);
-                        ?>
-                            <div class="col">
-                                <?php get_template_part('template-parts/card', 'equipo'); ?>
-                            </div>
-                        <?php endforeach; 
-                        wp_reset_postdata();
-                        ?>
-                    </div>
-             </div>
-            <?php endforeach; ?>
+                <?php endforeach;
+                wp_reset_postdata();
+                ?>
+            </div>
         </section>
     <?php endif; ?>
 

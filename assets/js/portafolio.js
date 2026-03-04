@@ -1,193 +1,124 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // ========== CUSTOM VIDEO PLAYERS ==========
-  const videoPlayers = document.querySelectorAll(".custom-video-player");
-
-  videoPlayers.forEach((player) => {
-    const video = player.querySelector(".video-element");
-    const poster = player.querySelector(".video-poster");
-    const posterImage = player.querySelector(".poster-image");
-    const playBtnCenter = player.querySelector(".play-btn-center");
-    const playPauseBtn = player.querySelector(".play-pause");
-    const playIcon = playPauseBtn.querySelector(".play-icon");
-    const pauseIcon = playPauseBtn.querySelector(".pause-icon");
-    const progressBar = player.querySelector(".progress-bar");
-    const progressFilled = player.querySelector(".progress-filled");
-    const currentTimeEl = player.querySelector(".current-time");
-    const durationEl = player.querySelector(".duration");
-    const volumeBtn = player.querySelector(".volume-btn");
-    const volumeSlider = player.querySelector(".volume-slider");
-    const fullscreenBtn = player.querySelector(".fullscreen-btn");
-    const canvas = player.querySelector(".thumbnail-canvas");
-
-    let isLoaded = false;
-    const needsThumb = player.dataset.needsThumb === "true";
-
-    // Si necesita thumbnail, generarlo del primer frame del video
-    if (needsThumb && canvas) {
-      const tempVideo = document.createElement("video");
-      tempVideo.src = player.dataset.src;
-      tempVideo.currentTime = 1; // Segundo 1
-      tempVideo.preload = "metadata";
-      tempVideo.muted = true;
-
-      tempVideo.addEventListener("loadeddata", function () {
-        const ctx = canvas.getContext("2d");
-        canvas.width = tempVideo.videoWidth;
-        canvas.height = tempVideo.videoHeight;
-        ctx.drawImage(tempVideo, 0, 0, canvas.width, canvas.height);
-
-        // Convertir canvas a imagen
-        const thumbnailUrl = canvas.toDataURL("image/jpeg", 0.8);
-        posterImage.src = thumbnailUrl;
-
-        // Limpiar video temporal
-        tempVideo.src = "";
-        tempVideo.remove();
-      });
+  document.querySelectorAll(".custom-video-player").forEach((t) => {
+    const n = t.querySelector(".video-element"),
+      o = (t.querySelector(".video-poster"), t.querySelector(".poster-image")),
+      r = t.querySelector(".play-btn-center"),
+      l = t.querySelector(".play-pause"),
+      a = l.querySelector(".play-icon"),
+      c = l.querySelector(".pause-icon"),
+      i = t.querySelector(".progress-bar"),
+      d = t.querySelector(".progress-filled"),
+      s = t.querySelector(".current-time"),
+      u = t.querySelector(".duration"),
+      y = t.querySelector(".volume-btn"),
+      p = t.querySelector(".volume-slider"),
+      m = t.querySelector(".fullscreen-btn"),
+      v = t.querySelector(".thumbnail-canvas");
+    let f = !1;
+    if ("true" === t.dataset.needsThumb && v) {
+      const e = document.createElement("video");
+      ((e.src = t.dataset.src),
+        (e.currentTime = 1),
+        (e.preload = "metadata"),
+        (e.muted = !0),
+        e.addEventListener("loadeddata", function () {
+          const t = v.getContext("2d");
+          ((v.width = e.videoWidth),
+            (v.height = e.videoHeight),
+            t.drawImage(e, 0, 0, v.width, v.height));
+          const n = v.toDataURL("image/jpeg", 0.8);
+          ((o.src = n), (e.src = ""), e.remove());
+        }));
     }
-
-    // Cargar video al hacer click en el poster
-    playBtnCenter.addEventListener("click", function (e) {
-      e.stopPropagation();
-
-      if (!isLoaded) {
-        // Cargar video
-        const src = player.dataset.src;
-        const mime = player.dataset.mime;
-
-        const source = document.createElement("source");
-        source.src = src;
-        source.type = mime;
-        video.appendChild(source);
-        video.load();
-
-        isLoaded = true;
-
-        video.addEventListener("loadedmetadata", function () {
-          durationEl.textContent = formatTime(video.duration);
-        });
-
-        video.addEventListener(
-          "canplay",
-          function () {
-            video.play();
-            player.classList.add("playing");
-          },
-          { once: true }
-        );
-      } else {
-        video.play();
-        player.classList.add("playing");
+    (r.addEventListener("click", function (o) {
+      if ((o.stopPropagation(), f)) (n.play(), t.classList.add("playing"));
+      else {
+        const o = t.dataset.src,
+          r = t.dataset.mime,
+          l = document.createElement("source");
+        ((l.src = o),
+          (l.type = r),
+          n.appendChild(l),
+          n.load(),
+          (f = !0),
+          n.addEventListener("loadedmetadata", function () {
+            u.textContent = e(n.duration);
+          }),
+          n.addEventListener(
+            "canplay",
+            function () {
+              (n.play(), t.classList.add("playing"));
+            },
+            { once: !0 },
+          ));
       }
-    });
-
-    // Play/Pause
-    playPauseBtn.addEventListener("click", function () {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
-
-    video.addEventListener("play", function () {
-      playIcon.style.display = "none";
-      pauseIcon.style.display = "block";
-      player.classList.add("playing");
-    });
-
-    video.addEventListener("pause", function () {
-      playIcon.style.display = "block";
-      pauseIcon.style.display = "none";
-    });
-
-    // Progress bar
-    video.addEventListener("timeupdate", function () {
-      const percent = (video.currentTime / video.duration) * 100;
-      progressFilled.style.width = percent + "%";
-      currentTimeEl.textContent = formatTime(video.currentTime);
-    });
-
-    progressBar.addEventListener("click", function (e) {
-      const rect = progressBar.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      video.currentTime = pos * video.duration;
-    });
-
-    // Volumen
-    volumeSlider.addEventListener("input", function () {
-      video.volume = this.value / 100;
-    });
-
-    volumeBtn.addEventListener("click", function () {
-      if (video.volume > 0) {
-        video.volume = 0;
-        volumeSlider.value = 0;
-      } else {
-        video.volume = 1;
-        volumeSlider.value = 100;
-      }
-    });
-
-    // Fullscreen
-    fullscreenBtn.addEventListener("click", function () {
-      if (player.requestFullscreen) {
-        player.requestFullscreen();
-      } else if (player.webkitRequestFullscreen) {
-        player.webkitRequestFullscreen();
-      } else if (player.mozRequestFullScreen) {
-        player.mozRequestFullScreen();
-      }
-    });
-
-    // Click en el video para play/pause
-    video.addEventListener("click", function () {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
+    }),
+      l.addEventListener("click", function () {
+        n.paused ? n.play() : n.pause();
+      }),
+      n.addEventListener("play", function () {
+        ((a.style.display = "none"),
+          (c.style.display = "block"),
+          t.classList.add("playing"));
+      }),
+      n.addEventListener("pause", function () {
+        ((a.style.display = "block"), (c.style.display = "none"));
+      }),
+      n.addEventListener("timeupdate", function () {
+        const t = (n.currentTime / n.duration) * 100;
+        ((d.style.width = t + "%"), (s.textContent = e(n.currentTime)));
+      }),
+      i.addEventListener("click", function (e) {
+        const t = i.getBoundingClientRect(),
+          o = (e.clientX - t.left) / t.width;
+        n.currentTime = o * n.duration;
+      }),
+      p.addEventListener("input", function () {
+        n.volume = this.value / 100;
+      }),
+      y.addEventListener("click", function () {
+        n.volume > 0
+          ? ((n.volume = 0), (p.value = 0))
+          : ((n.volume = 1), (p.value = 100));
+      }),
+      m.addEventListener("click", function () {
+        t.requestFullscreen
+          ? t.requestFullscreen()
+          : t.webkitRequestFullscreen
+            ? t.webkitRequestFullscreen()
+            : t.mozRequestFullScreen && t.mozRequestFullScreen();
+      }),
+      n.addEventListener("click", function () {
+        n.paused ? n.play() : n.pause();
+      }));
   });
-
-  // ========== VIDEOS EXTERNOS ==========
-  const externalVideos = document.querySelectorAll(".external-video");
-
-  externalVideos.forEach((container) => {
-    const playBtn = container.querySelector(".play-btn-center");
-    const embedUrl = container.dataset.embedUrl;
-
-    playBtn.addEventListener("click", function () {
-      const iframe = document.createElement("iframe");
-      iframe.src = embedUrl + "?autoplay=1";
-      iframe.frameBorder = "0";
-      iframe.allow =
-        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      iframe.style.position = "absolute";
-      iframe.style.top = "0";
-      iframe.style.left = "0";
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-
-      container.innerHTML = "";
-      container.appendChild(iframe);
-    });
-  });
-
-  // ========== LIGHTBOX PARA IMÁGENES ==========
-  if (typeof GLightbox !== "undefined") {
-    const lightbox = GLightbox({
-      selector: "[data-lightbox]",
-      touchNavigation: true,
-      loop: true,
-    });
+  if (
+    (document.querySelectorAll(".external-video").forEach((e) => {
+      const t = e.querySelector(".play-btn-center"),
+        n = e.dataset.embedUrl;
+      t.addEventListener("click", function () {
+        const t = document.createElement("iframe");
+        ((t.src = n + "?autoplay=1"),
+          (t.frameBorder = "0"),
+          (t.allow =
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"),
+          (t.allowFullscreen = !0),
+          (t.style.position = "absolute"),
+          (t.style.top = "0"),
+          (t.style.left = "0"),
+          (t.style.width = "100%"),
+          (t.style.height = "100%"),
+          (e.innerHTML = ""),
+          e.appendChild(t));
+      });
+    }),
+    "undefined" != typeof GLightbox)
+  ) {
+    GLightbox({ selector: "[data-lightbox]", touchNavigation: !0, loop: !0 });
   }
-
-  // Función auxiliar para formatear tiempo
-  function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return mins + ":" + (secs < 10 ? "0" : "") + secs;
+  function e(e) {
+    const t = Math.floor(e / 60),
+      n = Math.floor(e % 60);
+    return t + ":" + (n < 10 ? "0" : "") + n;
   }
 });

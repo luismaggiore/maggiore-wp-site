@@ -68,14 +68,20 @@ $portafolios_query = new WP_Query([
     'post_status'    => 'publish'
 ]);
 
-// Formatear fecha para mostrar en el idioma actual
+$fecha_termino = get_post_meta($caso_id, 'mg_caso_fecha_termino', true);
+
+// Formatear fechas para mostrar en el idioma actual
 $fecha_formateada = '';
+$fecha_termino_formateada = '';
+
 if ($fecha) {
     $date = DateTime::createFromFormat('Y-m', $fecha);
-    if ($date) {
-        $timestamp = $date->getTimestamp();
-        $fecha_formateada = date_i18n('F Y', $timestamp);
-    }
+    if ($date) $fecha_formateada = date_i18n('F Y', $date->getTimestamp());
+}
+
+if ($fecha_termino) {
+    $date_t = DateTime::createFromFormat('Y-m', $fecha_termino);
+    if ($date_t) $fecha_termino_formateada = date_i18n('F Y', $date_t->getTimestamp());
 }
 ?>
 
@@ -246,6 +252,16 @@ if ($fecha) {
                             <time datetime="<?= esc_attr($fecha); ?>">
                                 <?= esc_html($fecha_formateada); ?>
                             </time>
+                            <?php if ($fecha_termino_formateada || $fecha): ?>
+                                <span style="color: rgba(255,255,255,0.4);"> — </span>
+                                <?php if ($fecha_termino_formateada): ?>
+                                    <time datetime="<?= esc_attr($fecha_termino); ?>">
+                                        <?= esc_html($fecha_termino_formateada); ?>
+                                    </time>
+                                <?php else: ?>
+                                    <span><?php _e('Actualidad', 'maggiore'); ?></span>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </p>
                     </div>
                 </section>

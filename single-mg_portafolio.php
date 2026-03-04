@@ -12,7 +12,7 @@
     $cliente_nombre = get_the_title($cliente_id);
     $descripcion = get_post_meta($portafolio_id, 'mg_portafolio_descripcion', true);
     $enlace = get_post_meta($portafolio_id, 'mg_portafolio_source', true);
-    $columnas = $caso_id ? 'col-xl-8' : 'col-xl-12';
+    $columnas = $caso_id ? 'col-xl-6' : 'col-xl-12';
     $fecha = get_post_meta($portafolio_id, 'mg_portafolio_fecha', true);
      
 
@@ -99,7 +99,7 @@ if ($fecha) {
 
     
     <?php if ($caso_id) : ?>
-      <div class="col-xl-4"><div class=" card-mg">
+      <div class="col-xl-6"><div class=" card-mg">
     <h3 class="label"><?php _e('Caso de éxito', 'maggiore'); ?></h3>
             <a class="service-tag" href="<?php echo get_permalink($caso_id); ?>"><?php echo get_the_title($caso_id); ?></a>
         </p></div></div>

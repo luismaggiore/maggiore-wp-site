@@ -107,12 +107,12 @@ function maggiore_scripts() {
    // =========================================================================
     // CONTACT FORM SCRIPT - Solo en páginas con formulario
     // =========================================================================
-    if (is_page_template('page-home.php') || is_front_page()) {
+    if (is_page_template('page-home.php') || is_front_page() || is_page_template('page-contacto.php')) {
         wp_enqueue_script(
             'maggiore-contact-form',
             get_template_directory_uri() . '/assets/js/contact-form.js',
-            ['jquery'], // Dependencias si usas jQuery, sino puede ir vacío []
-            '1.0.0',
+            ['maggiore-main', 'telefono'],
+            $theme_version,
             true
         );
     }
@@ -208,6 +208,8 @@ add_filter('mime_types', 'permitir_webp_upload');
     'homeUrl' => home_url('/'),
     'themeUrl' => get_template_directory_uri(),
     'currentLang' => function_exists('pll_current_language') ? pll_current_language() : 'es',
+    'thankYouUrl' => get_permalink( get_page_by_path('gracias') ) ?: home_url('/gracias/'), // ← NUEVA
+
   ]);
 }
 add_action('wp_enqueue_scripts', 'maggiore_scripts');
@@ -234,6 +236,7 @@ function maggiore_defer_scripts($tag, $handle, $src) {
         'bootstrap',
         'intl-tel-input',
         'intl-tel-utils',
+        'telefono',
         'mg-admin-media-public'
     ];
     
@@ -389,6 +392,10 @@ require_once get_template_directory() . '/inc/helpers/translated-slugs.php';
 require_once get_template_directory() . '/inc/helpers/theme-translations.php';
 require_once get_template_directory() . '/inc/helpers/footer-functions.php';
 require_once get_template_directory() . '/inc/helpers/allow-duplicate-slugs.php';
+require_once get_template_directory() . '/inc/helpers/clientes-helpers.php';
+require_once get_template_directory() . '/inc/helpers/primary-term.php';
+require_once get_template_directory() . '/inc/helpers/whatsapp-float.php'; // ← agregar esto
+
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */

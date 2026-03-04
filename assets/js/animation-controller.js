@@ -1,281 +1,161 @@
-/**
- * Animation Controller
- * Controlador central que unifica todos los requestAnimationFrame
- * Evita tener múltiples RAF corriendo simultáneamente
- * 
- * @version 1.0.0
- * @author Maggiore Marketing
- */
-
 class AnimationController {
   constructor() {
-    this.effects = new Map();
-    this.isRunning = false;
-    this.frameId = null;
-    this.lastTime = 0;
-    this.fps = 0;
-    this.frameCount = 0;
-    this.fpsUpdateTime = 0;
-    
-    // Setup de observers
-    this.setupVisibilityObserver();
-    this.setupReducedMotionObserver();
-    
-    console.log('🎬 Animation Controller initialized');
+    ((this.effects = new Map()),
+      (this.isRunning = !1),
+      (this.frameId = null),
+      (this.lastTime = 0),
+      (this.fps = 0),
+      (this.frameCount = 0),
+      (this.fpsUpdateTime = 0),
+      this.setupVisibilityObserver(),
+      this.setupReducedMotionObserver(),
+      console.log("🎬 Animation Controller initialized"));
   }
-
-  /**
-   * Registra un efecto para ser actualizado en cada frame
-   * @param {string} name - Nombre único del efecto
-   * @param {Object} effect - Objeto con método update(deltaTime, currentTime)
-   * @param {number} priority - Mayor = se ejecuta primero (default: 0)
-   */
-  register(name, effect, priority = 0) {
-    if (this.effects.has(name)) {
-      console.warn(`⚠️ Effect "${name}" already registered, replacing...`);
-    }
-
-    this.effects.set(name, { 
-      effect, 
-      priority, 
-      enabled: true,
-      updateCount: 0,
-      lastUpdateTime: 0
-    });
-    
-    console.log(`✅ Registered effect: ${name} (priority: ${priority})`);
-
-    // Auto-start si es el primero
-    if (this.effects.size === 1 && !this.isRunning) {
-      this.start();
-    }
-
-    return this;
+  register(e, t, i = 0) {
+    return (
+      this.effects.has(e) &&
+        console.warn(`⚠️ Effect "${e}" already registered, replacing...`),
+      this.effects.set(e, {
+        effect: t,
+        priority: i,
+        enabled: !0,
+        updateCount: 0,
+        lastUpdateTime: 0,
+      }),
+      console.log(`✅ Registered effect: ${e} (priority: ${i})`),
+      1 !== this.effects.size || this.isRunning || this.start(),
+      this
+    );
   }
-
-  /**
-   * Desregistra un efecto
-   * @param {string} name - Nombre del efecto
-   */
-  unregister(name) {
-    const existed = this.effects.delete(name);
-    if (existed) {
-      console.log(`❌ Unregistered effect: ${name}`);
-    }
-    
-    if (this.effects.size === 0) {
-      this.stop();
-    }
-    
-    return this;
+  unregister(e) {
+    return (
+      this.effects.delete(e) && console.log(`❌ Unregistered effect: ${e}`),
+      0 === this.effects.size && this.stop(),
+      this
+    );
   }
-
-  /**
-   * Habilita o deshabilita un efecto sin desregistrarlo
-   * @param {string} name - Nombre del efecto
-   * @param {boolean} enabled - true para habilitar, false para deshabilitar
-   */
-  toggle(name, enabled) {
-    const entry = this.effects.get(name);
-    if (entry) {
-      entry.enabled = enabled;
-      console.log(`🔄 Effect "${name}" ${enabled ? 'enabled' : 'disabled'}`);
-    } else {
-      console.warn(`⚠️ Effect "${name}" not found`);
-    }
-    return this;
+  toggle(e, t) {
+    const i = this.effects.get(e);
+    return (
+      i
+        ? ((i.enabled = t),
+          console.log(`🔄 Effect "${e}" ${t ? "enabled" : "disabled"}`))
+        : console.warn(`⚠️ Effect "${e}" not found`),
+      this
+    );
   }
-
-  /**
-   * Obtiene un efecto registrado
-   * @param {string} name - Nombre del efecto
-   * @returns {Object|null} El efecto o null si no existe
-   */
-  getEffect(name) {
-    const entry = this.effects.get(name);
-    return entry ? entry.effect : null;
+  getEffect(e) {
+    const t = this.effects.get(e);
+    return t ? t.effect : null;
   }
-
-  /**
-   * Inicia el loop de animación
-   */
   start() {
-    if (this.isRunning) {
-      console.warn('⚠️ Animation Controller already running');
-      return;
-    }
-    
-    this.isRunning = true;
-    this.lastTime = performance.now();
-    this.fpsUpdateTime = this.lastTime;
-    this.frameCount = 0;
-    this.tick(this.lastTime);
-    
-    console.log('▶️ Animation Controller started');
-    return this;
+    if (!this.isRunning)
+      return (
+        (this.isRunning = !0),
+        (this.lastTime = performance.now()),
+        (this.fpsUpdateTime = this.lastTime),
+        (this.frameCount = 0),
+        this.tick(this.lastTime),
+        console.log("▶️ Animation Controller started"),
+        this
+      );
+    console.warn("⚠️ Animation Controller already running");
   }
-
-  /**
-   * Detiene el loop
-   */
   stop() {
-    if (!this.isRunning) return;
-    
-    this.isRunning = false;
-    if (this.frameId) {
-      cancelAnimationFrame(this.frameId);
-      this.frameId = null;
-    }
-    
-    console.log('⏸️ Animation Controller stopped');
-    return this;
+    if (this.isRunning)
+      return (
+        (this.isRunning = !1),
+        this.frameId &&
+          (cancelAnimationFrame(this.frameId), (this.frameId = null)),
+        console.log("⏸️ Animation Controller stopped"),
+        this
+      );
   }
-
-  /**
-   * Loop principal - UN SOLO RAF PARA TODO
-   * @private
-   */
-  tick(currentTime) {
+  tick(e) {
     if (!this.isRunning) return;
-
-    // Calcula delta time en segundos
-    const deltaTime = (currentTime - this.lastTime) / 1000;
-    this.lastTime = currentTime;
-
-    // Calcula FPS cada segundo
-    this.frameCount++;
-    if (currentTime - this.fpsUpdateTime >= 1000) {
-      this.fps = this.frameCount;
-      this.frameCount = 0;
-      this.fpsUpdateTime = currentTime;
-    }
-
-    // Ordena efectos por prioridad (mayor primero)
-    const sortedEffects = Array.from(this.effects.entries())
-      .filter(([_, entry]) => entry.enabled)
-      .sort((a, b) => b[1].priority - a[1].priority);
-
-    // Actualiza cada efecto habilitado
-    sortedEffects.forEach(([name, entry]) => {
-      try {
-        // Verifica si el efecto tiene shouldUpdate y lo respeta
-        const shouldUpdate = !entry.effect.shouldUpdate || 
-                           entry.effect.shouldUpdate(currentTime, deltaTime);
-        
-        if (shouldUpdate) {
-          entry.effect.update(deltaTime, currentTime);
-          entry.updateCount++;
-          entry.lastUpdateTime = currentTime;
+    const t = (e - this.lastTime) / 1e3;
+    ((this.lastTime = e),
+      this.frameCount++,
+      e - this.fpsUpdateTime >= 1e3 &&
+        ((this.fps = this.frameCount),
+        (this.frameCount = 0),
+        (this.fpsUpdateTime = e)));
+    (Array.from(this.effects.entries())
+      .filter(([e, t]) => t.enabled)
+      .sort((e, t) => t[1].priority - e[1].priority)
+      .forEach(([i, s]) => {
+        try {
+          (!s.effect.shouldUpdate || s.effect.shouldUpdate(e, t)) &&
+            (s.effect.update(t, e), s.updateCount++, (s.lastUpdateTime = e));
+        } catch (e) {
+          (console.error(`❌ Error updating effect "${i}":`, e),
+            (s.enabled = !1));
         }
-      } catch (error) {
-        console.error(`❌ Error updating effect "${name}":`, error);
-        // Deshabilita el efecto que falla para no bloquear los demás
-        entry.enabled = false;
-      }
-    });
-
-    // Siguiente frame
-    this.frameId = requestAnimationFrame((t) => this.tick(t));
+      }),
+      (this.frameId = requestAnimationFrame((e) => this.tick(e))));
   }
-
-  /**
-   * Pausa automáticamente cuando la página no es visible
-   * @private
-   */
   setupVisibilityObserver() {
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        this.stop();
-        console.log('👁️ Page hidden - animations paused');
-      } else {
-        this.start();
-        console.log('👁️ Page visible - animations resumed');
-      }
+    document.addEventListener("visibilitychange", () => {
+      document.hidden
+        ? (this.stop(), console.log("👁️ Page hidden - animations paused"))
+        : (this.start(), console.log("👁️ Page visible - animations resumed"));
     });
   }
-
-  /**
-   * Respeta la preferencia de reduced motion del usuario
-   * @private
-   */
   setupReducedMotionObserver() {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
-    const handleReducedMotion = (e) => {
-      if (e.matches) {
-        this.stop();
-        console.log('♿ Reduced motion detected - animations disabled');
-        document.body.classList.add('visual-engine-reduced-motion');
-      } else {
-        this.start();
-        document.body.classList.remove('visual-engine-reduced-motion');
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleReducedMotion);
-    handleReducedMotion(mediaQuery);
-  }
-
-  /**
-   * Obtiene métricas de performance
-   * @returns {Object} Estadísticas del controller
-   */
-  getStats() {
-    const effectStats = {};
-    this.effects.forEach((entry, name) => {
-      effectStats[name] = {
-        enabled: entry.enabled,
-        priority: entry.priority,
-        updateCount: entry.updateCount,
-        lastUpdate: entry.lastUpdateTime
+    const e = window.matchMedia("(prefers-reduced-motion: reduce)"),
+      t = (e) => {
+        e.matches
+          ? (this.stop(),
+            console.log("♿ Reduced motion detected - animations disabled"),
+            document.body.classList.add("visual-engine-reduced-motion"))
+          : (this.start(),
+            document.body.classList.remove("visual-engine-reduced-motion"));
       };
-    });
-
-    return {
-      fps: Math.round(this.fps),
-      effectCount: this.effects.size,
-      activeEffects: Array.from(this.effects.entries())
-        .filter(([_, e]) => e.enabled)
-        .length,
-      isRunning: this.isRunning,
-      effects: effectStats
-    };
+    (e.addEventListener("change", t), t(e));
   }
-
-  /**
-   * Imprime estadísticas en consola (útil para debugging)
-   */
+  getStats() {
+    const e = {};
+    return (
+      this.effects.forEach((t, i) => {
+        e[i] = {
+          enabled: t.enabled,
+          priority: t.priority,
+          updateCount: t.updateCount,
+          lastUpdate: t.lastUpdateTime,
+        };
+      }),
+      {
+        fps: Math.round(this.fps),
+        effectCount: this.effects.size,
+        activeEffects: Array.from(this.effects.entries()).filter(
+          ([e, t]) => t.enabled,
+        ).length,
+        isRunning: this.isRunning,
+        effects: e,
+      }
+    );
+  }
   logStats() {
-    const stats = this.getStats();
-    console.log('📊 Animation Controller Stats:', stats);
-    return this;
+    const e = this.getStats();
+    return (console.log("📊 Animation Controller Stats:", e), this);
   }
-
-  /**
-   * Destruye el controller y limpia recursos
-   */
   destroy() {
-    this.stop();
-    this.effects.clear();
-    console.log('💥 Animation Controller destroyed');
+    (this.stop(),
+      this.effects.clear(),
+      console.log("💥 Animation Controller destroyed"));
   }
 }
-
-// Exportar como singleton global
-if (typeof window !== 'undefined') {
-  window.AnimationController = AnimationController;
-  window.animationController = new AnimationController();
-  
-  // Debug helper - accesible desde la consola
-  if (typeof window.VISUAL_CONFIG !== 'undefined' && window.VISUAL_CONFIG.debug?.showFPS) {
+("undefined" != typeof window &&
+  ((window.AnimationController = AnimationController),
+  (window.animationController = new AnimationController()),
+  void 0 !== window.VISUAL_CONFIG &&
+    window.VISUAL_CONFIG.debug?.showFPS &&
     setInterval(() => {
-      const stats = window.animationController.getStats();
-      console.log(`FPS: ${stats.fps} | Effects: ${stats.activeEffects}/${stats.effectCount}`);
-    }, 2000);
-  }
-}
-
-// Export para módulos ES6 si es necesario
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = AnimationController;
-}
+      const e = window.animationController.getStats();
+      console.log(
+        `FPS: ${e.fps} | Effects: ${e.activeEffects}/${e.effectCount}`,
+      );
+    }, 2e3)),
+  "undefined" != typeof module &&
+    module.exports &&
+    (module.exports = AnimationController));

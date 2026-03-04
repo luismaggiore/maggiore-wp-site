@@ -11,7 +11,12 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
 ?>
 
 <main>
+ <style>
+        .words6, .words7, .words9, .words10{
+            color: var(--secondary-color) !important;
+        } 
 
+    </style>
     <!-- HERO SECTION -->
     <section class=" quienes-somos-hero p-top" >
         <div class="container-fluid">
@@ -70,6 +75,7 @@ $lang = function_exists('pll_current_language') ? pll_current_language() : false
                 $linkedin = get_post_meta($director_id, 'mg_equipo_linkedin', true); 
                 $primer_nombre = explode(' ', $nombre)[0];
                                 $cargo = get_post_meta($director_id, 'mg_equipo_cargo', true);
+                $director_url = get_permalink($director_id);
 
                 // Determinar si es par o impar para alternar orden
                 $is_even = ($index % 2 === 0);

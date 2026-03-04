@@ -55,7 +55,7 @@ $pid = get_the_ID();
               </h1>
 
               <div class="bajada-reveal">
-                <p class="bajada"><?php echo esc_html( mg_home_get( $pid, 'mg_home_hero_bajada' ) ); ?>.</p>
+                <p class="bajada"><?php echo esc_html( mg_home_get( $pid, 'mg_home_hero_bajada' ) ); ?></p>
 
                 <div class="mg-link">
                   <?php $cta_texto = mg_home_get( $pid, 'mg_home_hero_cta_texto' ); ?>
@@ -161,12 +161,18 @@ $pid = get_the_ID();
             <div class="constelacion" aria-hidden="true">
               <img class="img-constelacion arco"
                    src="<?php echo get_template_directory_uri(); ?>/assets/img/bow.webp"
+                   loading="lazy"
+       decoding="async"
                    alt="Bow and arrow">
               <img class="img-constelacion ajedrez"
                    src="<?php echo get_template_directory_uri(); ?>/assets/img/pawn.webp"
+                   loading="lazy"
+       decoding="async"
                    alt="A chess pawn">
               <img class="img-constelacion infinito"
                    src="<?php echo get_template_directory_uri(); ?>/assets/img/infinity.webp"
+                   loading="lazy"
+       decoding="async"
                    alt="Infinity symbol">
               <svg id="Layer_1" data-name="Layer 1"
                    xmlns="http://www.w3.org/2000/svg"
