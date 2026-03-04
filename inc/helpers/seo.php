@@ -10,7 +10,7 @@
  * El add_action de línea 1131 en seo-enhanced.php también se elimina
  * porque el schema ahora se genera aquí.
  * 
- * @version 4.1
+ * @version 4.2 - Fix twitter:site desde maggiore_twitter_url
  */
 
 if (!defined('ABSPATH')) exit;
@@ -91,9 +91,28 @@ function mg_output_seo_meta() {
     $noindex = get_post_meta($post->ID, 'mg_seo_noindex', true);
 
     // =============================================================
+    // TWITTER HANDLE
+    // Lee maggiore_twitter_url desde los ajustes del admin y extrae
+    // el @handle para el meta tag twitter:site.
+    // Ej: "https://twitter.com/maggiorelatam" → "@maggiorelatam"
+    // Si el campo está vacío, no se imprime el meta tag.
+    // =============================================================
+    $twitter_handle = '';
+    $twitter_url    = get_option('maggiore_twitter_url', '');
+
+    if (!empty($twitter_url)) {
+        $path           = parse_url($twitter_url, PHP_URL_PATH);
+        $username       = trim(basename(rtrim($path, '/')));
+        if (!empty($username)) {
+            $twitter_handle = '@' . ltrim($username, '@');
+        }
+    }
+
+    // =============================================================
     // SCHEMA JSON-LD
     // Prioridad: 1) Schema manual del metabox, 2) Schema automático
     // =============================================================
+    $schema_output = '';
     $schema_manual = get_post_meta($post->ID, 'mg_schema_json', true);
 
     if (!empty($schema_manual)) {
@@ -119,6 +138,7 @@ function mg_output_seo_meta() {
     // =============================================================
 
     // El <title> lo maneja el filtro pre_get_document_title (ver al final del archivo)
+
     // Description
     echo "<meta name='description' content='" . esc_attr($desc) . "'>\n";
 
@@ -143,6 +163,9 @@ function mg_output_seo_meta() {
 
     // Twitter Card
     echo "<meta name='twitter:card' content='summary_large_image'>\n";
+    if (!empty($twitter_handle)) {
+        echo "<meta name='twitter:site' content='" . esc_attr($twitter_handle) . "'>\n";
+    }
     echo "<meta name='twitter:title' content='" . esc_attr($title) . "'>\n";
     echo "<meta name='twitter:description' content='" . esc_attr($desc) . "'>\n";
     echo "<meta name='twitter:image' content='" . esc_url($og_image) . "'>\n";
@@ -213,12 +236,12 @@ function mg_schema_home_json() {
             ],
         ],
         [
-            '@context'  => 'https://schema.org',
-            '@type'     => 'WebSite',
-            '@id'       => $site_url . '#website',
-            'url'       => $site_url,
-            'name'      => $site_name,
-            'publisher' => ['@id' => $site_url . '#organization'],
+            '@context'   => 'https://schema.org',
+            '@type'      => 'WebSite',
+            '@id'        => $site_url . '#website',
+            'url'        => $site_url,
+            'name'       => $site_name,
+            'publisher'  => ['@id' => $site_url . '#organization'],
             'inLanguage' => 'es-CL',
         ],
         [

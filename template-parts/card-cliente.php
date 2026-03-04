@@ -9,10 +9,10 @@ $descripcion = get_post_meta($cliente_id, 'mg_cliente_descripcion', true);
 $logo = get_the_post_thumbnail_url($cliente_id, 'medium');
 $num_empleados = get_post_meta($cliente_id, 'mg_cliente_num_empleados', true);
 $linkedin = get_post_meta($cliente_id, 'mg_cliente_linkedin', true);
-
+$website   = get_post_meta($cliente_id, 'mg_cliente_website', true);
 // Obtener industrias
 $industrias = get_the_terms($cliente_id, 'mg_industria');
-
+$tiene_redes = $website || $linkedin;
 // Contar casos y portafolios
 $casos_count = 0;
 $portafolios_count = 0;
@@ -78,14 +78,17 @@ $portafolios_count = $portafolios->found_posts;
              href="<?= esc_url($term_link); ?>">
             <?= esc_html($term->name); ?>
           </a>
+          
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
   </div>
 
-  <?php if ($linkedin): ?>
-    <div class="cliente-social text-center position-absolute top-0 end-0 m-2 z-3">
+  
+<?php if ($tiene_redes): ?>
 
+    <div class="cliente-social text-center position-absolute top-0 end-0 m-2 z-3">
+<?php if ($linkedin): ?>
       <a
         href="<?php echo esc_url($linkedin); ?>"
        class="service-tag mt-1  px-1  btn-linkedin "              
@@ -100,9 +103,23 @@ $portafolios_count = $portafolios->found_posts;
   <path d="M2.54,10.71V3.48H.14v7.22h2.4ZM1.34,2.5c.84,0,1.36-.55,1.36-1.25-.01-.71-.52-1.25-1.34-1.25S0,.54,0,1.25s.52,1.25,1.33,1.25h.02ZM6.25,10.71v-4.03c0-.22.02-.43.08-.59.17-.43.57-.88,1.23-.88.87,0,1.22.66,1.22,1.63v3.86h2.4v-4.14c0-2.22-1.18-3.25-2.76-3.25-1.27,0-1.85.7-2.16,1.19v.03h-.02l.02-.03v-1.02h-2.4c.03.68,0,7.22,0,7.22h2.4Z"/>
 </svg></i>
       </a>
-
-     
-    </div>
   <?php endif; ?>
+<?php if (!$linkedin && $website): ?>
+          <a
+        href="<?php echo esc_url($website); ?>"
+       class="service-tag mt-1  px-1  btn-linkedin "              
+        target="_blank"
+        rel="noopener noreferrer"
+        itemprop="sameAs"
+        aria-label="<?php echo esc_attr(sprintf(__('Ver website de %s', 'maggiore'), $titulo)); ?>"
+      >
+   
+                                                            <i class="bi bi-globe" style="transform: translateX(0.5px)"></i>
+
+      </a>
+        <?php endif; ?>
+    </div>
+      <?php endif; ?>
+
 
 </article>

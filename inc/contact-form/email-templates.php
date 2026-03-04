@@ -155,7 +155,7 @@ function maggiore_get_email_cliente_template($data) {
                 <p style="font-size: 15px; color: #718096;">
                     <strong>¿Tienes alguna duda urgente?</strong><br>
                     Puedes escribirnos directamente  
-                    <a href="https://wa.me/+56952026029" style="color: #667eea; text-decoration: none;">
+                    <a href="https://api.whatsapp.com/send/?phone=56963206716" style="color: #667eea; text-decoration: none;">
                         aquí
                     </a>
                 </p>

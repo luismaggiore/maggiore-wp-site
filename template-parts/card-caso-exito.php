@@ -24,6 +24,60 @@ $permalink            = get_permalink($post_id);
 
 $show_author          = (!is_archive() && !empty($contratador_nombre));
 $class_archive        = is_archive() ? 'archive' : '';
+
+// =============================================================
+// SCHEMA: imagen para itemprop="image" (requerido por Article)
+// Prioridad: thumbnail del caso → logo del cliente → OG por defecto
+// =============================================================
+$article_image = get_the_post_thumbnail_url($post_id, 'large');
+if (!$article_image) {
+    $article_image = $cliente_logo;
+}
+if (!$article_image) {
+    $default_og    = get_option('mg_default_og_image', '');
+    $article_image = $default_og ?: get_template_directory_uri() . '/assets/img/default-og.webp';
+}
+
+// =============================================================
+// SCHEMA: autor fallback como Person (requerido por Article)
+// Solo se necesita cuando no hay contratador visible ($show_author = false).
+// Busca el primer miembro del equipo asociado al caso, por menu_order.
+// Prioridad: mg_caso_equipo (manual) → _mg_equipo_auto (automático).
+// =============================================================
+$fallback_autor = null;
+
+if (!$show_author) {
+    $equipo_ids = (array) get_post_meta($post_id, 'mg_caso_equipo', true);
+    $equipo_ids = array_filter(array_map('intval', $equipo_ids));
+
+    // Si no hay equipo manual, usar el automático
+    if (empty($equipo_ids)) {
+        $equipo_ids = (array) get_post_meta($post_id, '_mg_equipo_auto', true);
+        $equipo_ids = array_filter(array_map('intval', $equipo_ids));
+    }
+
+    if (!empty($equipo_ids)) {
+        $primer_miembro = get_posts([
+            'post_type'      => 'mg_equipo',
+            'post__in'       => $equipo_ids,
+            'posts_per_page' => 1,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+            'post_status'    => 'publish',
+        ]);
+
+        if (!empty($primer_miembro)) {
+            $m = $primer_miembro[0];
+            $fallback_autor = [
+                'name'     => $m->post_title,
+                'cargo'    => get_post_meta($m->ID, 'mg_equipo_cargo', true),
+                'linkedin' => get_post_meta($m->ID, 'mg_equipo_linkedin', true),
+                'url'      => get_permalink($m->ID),
+                'image'    => get_the_post_thumbnail_url($m->ID, 'thumbnail'),
+            ];
+        }
+    }
+}
 ?>
 
 <article
@@ -32,6 +86,13 @@ $class_archive        = is_archive() ? 'archive' : '';
   itemscope
   itemtype="https://schema.org/Article"
 >
+
+  <?php /*
+    Meta tags requeridos por schema.org/Article sin representación visual.
+  */ ?>
+  <meta itemprop="image"         content="<?= esc_url($article_image); ?>">
+  <meta itemprop="datePublished" content="<?= esc_attr(get_the_date('c', $post_id)); ?>">
+  <meta itemprop="url"           content="<?= esc_url($permalink); ?>">
 
   <?php if ($cliente_id): ?>
     <div class="client-tag z-2 position-relative"
@@ -137,6 +198,27 @@ $class_archive        = is_archive() ? 'archive' : '';
 
       </div>
     </div>
+
+  <?php elseif ($fallback_autor): ?>
+
+    <?php /*
+      Autor fallback: primer miembro del equipo asociado al caso (por menu_order).
+      Invisible en la UI pero satisface el requisito Person de schema.org/Article.
+    */ ?>
+    <div itemprop="author" itemscope itemtype="https://schema.org/Person" hidden>
+      <meta itemprop="name"    content="<?= esc_attr($fallback_autor['name']); ?>">
+      <meta itemprop="url"     content="<?= esc_url($fallback_autor['url']); ?>">
+      <?php if ($fallback_autor['cargo']): ?>
+        <meta itemprop="jobTitle" content="<?= esc_attr($fallback_autor['cargo']); ?>">
+      <?php endif; ?>
+      <?php if ($fallback_autor['linkedin']): ?>
+        <meta itemprop="sameAs"   content="<?= esc_url($fallback_autor['linkedin']); ?>">
+      <?php endif; ?>
+      <?php if ($fallback_autor['image']): ?>
+        <meta itemprop="image"    content="<?= esc_url($fallback_autor['image']); ?>">
+      <?php endif; ?>
+    </div>
+
   <?php endif; ?>
 
   <a href="<?= esc_url($permalink); ?>"
