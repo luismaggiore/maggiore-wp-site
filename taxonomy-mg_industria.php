@@ -13,8 +13,19 @@ $current_term = get_queried_object();
 $term_id = $current_term->term_id;
 $lang = function_exists('pll_current_language') ? pll_current_language() : false;
 
-// Obtener el filtro actual (por defecto: todos)
-$filter = isset($_GET['tipo']) ? sanitize_text_field($_GET['tipo']) : 'todos';
+// Obtener el filtro actual (soporta URL limpia /clientes/ o /casos/ via query var, o ?tipo= legacy)
+$filter_qv = get_query_var('mg_tipo', '');
+if ($filter_qv) {
+    $filter = sanitize_text_field($filter_qv);
+} elseif (isset($_GET['tipo'])) {
+    $filter = sanitize_text_field($_GET['tipo']);
+} else {
+    $filter = 'todos';
+}
+// Normalizar valores válidos
+if (!in_array($filter, ['todos', 'clientes', 'casos'])) {
+    $filter = 'todos';
+}
 
 // Construir query según el filtro
 $post_types = [];
@@ -150,10 +161,12 @@ $term_slug = $current_term->slug;
           // Saltar la industria actual
           if ($industry->term_id === $term_id) continue;
           
-          // Mantener el filtro actual en el enlace a otra industria
-          $other_industry_url = get_term_link($industry);
-          if ($filter !== 'todos') {
-              $other_industry_url = add_query_arg('tipo', $filter, $other_industry_url);
+          // Mantener el filtro actual en el enlace a otra industria (URL limpia)
+          $other_industry_url = trailingslashit(get_term_link($industry));
+          if ($filter === 'clientes') {
+              $other_industry_url .= 'clientes/';
+          } elseif ($filter === 'casos') {
+              $other_industry_url .= 'casos/';
           }
       ?>
         <a href="<?= esc_url($other_industry_url); ?>" 
@@ -170,13 +183,17 @@ $term_slug = $current_term->slug;
   <div class="d-flex flex-wrap gap-1 align-items-center">
 
     <?php
-      $base_url = get_term_link($current_term);
+      $base_url = trailingslashit(get_term_link($current_term));
 
       $is_all_active      = ($filter === 'todos');
       $is_clientes_active = ($filter === 'clientes');
       $is_casos_active    = ($filter === 'casos');
 
       $total = (int)($count_clientes + $count_casos);
+
+      // URLs limpias para los filtros
+      $url_clientes = $base_url . 'clientes/';
+      $url_casos    = $base_url . 'casos/';
     ?>
 
     <a href="<?= esc_url($base_url); ?>"
@@ -187,7 +204,7 @@ $term_slug = $current_term->slug;
       <?php endif; ?>
     </a>
 
-    <a href="<?= esc_url(add_query_arg('tipo', 'clientes', $base_url)); ?>"
+    <a href="<?= esc_url($url_clientes); ?>"
        class="btn-filter <?= $is_clientes_active ? 'active' : ''; ?>">
       <?php _e('Clientes', 'maggiore'); ?>
       <?php if ((int)$count_clientes > 0): ?>
@@ -195,7 +212,7 @@ $term_slug = $current_term->slug;
       <?php endif; ?>
     </a>
 
-    <a href="<?= esc_url(add_query_arg('tipo', 'casos', $base_url)); ?>"
+    <a href="<?= esc_url($url_casos); ?>"
        class="btn-filter <?= $is_casos_active ? 'active' : ''; ?>">
       <?php _e('Casos de Éxito', 'maggiore'); ?>
       <?php if ((int)$count_casos > 0): ?>
@@ -232,14 +249,14 @@ $term_slug = $current_term->slug;
 
     <!-- Grid Masonry -->
     <?php if ($query->have_posts()): ?>
-        <section class="masonry-grid mb-5 " >
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-0 gy-2" data-masonry='{"percentPosition": true}'>
+        <section class="mb-5">
+            <div class="masonry-grid" id="masonry-grid">
+                <!-- Sizer: define el ancho de columna para Masonry (sin renderizar) -->
+                <div class="masonry-sizer"></div>
                 <?php while ($query->have_posts()): $query->the_post(); ?>
-                    <div class="col mb-0 " >
+                    <div class="masonry-item">
                         <?php
-                        // Detectar tipo de post y cargar card correspondiente
                         $post_type = get_post_type();
-                        
                         if ($post_type === 'mg_cliente') {
                             get_template_part('template-parts/card', 'cliente');
                         } elseif ($post_type === 'mg_caso_exito') {
@@ -253,13 +270,19 @@ $term_slug = $current_term->slug;
 
         <!-- Paginación -->
         <?php
+        // Base de paginación según filtro activo
+        $paginate_base = trailingslashit(get_term_link($current_term));
+        if ($filter === 'clientes') $paginate_base .= 'clientes/';
+        elseif ($filter === 'casos')   $paginate_base .= 'casos/';
+
         $pagination = paginate_links([
-            'total' => $query->max_num_pages,
-            'current' => $paged,
+            'base'      => $paginate_base . '%_%',
+            'format'    => 'page/%#%/',
+            'total'     => $query->max_num_pages,
+            'current'   => $paged,
             'prev_text' => '&laquo; ' . __('Anterior', 'maggiore'),
             'next_text' => __('Siguiente', 'maggiore') . ' &raquo;',
-            'type' => 'array',
-            'add_args' => ['tipo' => $filter] // Mantener el filtro en la paginación
+            'type'      => 'array',
         ]);
         ?>
         
@@ -300,22 +323,43 @@ $term_slug = $current_term->slug;
 </main>
 
 <!-- Masonry.js para el layout -->
+<style>
+/* ── Masonry grid ── */
+.masonry-grid { position: relative; }
+
+/* El sizer define el ancho de columna; Masonry lo usa como referencia */
+.masonry-sizer,
+.masonry-item  { width: calc(33.333% - 11px); }   /* 3 cols en desktop */
+
+@media (max-width: 991.98px) {
+    .masonry-sizer,
+    .masonry-item { width: calc(50% - 8px); }      /* 2 cols en tablet */
+}
+@media (max-width: 575.98px) {
+    .masonry-sizer,
+    .masonry-item { width: 100%; }                  /* 1 col en móvil */
+}
+
+.masonry-item { margin-bottom: 16px; }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar Masonry después de que las imágenes carguen
-    var grid = document.querySelector('.masonry-grid .row');
-    if (grid) {
-        imagesLoaded(grid, function() {
-            new Masonry(grid, {
-                itemSelector: '.col',
-                percentPosition: true,
-                gutter: 16
-            });
+    var grid = document.getElementById('masonry-grid');
+    if (!grid) return;
+
+    // Esperar a que carguen las imágenes antes de inicializar
+    imagesLoaded(grid, function() {
+        new Masonry(grid, {
+            itemSelector:   '.masonry-item',
+            columnWidth:    '.masonry-sizer',   // sizer como referencia de columna
+            percentPosition: true,
+            gutter:         16
         });
-    }
+    });
 });
 </script>
-<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 
 <?php get_footer(); ?>

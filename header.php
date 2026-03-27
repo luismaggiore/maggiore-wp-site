@@ -12,6 +12,8 @@
     ?>
 
     <?php wp_head(); ?>
+    <meta name="color-scheme" content="dark">
+
 </head>
 
 <body <?php body_class(); ?>>

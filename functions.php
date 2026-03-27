@@ -75,11 +75,12 @@ function maggiore_scripts() {
   // =========================================================================
   
   wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css');
-  wp_enqueue_style('maggiore-style', get_stylesheet_uri()); // style.css
-  wp_enqueue_style('maggiore-main', get_template_directory_uri() . '/assets/css/main.css', [], $theme_version);
-  wp_enqueue_style('comments-styles', get_template_directory_uri() . '/assets/css/comments-styles.css', [], $theme_version);
-  wp_enqueue_style('blog-styles', get_template_directory_uri() . '/assets/css/blog-styles.css', [], $theme_version);
-  wp_enqueue_style('bs-override', get_template_directory_uri() . '/assets/css/override.css', [], $theme_version);
+  wp_enqueue_style('adobe-typekit', 'https://use.typekit.net/odk5rds.css', [], null); // Typekit enqueued directamente para carga paralela
+  wp_enqueue_style('maggiore-style', get_stylesheet_uri(), ['bootstrap'], $theme_version); // style.css
+  wp_enqueue_style('maggiore-main', get_template_directory_uri() . '/assets/css/main.css', ['bootstrap', 'adobe-typekit', 'maggiore-style'], $theme_version);
+  wp_enqueue_style('comments-styles', get_template_directory_uri() . '/assets/css/comments-styles.css', ['maggiore-main'], $theme_version);
+  wp_enqueue_style('blog-styles', get_template_directory_uri() . '/assets/css/blog-styles.css', ['maggiore-main'], $theme_version);
+  wp_enqueue_style('bs-override', get_template_directory_uri() . '/assets/css/override.css', ['maggiore-main'], $theme_version);
   
   // International telephone input CSS
   wp_enqueue_style('intl-tel-input-css', 'https://cdn.jsdelivr.net/npm/intl-tel-input@23.8.0/build/css/intlTelInput.css');
@@ -395,7 +396,7 @@ require_once get_template_directory() . '/inc/helpers/allow-duplicate-slugs.php'
 require_once get_template_directory() . '/inc/helpers/clientes-helpers.php';
 require_once get_template_directory() . '/inc/helpers/primary-term.php';
 require_once get_template_directory() . '/inc/helpers/whatsapp-float.php'; // ← agregar esto
-
+require_once get_template_directory() . '/inc/helpers/seo-archive-options.php'; // ← agregar esto
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */
@@ -458,6 +459,20 @@ add_action('pre_get_posts', function($query) {
     }
 });
 
+function mg_industria_rewrite_rules() {
+    add_rewrite_rule(
+        'industria/([^/]+)/(clientes|casos)(?:/page/([0-9]+))?/?$',
+        'index.php?mg_industria=$matches[1]&mg_tipo=$matches[2]&paged=$matches[3]',
+        'top'
+    );
+}
+add_action( 'init', 'mg_industria_rewrite_rules' );
+
+function mg_add_query_vars( $vars ) {
+    $vars[] = 'mg_tipo';
+    return $vars;
+}
+add_filter( 'query_vars', 'mg_add_query_vars' );
 
 
 function maggiore_get_lang() {

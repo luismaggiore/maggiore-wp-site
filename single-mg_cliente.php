@@ -113,7 +113,7 @@ $portafolios = get_posts([
         <!-- Logo y Título -->
         <div class="row align-items-center mb-3">
             <?php if ($logo): ?>
-                <div class="col-auto">
+                <div class="col-md-auto">
                     <img src="<?= esc_url($logo); ?>"
                          alt="<?= esc_attr(sprintf(__('Logo de %s', 'maggiore'), get_the_title())); ?>"
                          class="img-fluid"
@@ -122,7 +122,7 @@ $portafolios = get_posts([
                 </div>
             <?php endif; ?>
 
-            <div class="col">
+            <div class="col-md">
                 <h1 class="display-4 mb-2" itemprop="name"><?php the_title(); ?></h1>
 
                 <?php if ($descripcion): ?>

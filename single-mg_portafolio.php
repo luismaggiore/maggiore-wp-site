@@ -99,9 +99,9 @@ if ($fecha) {
 
     
     <?php if ($caso_id) : ?>
-      <div class="col-xl-6"><div class=" card-mg">
+      <div class="col-xl-6 "><div class=" card-mg">
     <h3 class="label"><?php _e('Caso de éxito', 'maggiore'); ?></h3>
-            <a class="service-tag" href="<?php echo get_permalink($caso_id); ?>"><?php echo get_the_title($caso_id); ?></a>
+            <a   href="<?php echo get_permalink($caso_id); ?>"><?php echo get_the_title($caso_id); ?></a>
         </p></div></div>
     <?php endif; ?>
 
@@ -197,7 +197,7 @@ if ($fecha) {
           ?>
             <div class="media-item <?= $layout === 'grid' ? 'col' : ''; ?>">
               <figure class="figure mb-0">
-                <a href="<?= esc_url($image_full); ?>" data-lightbox="gallery" data-title="<?= esc_attr($image_alt); ?>">
+                <a href="<?= esc_url($image_full); ?>" data-lightbox="gallery">
                   <img src="<?= esc_url($image_url); ?>"
                        alt="<?= esc_attr($image_alt); ?>"
                        class="img-fluid rounded"

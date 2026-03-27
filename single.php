@@ -209,6 +209,15 @@ if ($autor_id) {
                             <span>WhatsApp</span>
                         </a>
 
+                        <!-- Instagram -->
+                        <button type="button"
+                                class="social-share-btn instagram"
+                                data-url="<?= get_permalink($post_id); ?>"
+                                aria-label="<?php _e('Compartir en Instagram', 'maggiore'); ?>">
+                            <i class="bi bi-instagram"></i>
+                            <span>Instagram</span>
+                        </button>
+
                         <!-- Email -->
                         <a href="mailto:?subject=<?= $post_title; ?>&body=<?= $post_url; ?>" 
                            class="social-share-btn email"
@@ -404,19 +413,49 @@ if ($autor_id) {
 </style>
 
 <script>
-// Script para copiar el enlace
 document.addEventListener('DOMContentLoaded', function() {
+
+    // ── Función helper: mostrar toast ──────────────────────────────────────
+    function showToast(message) {
+        let toast = document.getElementById('share-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'share-toast';
+            toast.style.cssText = [
+                'position:fixed', 'bottom:24px', 'left:50%',
+                'transform:translateX(-50%) translateY(20px)',
+                'background:rgba(30,30,30,0.92)', 'color:#fff',
+                'padding:10px 20px', 'border-radius:8px',
+                'font-size:14px', 'z-index:9999',
+                'opacity:0', 'transition:opacity .3s, transform .3s',
+                'pointer-events:none', 'white-space:nowrap'
+            ].join(';');
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        requestAnimationFrame(function() {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+        });
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(function() {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+        }, 3000);
+    }
+
+    // ── Copiar enlace ──────────────────────────────────────────────────────
     const copyButton = document.querySelector('.copy-link');
     if (copyButton) {
         copyButton.addEventListener('click', function() {
             const url = this.dataset.url;
             navigator.clipboard.writeText(url).then(function() {
-                const originalText = copyButton.querySelector('span').textContent;
-                copyButton.querySelector('span').textContent = '<?php _e('¡Copiado!', 'maggiore'); ?>';
+                const span = copyButton.querySelector('span');
+                const originalText = span.textContent;
+                span.textContent = '<?php _e('¡Copiado!', 'maggiore'); ?>';
                 copyButton.style.borderColor = 'var(--secondary-color)';
-                
                 setTimeout(function() {
-                    copyButton.querySelector('span').textContent = originalText;
+                    span.textContent = originalText;
                     copyButton.style.borderColor = '';
                 }, 2000);
             }).catch(function(err) {
@@ -424,6 +463,60 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // ── Instagram ──────────────────────────────────────────────────────────
+    const igButton = document.querySelector('.social-share-btn.instagram');
+    if (igButton) {
+        igButton.addEventListener('click', function() {
+            const url = this.dataset.url;
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+            // Siempre copiar el link al portapapeles
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).catch(function() {});
+            }
+
+            if (isMobile) {
+                // Intentar abrir la app de Instagram
+                // Si no está instalada, el sistema operativo preguntará qué app usar o fallback al navegador
+                const appUrl = 'instagram://';
+                const webUrl = 'https://www.instagram.com/';
+
+                let appOpened = false;
+                const startTime = Date.now();
+
+                // Crear iframe oculto para probar el deep link (evita perder la pestaña)
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+
+                iframe.src = appUrl;
+
+                // Si después de 1.5s el usuario sigue en la página, la app no estaba instalada → abrir web
+                const fallbackTimer = setTimeout(function() {
+                    if (Date.now() - startTime < 2000) {
+                        window.open(webUrl, '_blank');
+                    }
+                    document.body.removeChild(iframe);
+                }, 1500);
+
+                // Si la app se abrió, la página pierde foco → cancelamos el fallback
+                window.addEventListener('blur', function onBlur() {
+                    clearTimeout(fallbackTimer);
+                    appOpened = true;
+                    window.removeEventListener('blur', onBlur);
+                    if (iframe.parentNode) document.body.removeChild(iframe);
+                }, { once: true });
+
+                showToast('<?php _e('¡Link copiado! Pégalo en Instagram', 'maggiore'); ?>');
+            } else {
+                // En escritorio: abrir instagram.com en nueva pestaña
+                window.open('https://www.instagram.com/', '_blank');
+                showToast('<?php _e('¡Link copiado! Pégalo en Instagram', 'maggiore'); ?>');
+            }
+        });
+    }
+
 });
 </script>
 
