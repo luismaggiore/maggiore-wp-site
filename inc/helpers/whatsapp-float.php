@@ -93,6 +93,8 @@ function mg_render_whatsapp_float_settings() {
             'mg_wa_float_pixel_enabled'   => 'checkbox',
             'mg_wa_float_pixel_event'     => 'text',
             'mg_wa_float_cpt_enabled'     => 'checkbox',
+            'mg_wa_float_gads_enabled'    => 'checkbox',
+            // mg_wa_float_gads_snippet se maneja por separado (contiene <script>)
         ];
 
         foreach ($fields as $key => $type) {
@@ -105,6 +107,13 @@ function mg_render_whatsapp_float_settings() {
             }
         }
 
+        // El snippet necesita sanitización especial — sanitize_textarea_field elimina <script>
+        if (isset($_POST['mg_wa_float_gads_snippet'])) {
+            $raw   = wp_unslash($_POST['mg_wa_float_gads_snippet']);
+            $clean = preg_replace('/[^\w\s\(\)\{\}\'\":,.\/<>!@#\$%\^&\*\-\+=;]/', '', $raw);
+            update_option('mg_wa_float_gads_snippet', $clean);
+        }
+
         echo '<div class="notice notice-success is-dismissible"><p><strong>'
             . __('Configuración guardada.', 'maggiore')
             . '</strong></p></div>';
@@ -115,6 +124,8 @@ function mg_render_whatsapp_float_settings() {
     $position      = get_option('mg_wa_float_position', 'bottom-right');
     $tooltip       = get_option('mg_wa_float_tooltip', '¡Escríbenos!');
     $message       = get_option('mg_wa_float_message', 'Hola, me gustaría obtener más información.');
+    $gads_enabled  = get_option('mg_wa_float_gads_enabled', '0');
+    $gads_snippet  = get_option('mg_wa_float_gads_snippet', '');
     $ga4_enabled   = get_option('mg_wa_float_ga4_enabled', '1');
     $ga4_event     = get_option('mg_wa_float_ga4_event', 'whatsapp_click');
     $pixel_enabled = get_option('mg_wa_float_pixel_enabled', '1');
@@ -302,7 +313,84 @@ function mg_render_whatsapp_float_settings() {
 
                     <tr><td colspan="2"><hr></td></tr>
 
-                    <!-- CPT -->
+                    <!-- Google Ads Conversion -->
+                    <tr>
+                        <th scope="row"><?php _e('Google Ads', 'maggiore'); ?></th>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="mg_wa_float_gads_enabled" value="1" <?php checked($gads_enabled, '1'); ?>>
+                                <?php _e('Disparar conversión de Google Ads al hacer click', 'maggiore'); ?>
+                            </label>
+                            <p class="description">
+                                <?php _e('Registra la conversión directamente desde el click, sin necesidad de una thank-you page.', 'maggiore'); ?>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><label for="mg_wa_float_gads_snippet"><?php _e('Snippet de conversión', 'maggiore'); ?></label></th>
+                        <td>
+                            <?php if (!empty($gads_snippet)): ?>
+                            <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:14px; margin-bottom:12px;">
+                                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                                    <span style="font-size:12px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">
+                                        ✅ <?php _e('Snippet actualmente en ejecución', 'maggiore'); ?>
+                                    </span>
+                                    <?php if ($gads_enabled === '1'): ?>
+                                        <span style="background:#dcfce7; color:#166534; font-size:11px; font-weight:600; padding:2px 10px; border-radius:20px;">
+                                            ACTIVO
+                                        </span>
+                                    <?php else: ?>
+                                        <span style="background:#f1f5f9; color:#64748b; font-size:11px; font-weight:600; padding:2px 10px; border-radius:20px;">
+                                            PAUSADO
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <pre style="margin:0; font-size:12px; font-family:monospace; color:#334155; background:#fff; border:1px solid #e2e8f0; border-radius:4px; padding:10px; overflow-x:auto; white-space:pre-wrap; word-break:break-all;"><?= esc_html($gads_snippet); ?></pre>
+                                <p style="margin:8px 0 0; font-size:12px; color:#64748b;">
+                                    💡 <?php _e('Para reemplazarlo, pega el nuevo snippet en el campo de abajo y guarda.', 'maggiore'); ?>
+                                </p>
+                            </div>
+                            <?php else: ?>
+                            <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:6px; padding:12px; margin-bottom:12px; font-size:13px; color:#92400e;">
+                                ⚠️ <strong><?php _e('No hay ningún snippet guardado.', 'maggiore'); ?></strong>
+                                <?php _e('Pega el código de Google Ads en el campo de abajo.', 'maggiore'); ?>
+                            </div>
+                            <?php endif; ?>
+                            <textarea id="mg_wa_float_gads_snippet" name="mg_wa_float_gads_snippet"
+                                      class="large-text code" rows="8"
+                                      placeholder="<?php _e('Pega aquí el snippet completo que entrega Google Ads...', 'maggiore'); ?>"
+                                      style="font-family:monospace; font-size:12px;"><?= esc_textarea($gads_snippet); ?></textarea>
+                            <p class="description">
+                                <?php _e('Pega el snippet tal como lo entrega Google Ads (incluyendo el comentario y las etiquetas', 'maggiore'); ?>
+                                <code>&lt;script&gt;</code>).
+                                <?php _e('El sistema extrae automáticamente', 'maggiore'); ?>
+                                <code>send_to</code>, <code>value</code> <?php _e('y', 'maggiore'); ?> <code>currency</code>.
+                            </p>
+                            <?php if (!empty($gads_snippet)): ?>
+                                <?php
+                                // Mostrar preview de lo que se parseó
+                                preg_match("/'send_to'\s*:\s*'([^']+)'/", $gads_snippet, $m_send);
+                                preg_match("/'value'\s*:\s*([\d.]+)/",     $gads_snippet, $m_val);
+                                preg_match("/'currency'\s*:\s*'([^']+)'/", $gads_snippet, $m_cur);
+                                $parsed_ok = !empty($m_send[1]);
+                                ?>
+                                <?php if ($parsed_ok): ?>
+                                <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:6px; padding:12px; margin-top:8px; font-size:13px;">
+                                    ✅ <strong><?php _e('Snippet parseado correctamente:', 'maggiore'); ?></strong><br>
+                                    <code>send_to</code>: <strong><?= esc_html($m_send[1]); ?></strong><br>
+                                    <code>value</code>: <strong><?= esc_html($m_val[1] ?? '—'); ?></strong> &nbsp;
+                                    <code>currency</code>: <strong><?= esc_html($m_cur[1] ?? '—'); ?></strong>
+                                </div>
+                                <?php else: ?>
+                                <div style="background:#fff7ed; border:1px solid #fed7aa; border-radius:6px; padding:12px; margin-top:8px; font-size:13px;">
+                                    ⚠️ <?php _e('No se pudo detectar <code>send_to</code> en el snippet. Verifica que pegaste el código completo.', 'maggiore'); ?>
+                                </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+
+                    <tr><td colspan="2"><hr></td></tr>
                     <tr>
                         <th scope="row"><?php _e('Base de Datos Interna', 'maggiore'); ?></th>
                         <td>
@@ -503,8 +591,75 @@ function mg_handle_wa_click_ajax() {
 
 
 // =============================================================================
-// 7. FRONTEND — BOTÓN + JAVASCRIPT
+// 8. EXPORTAR A CSV
 // =============================================================================
+
+// Botón "Exportar CSV" arriba del listado
+add_action('manage_posts_extra_tablenav', function ($which) {
+    $screen = get_current_screen();
+    if (!$screen || $screen->post_type !== 'mg_wa_click' || $which !== 'top') return;
+    $url = wp_nonce_url(admin_url('admin-post.php?action=mg_wa_export_csv'), 'mg_wa_export_csv');
+    echo '<div class="alignleft actions" style="margin-left:8px;">';
+    echo '<a href="' . esc_url($url) . '" class="button button-secondary">⬇️ ' . __('Exportar CSV', 'maggiore') . '</a>';
+    echo '</div>';
+});
+
+// Handler de la descarga
+add_action('admin_post_mg_wa_export_csv', function () {
+    if (!current_user_can('manage_options')) wp_die(__('Sin permisos.', 'maggiore'));
+    check_admin_referer('mg_wa_export_csv');
+
+    $posts = get_posts([
+        'post_type'      => 'mg_wa_click',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ]);
+
+    $filename = 'whatsapp-clicks-' . date('Y-m-d') . '.csv';
+
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+
+    $out = fopen('php://output', 'w');
+    fprintf($out, chr(0xEF) . chr(0xBB) . chr(0xBF)); // BOM UTF-8 para Excel
+
+    // Cabeceras
+    fputcsv($out, [
+        'ID',
+        __('Fecha', 'maggiore'),
+        __('Página', 'maggiore'),
+        __('URL', 'maggiore'),
+        __('Dispositivo', 'maggiore'),
+        __('Sistema Operativo', 'maggiore'),
+        __('UTM Source', 'maggiore'),
+        __('UTM Medium', 'maggiore'),
+        __('UTM Campaign', 'maggiore'),
+        __('Referrer', 'maggiore'),
+    ]);
+
+    foreach ($posts as $post) {
+        fputcsv($out, [
+            $post->ID,
+            get_the_date('Y-m-d H:i:s', $post),
+            get_the_title($post),
+            get_post_meta($post->ID, '_wa_page_url',    true),
+            get_post_meta($post->ID, '_wa_device',      true),
+            get_post_meta($post->ID, '_wa_os',          true),
+            get_post_meta($post->ID, '_wa_utm_source',  true),
+            get_post_meta($post->ID, '_wa_utm_medium',  true),
+            get_post_meta($post->ID, '_wa_utm_campaign',true),
+            get_post_meta($post->ID, '_wa_referrer',    true),
+        ]);
+    }
+
+    fclose($out);
+    exit;
+});
+
 
 add_action('wp_footer', 'mg_render_whatsapp_float_button');
 
@@ -545,6 +700,8 @@ function mg_render_whatsapp_float_button() {
         'ga4Event'     => $ga4_event,
         'pixel'        => $pixel_enabled,
         'pixelEvent'   => $pixel_event,
+        'gads'         => $gads_enabled,
+        'gadsSnippet'  => $gads_snippet,
         'cpt'          => $cpt_enabled,
         'ajaxUrl'      => admin_url('admin-ajax.php'),
         'nonce'        => wp_create_nonce('mg_wa_click_nonce'),
@@ -654,7 +811,22 @@ function mg_render_whatsapp_float_button() {
                 });
             }
 
-            // --- 2. Meta Pixel ---
+            // --- 2. Google Ads Conversion ---
+            if (cfg.gads && cfg.gadsSnippet && typeof gtag === 'function') {
+                // Parsear send_to, value y currency del snippet guardado
+                const sendToMatch  = cfg.gadsSnippet.match(/'send_to'\s*:\s*'([^']+)'/);
+                const valueMatch   = cfg.gadsSnippet.match(/'value'\s*:\s*([\d.]+)/);
+                const currencyMatch= cfg.gadsSnippet.match(/'currency'\s*:\s*'([^']+)'/);
+                if (sendToMatch) {
+                    gtag('event', 'conversion', {
+                        'send_to' : sendToMatch[1],
+                        'value'   : valueMatch   ? parseFloat(valueMatch[1])  : 0,
+                        'currency': currencyMatch ? currencyMatch[1]           : '',
+                    });
+                }
+            }
+
+            // --- 3. Meta Pixel ---
             if (cfg.pixel && typeof fbq === 'function') {
                 fbq('trackCustom', cfg.pixelEvent, {
                     page_title : pageTitle,
@@ -663,7 +835,7 @@ function mg_render_whatsapp_float_button() {
                 });
             }
 
-            // --- 3. AJAX → CPT (silencioso, no bloquea) ---
+            // --- 4. AJAX → CPT (silencioso, no bloquea) ---
             if (cfg.cpt) {
                 const utmParams = getUTMParams();
                 const formData  = new FormData();
@@ -682,7 +854,7 @@ function mg_render_whatsapp_float_button() {
                 fetch(cfg.ajaxUrl, { method: 'POST', body: formData }).catch(() => {});
             }
 
-            // --- 4. Abrir WhatsApp ---
+            // --- 5. Abrir WhatsApp ---
             window.open(waUrl, '_blank', 'noopener,noreferrer');
         });
 
