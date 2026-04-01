@@ -397,6 +397,7 @@ require_once get_template_directory() . '/inc/helpers/clientes-helpers.php';
 require_once get_template_directory() . '/inc/helpers/primary-term.php';
 require_once get_template_directory() . '/inc/helpers/whatsapp-float.php'; // ← agregar esto
 require_once get_template_directory() . '/inc/helpers/seo-archive-options.php'; // ← agregar esto
+
 /* -------------------------------------------------------
  * SEO Enhanced
  * ----------------------------------------------------- */

@@ -158,6 +158,10 @@ if ($fecha) {
 
     // Layout seleccionado para VIDEOS
     $layout_videos = get_post_meta(get_the_ID(), 'mg_portafolio_layout_videos', true) ?: 'grid';
+
+    // PDF Flipbook
+    $pdf_id  = (int) get_post_meta(get_the_ID(), 'mg_portafolio_pdf', true);
+    $pdf_url = $pdf_id ? wp_get_attachment_url($pdf_id) : '';
     ?>
 
     <?php // ========== GALERÍA DE IMÁGENES ========== ?>
@@ -402,6 +406,135 @@ if ($fecha) {
                       </a></section> </h2>
       
       <?php endif; ?>
+
+    <?php // ========== PDF FLIPBOOK ========== ?>
+    <?php if ($pdf_url): ?>
+    <section id="mg-flipbook-section" class="portafolio-flipbook my-5">
+        <div class="feature-name-2 mb-3">
+            <h2><?php _e('Documento', 'maggiore'); ?></h2>
+        </div>
+
+        <div id="mg-flipbook-wrapper"
+             data-pdf-url="<?= esc_attr($pdf_url); ?>"
+             style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center;">
+
+            <!-- Loading state -->
+            <div id="mg-flipbook-loading" style="text-align:center;padding:40px 20px;background:#f9f9f9;border-radius:8px;">
+                <div style="font-size:2rem;margin-bottom:12px;">📄</div>
+                <div id="mg-flipbook-progress" style="color:#555;font-size:0.9rem;margin-bottom:16px;">
+                    Cargando documento…
+                </div>
+                <!-- Barra de progreso -->
+                <div style="background:#e0e0e0;border-radius:4px;height:6px;width:280px;margin:0 auto;">
+                    <div id="mg-flipbook-bar" style="background:#0073aa;height:6px;border-radius:4px;width:0%;transition:width 0.2s;"></div>
+                </div>
+            </div>
+
+            <!-- Flipbook container — StPageFlip lo controla -->
+            <div id="mg-flipbook-container" style="display:none;"></div>
+     <span class="mt-2" style="font-size:0.9rem;min-width:80px;text-align:center;">
+                    <span id="mg-flipbook-current">—</span>
+                    /
+                    <span id="mg-flipbook-total">—</span>
+                </span>
+            <!-- Controles -->
+            <div id="mg-flipbook-controls"
+                 style="display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap;">
+
+                <button id="mg-flipbook-prev"
+                        class="btn btn-outline-info"
+                        aria-label="<?php esc_attr_e('Página anterior', 'maggiore'); ?>"
+                        style="display:flex;align-items:center;gap:6px;">
+                    ← <?php _e('Anterior', 'maggiore'); ?>
+                </button>
+
+           
+
+                <button id="mg-flipbook-next"
+                        class="btn btn-outline-info"
+                        aria-label="<?php esc_attr_e('Página siguiente', 'maggiore'); ?>"
+                        style="display:flex;align-items:center;gap:6px;">
+                    <?php _e('Siguiente', 'maggiore'); ?> →
+                </button>
+
+
+                <button id="mg-flipbook-fullscreen"
+                        class="btn btn-outline-info"
+                        title="<?php esc_attr_e('Pantalla completa', 'maggiore'); ?>"
+                        style="display:flex;align-items:center;gap:5px;">
+                    <span class="mg-fs-icon">⛶</span>
+                    <?php _e('Pantalla completa', 'maggiore'); ?>
+                </button>
+            </div>
+
+        </div><!-- /#mg-flipbook-wrapper -->
+
+        <style>
+            /* ── Flipbook wrapper ─────────────────────────── */
+            #mg-flipbook-section { overflow: visible; }
+
+            /* Wrapper centrado — sin overflow:hidden para que la animación respire */
+            #mg-flipbook-wrapper {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                overflow: visible;
+                padding: 40px 0;
+            }
+
+            #mg-flipbook-section {
+                overflow: visible;
+            }
+
+            /* El container que StPageFlip controla:
+               StPageFlip posiciona el libro con left:0 dentro del container,
+               necesitamos que el container sea exactamente el ancho del libro (2 páginas)
+               y esté centrado en el wrapper. */
+            #mg-flipbook-container {
+                position: relative !important;
+                margin: 0 auto !important;
+                /* StPageFlip setea width/height via JS, el margin auto lo centra */
+            }
+
+            /* Páginas individuales */
+            .mg-flip-page {
+                background: #fff;
+                box-shadow: inset -7px 0 30px -7px rgba(0,0,0,.4);
+                overflow: hidden;
+            }
+
+            /* Pantalla completa */
+            #mg-flipbook-section:fullscreen {
+                background: #1a1a1a;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+            #mg-flipbook-section:fullscreen #mg-flipbook-wrapper {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            #mg-flipbook-section:fullscreen #mg-flipbook-controls .button {
+                color: #fff;
+                border-color: rgba(255,255,255,.4);
+                background: rgba(255,255,255,.1);
+            }
+        </style>
+
+        <!-- CDN: PDF.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+        <!-- CDN: StPageFlip (vía jsDelivr, más confiable) -->
+        <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
+        <!-- Flipbook JS -->
+        <script src="<?php echo esc_url(get_template_directory_uri() . '/assets/js/portafolio-flipbook.js'); ?>"></script>
+
+    </section>
+    <?php endif; ?>
 
                   
 
