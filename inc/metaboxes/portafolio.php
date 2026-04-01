@@ -52,6 +52,11 @@ function mg_metabox_portafolio_render($post) {
     // NUEVO: Layout seleccionado
     $layout = get_post_meta($post->ID, 'mg_portafolio_layout', true) ?: 'grid';
     $layout_videos = get_post_meta($post->ID, 'mg_portafolio_layout_videos', true) ?: 'grid';
+
+    // PDF Flipbook
+    $pdf_id  = (int) get_post_meta($post->ID, 'mg_portafolio_pdf', true);
+    $pdf_url = $pdf_id ? wp_get_attachment_url($pdf_id) : '';
+
     $clientes_options  = mg_get_clientes_options();
     $servicios_options = mg_get_servicios_options();
     $equipo_options    = mg_get_equipo_options();
@@ -384,7 +389,62 @@ function mg_metabox_portafolio_render($post) {
         💡 <strong>Tip:</strong> Los videos externos no consumen espacio en tu servidor y cargan más rápido.
     </p>
 
+    <hr style="margin: 30px 0;">
 
+    <!-- ===================== PDF FLIPBOOK ===================== -->
+    <div style="background: #eef6ff; padding: 15px; border-left: 4px solid #0073aa; margin-bottom: 20px;">
+        <p style="margin-top: 0;">
+            <strong>📄 <?php _e('PDF Flipbook (Manual de Marca / Documento)', 'maggiore'); ?></strong><br>
+            <small style="color: #666;"><?php _e('Sube un PDF para mostrarlo como un libro interactivo en el portafolio. Ideal para manuales de marca, brochures, catálogos.', 'maggiore'); ?></small>
+        </p>
+
+        <div id="mg_pdf_preview">
+            <?php if ($pdf_id && $pdf_url): ?>
+                <?php
+                $pdf_file  = get_attached_file($pdf_id);
+                $pdf_name  = basename($pdf_file);
+                $pdf_size  = $pdf_file && file_exists($pdf_file) ? size_format(filesize($pdf_file), 2) : '';
+                ?>
+                <div class="mg-pdf-preview-item" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:#f0f7ff;border:1px solid #b3d4f5;border-radius:4px;margin-bottom:10px;">
+                    <span class="dashicons dashicons-pdf" style="font-size:32px;width:32px;height:32px;color:#c00;flex-shrink:0;"></span>
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="<?= esc_url($pdf_url); ?>">
+                            <?= esc_html($pdf_name); ?>
+                        </div>
+                        <?php if ($pdf_size): ?>
+                            <div style="font-size:11px;color:#666;margin-top:2px;"><?= esc_html($pdf_size); ?></div>
+                        <?php endif; ?>
+                    </div>
+                    <button type="button" id="mg_remove_pdf" class="button" style="flex-shrink:0;">
+                        <span class="dashicons dashicons-trash" style="margin-top:3px;"></span> Quitar
+                    </button>
+                </div>
+            <?php else: ?>
+                <p style="color:#999;font-style:italic;margin:0 0 10px;">No hay PDF seleccionado.</p>
+            <?php endif; ?>
+        </div>
+
+        <input type="hidden"
+               name="mg_portafolio_pdf"
+               id="mg_portafolio_pdf_input"
+               value="<?= esc_attr($pdf_id ?: ''); ?>">
+
+        <button type="button" class="button button-primary" id="mg_select_pdf">
+            <span class="dashicons dashicons-upload" style="margin-top:3px;"></span>
+            <?php _e('Seleccionar / cambiar PDF', 'maggiore'); ?>
+        </button>
+
+        <?php if ($pdf_url): ?>
+            <a href="<?= esc_url($pdf_url); ?>" target="_blank" class="button" style="margin-left:8px;">
+                <span class="dashicons dashicons-visibility" style="margin-top:3px;"></span>
+                Ver PDF
+            </a>
+        <?php endif; ?>
+
+        <p style="color:#666;font-size:11px;margin-top:10px;margin-bottom:0;">
+            💡 <strong>Tip:</strong> Solo archivos PDF. El flipbook se renderizará automáticamente en el frontend al existir un PDF asignado.
+        </p>
+    </div>
 
     <style>
         .mg-thumb-wrapper { position: relative; }
@@ -460,7 +520,40 @@ function mg_save_metabox_portafolio($post_id) {
             update_post_meta($post_id, 'mg_portafolio_layout_videos', $layout_videos);
         }
     }
-    
+
+    // PDF Flipbook
+    if (isset($_POST['mg_portafolio_pdf'])) {
+        $pdf_id = intval($_POST['mg_portafolio_pdf']);
+        if ($pdf_id > 0) {
+            // Verificar que sea un PDF real
+            $mime = get_post_mime_type($pdf_id);
+            if ($mime === 'application/pdf') {
+                update_post_meta($post_id, 'mg_portafolio_pdf', $pdf_id);
+            }
+        } else {
+            delete_post_meta($post_id, 'mg_portafolio_pdf');
+        }
+    }
 
 }
 add_action('save_post_mg_portafolio', 'mg_save_metabox_portafolio');
+
+/* -------------------------------------------------------
+ * Enqueue admin-pdf.js para el uploader de PDF
+ * ----------------------------------------------------- */
+function mg_portafolio_admin_pdf_scripts($hook) {
+    if ($hook !== 'post.php' && $hook !== 'post-new.php') return;
+    global $post_type;
+    if ($post_type !== 'mg_portafolio') return;
+
+    wp_enqueue_media();
+
+    wp_enqueue_script(
+        'mg-admin-pdf',
+        get_template_directory_uri() . '/assets/js/admin-pdf.js',
+        ['jquery', 'media-upload', 'media-views'],
+        '1.0.0',
+        true
+    );
+}
+add_action('admin_enqueue_scripts', 'mg_portafolio_admin_pdf_scripts');
